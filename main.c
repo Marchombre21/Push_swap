@@ -6,32 +6,46 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/09 08:36:07 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 09:51:19 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 #include "libft/libft.h"
 #include <stdio.h>
-#include <ctype.h>
-void	check_flags()
+
+void	check_flags(char *s, t_flags *flags)
 {
-
+	if (s == "--simple")
+	{
+		flags->simple = 1;
+		flags->adaptative = 0;
+	}
+	else if(s == "--medium")
+	{
+		flags->medium = 1;
+		flags->adaptative = 0;
+	}
+	else if(s == "--complex")
+	{
+		flags->complex = 1;
+		flags->adaptative = 0;
+	}
+	else if(s == "--bench")
+		flags->bench_mode = 1;
 }
-
-// int	is_int(int)
 
 int	main(int argc, char **argv)
 {
-	(void) argc;
-	(void) argv;
-	printf("%d", ft_isdigit(-452));
-	printf("%d", isdigit(-452));
-	// int	i;
+	int	i;
+	t_flags flags;
 
-	// i = 1;
-	// if (argc < 2)
-	// 	return (0);
-	// while (argv[i] )
+	flags.adaptative = 1;
+	i = 1;
+	if (argc < 2)
+		return (0);
+	while (argv[i][0] == '-' && argv[i][1] == '-')
+		check_flags(argv[i++], &flags);
+	
 	return (0);
 }
