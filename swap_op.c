@@ -6,11 +6,11 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:17:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/08 18:19:16 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 09:49:41 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_push_swap.h"
 
 void	swap_op(t_stack **stack)
 {
