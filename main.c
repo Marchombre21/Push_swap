@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/09 11:40:00 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 09:47:34 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 void	check_flags(char *s, t_flags *flags)
 {
-	if (s == "--simple")
+	if (ft_strncmp("--simple", s, 8) == 0)
 	{
 		flags->simple = 1;
 		flags->adaptative = 0;
 	}
-	else if(s == "--medium")
+	else if(ft_strncmp("--medium", s, 8) == 0)
 	{
 		flags->medium = 1;
 		flags->adaptative = 0;
 	}
-	else if(s == "--complex")
+	else if(ft_strncmp("--complex", s, 9) == 0)
 	{
 		flags->complex = 1;
 		flags->adaptative = 0;
 	}
-	else if(s == "--bench")
+	else if(ft_strncmp("--bench", s, 7) == 0)
 		flags->bench_mode = 1;
 }
 
