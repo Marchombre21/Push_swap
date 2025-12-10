@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/10 16:43:05 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 17:06:03 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int	main(int argc, char **argv)
 		simple_sort(&stack_a, &stack_b);
 	// else if (flags.medium)
 	// 	medium_sort(&stack_a, &stack_b);
-	// else if (flags.complex)
-	// 	complex_sort(&stack_a, &stack_b);
+	else if (flags.complex)
+		complex_sort(&stack_a);
 	ft_printf("Stack A:\n");
 	t_stack *current = stack_a;
 	while (current != NULL)

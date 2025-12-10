@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/10 16:31:10 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 17:06:52 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_stack	*sort(t_stack *lst, int size)
 	}
 	else
 		half_list = lst->next;
-	half_list = merge(lst, half_size_two, half_list, half_size);
+	half_list = merge(&lst, half_size_two, half_list, half_size);
 	return (half_list);
 }
 
@@ -74,6 +74,5 @@ void	complex_sort(t_stack **a)
 	int	size_list;
 
 	size_list = ft_lstsize(*a);
-	
-	
+	sort(*a, size_list);
 }
