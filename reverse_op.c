@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 08:28:59 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/10 08:46:57 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 09:50:05 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ void	reverse_op(t_stack **stack)
 void	rra(t_stack **a)
 {
 	reverse_op(a);
-	ft_printf("ra\n");
+	ft_printf("rra\n");
 }
 
 void	rrb(t_stack **b)
 {
 	reverse_op(b);
-	ft_printf("rb\n");
+	ft_printf("rrb\n");
 }
 
 void	rrr(t_stack **a, t_stack **b)
 {
 	reverse_op(a);
 	reverse_op(b);
-	ft_printf("ra\n");
-	ft_printf("rb\n");
+	ft_printf("rra\n");
+	ft_printf("rrb\n");
 }

@@ -6,13 +6,13 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:15:01 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/09 11:28:37 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 09:55:54 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_stack **lst, void (*del)(void *))
+void	ft_lstclear(t_stack **lst, void (*del)(int))
 {
 	t_stack	*temp;
 
@@ -21,7 +21,7 @@ void	ft_lstclear(t_stack **lst, void (*del)(void *))
 	while (*lst)
 	{
 		temp = (*lst)->next;
-		del((*lst)->content);
+		del((*lst)->value);
 		free(*lst);
 		*lst = temp;
 	}
