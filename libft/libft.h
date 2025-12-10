@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 06:55:11 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/09 11:28:37 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 09:55:52 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
-t_stack			*ft_lstnew(void *content);
+t_stack			*ft_lstnew(int	value);
 void			ft_lstadd_front(t_stack **lst, t_stack *new);
 int				ft_lstsize(t_stack *lst);
 t_stack			*ft_lstlast(t_stack *lst);
 void			ft_lstadd_back(t_stack **lst, t_stack *new);
-void			ft_lstdelone(t_stack *lst, void (*del)(void *));
-void			ft_lstclear(t_stack **lst, void (*del)(void *));
+void			ft_lstdelone(t_stack *lst, void (*del)(int));
+void			ft_lstclear(t_stack **lst, void (*del)(int));
 void			ft_lstiter(t_stack *lst, void (*f)(void *));
 t_stack			*ft_lstmap(t_stack *lst, void *(*f)(void *), void (*del)
 					(void *));
