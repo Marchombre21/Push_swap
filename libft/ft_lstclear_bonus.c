@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:15:01 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/15 12:16:57 by bfitte           ###   ########.fr       */
+/*   Updated: 2025/12/09 11:28:37 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_stack **lst, void (*del)(void *))
 {
-	t_list	*temp;
+	t_stack	*temp;
 
 	if (!lst || !del)
 		return ;

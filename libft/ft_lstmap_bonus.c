@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 07:12:00 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/15 12:25:01 by bfitte           ###   ########.fr       */
+/*   Updated: 2025/12/09 13:28:24 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_stack	*ft_lstmap(t_stack *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_list;
-	t_list	*new_node;
+	t_stack	*new_list;
+	t_stack	*new_node;
 	void	*new_content;
 
 	if (!lst || !f || !del)
@@ -23,7 +23,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	new_list = NULL;
 	while (lst)
 	{
-		new_content = f(lst->content);
+		new_content = f(lst->value);
 		new_node = ft_lstnew(new_content);
 		if (!new_node)
 		{

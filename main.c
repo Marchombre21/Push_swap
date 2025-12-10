@@ -6,13 +6,11 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/09 09:51:19 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/09 11:40:00 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-#include "libft/libft.h"
-#include <stdio.h>
 
 void	check_flags(char *s, t_flags *flags)
 {

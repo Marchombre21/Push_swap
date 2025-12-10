@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 10:51:33 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/15 12:12:54 by bfitte           ###   ########.fr       */
+/*   Updated: 2025/12/09 13:28:24 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_stack *lst, void (*del)(void *))
 {
 	if (!lst || !del)
 		return ;
 	if (del)
-		del(lst->content);
+		del(lst->value);
 	free(lst);
 }

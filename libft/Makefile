@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bfitte <bfitte@student.42.fr>              +#+  +:+       +#+         #
+#    By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/06 06:57:02 by bfitte            #+#    #+#              #
-#    Updated: 2025/11/18 13:34:10 by bfitte           ###   ########.fr        #
+#    Updated: 2025/12/09 10:11:29 by bfitte/gmac      ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=libft.a
 CC=cc
 HEADERS=libft.h
-CFLAGS=-Wall -Werror -Wextra -I.
+CFLAGS=-Wall -Werror -Wextra
 SRC_FILES=ft_isalpha.c\
 	ft_memcpy.c\
 	ft_strrchr.c\

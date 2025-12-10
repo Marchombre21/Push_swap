@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/10 09:00:21 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 09:04:36 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-// # include <ft_printf.h>
+# include <ft_printf.h>
 # include <libft.h>
 
 typedef struct s_stack
@@ -37,7 +37,7 @@ typedef struct  s_flags
 
 void	sa(t_stack **stack_a);
 void	sb(t_stack **stack_b);
-void	ss(t_stack **stack_a, t_stack stack_b);
+void	ss(t_stack **stack_a, t_stack **stack_b);
 void	pa(t_stack **stack_a, t_stack **stack_b);
 void	pb(t_stack **stack_a, t_stack **stack_b);
 void	simple_sort(t_stack **stack_a, t_stack **stack_b);
