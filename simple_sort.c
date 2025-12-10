@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/09 16:27:39 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 09:53:29 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,35 @@
 void	simple_sort(t_stack **stack_a, t_stack **stack_b)
 {
 	int		i;
+	int		j;
 	int 	size;
-	t_stack	*temp;
 
-	i = 0;
+	i = 1;
 	size = ft_lstsize(*stack_a);
-	while (i < size)
+	if (size <= 1)
+		return ;
+	while (i < size / 2)
 	{
-		temp = *stack_a;
-		if (temp->value > temp->next->value)
+		j = size;
+		while (j > 0)
 		{
-			sa(stack_a);
-			i = 0;
+			if (!*stack_b)
+				pb(stack_a, stack_b);
+			else if (*stack_a < *stack_b)
+			{
+				pb(stack_a, stack_b);
+				sb(stack_b);
+			}
+			else
+				pb(stack_a, stack_b);
+			j--;
 		}
-		rra(stack_a);
+		j = size;
+		while (j > 0)
+		{
+			pa(stack_a, stack_b);
+			j--;
+		}
 		i++;
 	}
 }
