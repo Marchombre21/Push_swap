@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/10 14:32:33 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 22:08:14 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int	main(int argc, char **argv)
 		return (1);
 	if (flags.simple)
 		simple_sort(&stack_a, &stack_b);
-	// else if (flags.medium)
-	// 	medium_sort(&stack_a, &stack_b);
+	else if (flags.medium)
+		medium_sort(&stack_a, &stack_b);
 	// else if (flags.complex)
 	// 	complex_sort(&stack_a, &stack_b);
 	ft_printf("Stack A:\n");
