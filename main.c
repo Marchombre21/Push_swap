@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/10 14:32:33 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 16:43:05 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,13 @@ t_stack	*parse_input(int nb_input, char **numbers)
 	return (stack_a);
 }
 
+void	dispatch(t_stack **a, t_flags flags)
+{
+	if (flags.adaptative)
+	{
+		complex_sort(a);
+	}
+}
 
 int	main(int argc, char **argv)
 {
