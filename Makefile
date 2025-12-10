@@ -12,6 +12,8 @@ LIBFT_DIR := libft/
 
 PRINTF_DIR := ft_printf/
 
+BUILD_DIR := .build
+
 LIBFT := $(LIBFT_DIR)libft.a
 
 PRINTF := $(PRINTF_DIR)libftprintf.a
@@ -27,7 +29,7 @@ SRC_FILES := main.c\
 	simple_sort.c\
 	swap_op.c
 
-OBJ := $(patsubst %.c, %.o, $(SRC_FILES))
+OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 
 DEPS := $(patsubst %.o, %.d, $(OBJ))
 
@@ -42,8 +44,11 @@ $(LIBFT):
 $(PRINTF):
 	make -C $(PRINTF_DIR)
 
-%.o: %.c
+$(BUILD_DIR)/%.o: %.c $(BUILD_DIR)
 	$(CC) $(FLAGS) $(DEPFLAGS) -c $< -o $@
+
+$(BUILD_DIR):
+	mkdir -p $@
 
 clean:
 	make clean -C $(LIBFT_DIR)
@@ -53,6 +58,7 @@ clean:
 fclean: clean
 	make fclean -C $(LIBFT_DIR)
 	make fclean -C $(PRINTF_DIR)
+	rmdir -p $(BUILD_DIR)
 	$(RM) $(NAME)
 
 re: fclean all
