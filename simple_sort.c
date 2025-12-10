@@ -6,11 +6,15 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/10 11:41:58 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 15:24:26 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
+
+/* ****************************************************	*/
+/* Loop to push from stack A to stack B					*/
+/* ****************************************************	*/
 
 int	b_loop(t_stack **stack_a, t_stack **stack_b, int size)
 {
@@ -19,11 +23,11 @@ int	b_loop(t_stack **stack_a, t_stack **stack_b, int size)
 
 	sorted = 0;
 	j = size;
-	while (j > 0)
+	while (j > 0 || *stack_a)
 	{
 		if (!*stack_b)
 			pb(stack_a, stack_b);
-		else if (*stack_a < *stack_b)
+		else if ((*stack_a)->value < (*stack_b)->value)
 		{
 			pb(stack_a, stack_b);
 			sb(stack_b);
@@ -36,6 +40,10 @@ int	b_loop(t_stack **stack_a, t_stack **stack_b, int size)
 	return (sorted);
 }
 
+/* ****************************************************	*/
+/* Loop to push from stack B to stack A					*/
+/* ****************************************************	*/
+
 int	a_loop(t_stack **stack_a, t_stack **stack_b, int size)
 {
 	int	j;
@@ -43,11 +51,11 @@ int	a_loop(t_stack **stack_a, t_stack **stack_b, int size)
 
 	sorted = 0;
 	j = size;
-	while (j > 0)
+	while (j > 0 || *stack_b)
 	{
 		if (!*stack_a)
 			pa(stack_a, stack_b);
-		else if (*stack_b < *stack_a)
+		else if ((*stack_a)->value < (*stack_b)->value)
 		{
 			pa(stack_a, stack_b);
 			sa(stack_a);
@@ -59,6 +67,7 @@ int	a_loop(t_stack **stack_a, t_stack **stack_b, int size)
 	}
 	return (sorted);
 }
+
 /* ****************************************************	*/
 /* The simple sort algorithm used here is a variation	*/
 /* of the bubble sort algorithm adapted for two stacks.	*/
@@ -76,29 +85,8 @@ int	simple_sort(t_stack **stack_a, t_stack **stack_b)
 	while (sorted != 0)
 	{
 		sorted = 0;
-		sorted += b_loop(stack_a, stack_b, size);
+		b_loop(stack_a, stack_b, size);
 		sorted += a_loop(stack_a, stack_b, size);
 	}
 	return (0);
 }
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	t_stack	*stack_a;
-// 	t_stack	*stack_b;
-
-// 	stack_a = ft_lstnew(10);
-// 	ft_lstadd_back(&stack_a, ft_lstnew(-5));
-// 	ft_lstadd_back(&stack_a, ft_lstnew(6));
-// 	ft_lstadd_back(&stack_a, ft_lstnew(3));
-// 	stack_b = NULL;
-// 	simple_sort(&stack_a, &stack_b);
-// 	while (stack_a)
-// 	{
-// 		printf("%d\n", stack_a->value);
-// 		stack_a = stack_a->next;
-// 	}
-// 	return (0);
-// }
