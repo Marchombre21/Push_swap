@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/10 11:33:17 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/10 11:41:58 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,14 @@ int	a_loop(t_stack **stack_a, t_stack **stack_b, int size)
 	}
 	return (sorted);
 }
+/* ****************************************************	*/
+/* The simple sort algorithm used here is a variation	*/
+/* of the bubble sort algorithm adapted for two stacks.	*/
+/* ****************************************************	*/
 
 int	simple_sort(t_stack **stack_a, t_stack **stack_b)
 {
-	int 	size;
+	int		size;
 	int		sorted;
 
 	sorted = 1;
@@ -72,8 +76,8 @@ int	simple_sort(t_stack **stack_a, t_stack **stack_b)
 	while (sorted != 0)
 	{
 		sorted = 0;
-		sorted +=b_loop(stack_a, stack_b, size);
-		sorted +=a_loop(stack_a, stack_b, size);
+		sorted += b_loop(stack_a, stack_b, size);
+		sorted += a_loop(stack_a, stack_b, size);
 	}
 	return (0);
 }
@@ -98,4 +102,3 @@ int	simple_sort(t_stack **stack_a, t_stack **stack_b)
 // 	}
 // 	return (0);
 // }
-
