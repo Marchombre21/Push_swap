@@ -12,7 +12,7 @@ LIBFT_DIR := libft/
 
 PRINTF_DIR := ft_printf/
 
-LIBFT := $(LIBFT_DIR)libft_ps.a
+LIBFT := $(LIBFT_DIR)libft.a
 
 PRINTF := $(PRINTF_DIR)libftprintf.a
 
@@ -47,10 +47,12 @@ $(PRINTF):
 
 clean:
 	make clean -C $(LIBFT_DIR)
+	make clean -C $(PRINTF_DIR)
 	$(RM) $(OBJ) $(DEPS)
 
 fclean: clean
 	make fclean -C $(LIBFT_DIR)
+	make fclean -C $(PRINTF_DIR)
 	$(RM) $(NAME)
 
 re: fclean all
