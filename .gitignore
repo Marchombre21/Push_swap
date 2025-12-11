@@ -1,0 +1,9 @@
+**.o
+.build/
+.vscode/
+**.d
+**.swp
+**.a
+push_swap
+**.out
+**.txt
