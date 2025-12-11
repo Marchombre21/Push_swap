@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/11 11:00:40 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/11 11:20:43 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	rrr(t_stack **a, t_stack **b);
 int	next_sqrt(int nb);
 int	find_min(t_stack *stack);
 int	find_max(t_stack *stack);
+void print_stack(t_stack *stack, char *name);
 
 /* Sort functions */
 int		simple_sort(t_stack **stack_a, t_stack **stack_b);

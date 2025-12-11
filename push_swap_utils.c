@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 10:58:46 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/11 10:59:09 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/11 11:20:36 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,18 @@ int	find_max(t_stack *stack)
 		current = current->next;
 	}
 	return (max);
+}
+
+void	print_stack(t_stack *stack, char *name)
+{
+	t_stack *current;
+
+	ft_printf("Stack %s: ", name);
+	current = stack;
+	while (current)
+	{
+		ft_printf("%d -> ", current->value);
+		current = current->next;
+	}
+	ft_printf("NULL\n");
 }
