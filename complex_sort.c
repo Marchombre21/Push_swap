@@ -6,94 +6,119 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/11 13:33:57 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/11 16:42:16 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-// void	sort(t_stack *a, t_stack *b, int div)
-// {
+int	check_sort(t_stack *stack_a)
+{
+	int	i;
 
-// }
+	i = 0;
+	while (stack_a->next && stack_a->value < stack_a->next->value)
+	{
+		i++;
+		stack_a = stack_a->next;
+	}
+	return (i);
+}
 
-// int	find_max(t_stack *a)
-// {
-// 	int	max;
+int	sort(t_stack **a, t_stack **b, int shift_byte, int size)
+{
+	while (size-- != 0)
+	{
+		if ((*a)->value >> shift_byte & 1)
+			ra(a);
+		else
+			pb(a, b);
+	}
+	size = ft_lstsize(*b);
+	while (size-- != 0)
+		pa(a, b);
+	return(check_sort(*a));
+}
 
-// 	max = a->value;
-// 	while (a)
-// 	{
-// 		if (a->value > max)
-// 			max = a->value;
-// 		a = a->next;
-// 	}
-// 	return (max);
-// }
 
-// void sort_array(int *tab, int size)
-// {
-// 	int i;
-// 	int j;
-// 	int tmp;
+int	find_max(t_stack *a)
+{
+	int	max;
+	int	shift_byte;
+	
+	shift_byte = 0;
+	max = a->value;
+	while (a)
+	{
+		if (a->value > max)
+		max = a->value;
+		a = a->next;
+	}
+	while (max >> shift_byte != 0)
+		shift_byte++;
+	return (shift_byte);
+}
 
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 	j = 0;
-// 	while (j < size - 1)
-// 	{
-// 		if (tab[j] > tab[j + 1])
-// 		{
-// 		tmp = tab[j];
-// 		tab[j] = tab[j + 1];
-// 		tab[j + 1] = tmp;
-// 		}
-// 		j++;
-// 	}
-// 	i++;
-// 	}
-// }
+void sort_array(int *tab, int size)
+{
+	int i;
+	int j;
+	int tmp;
 
-// void	transform_to_index(t_stack *a, int size)
-// {
-// 	int	array[size];
-// 	int	i;
-// 	t_stack	*b;
+	i = 0;
+	while (i < size)
+	{
+	j = 0;
+	while (j < size - 1)
+	{
+		if (tab[j] > tab[j + 1])
+		{
+		tmp = tab[j];
+		tab[j] = tab[j + 1];
+		tab[j + 1] = tmp;
+		}
+		j++;
+	}
+	i++;
+	}
+}
 
-// 	b = a;
-// 	i = 0;
-// 	while (a)
-// 	{
-// 		array[i++] = a->value;
-// 		a = a->next;
-// 	}
-// 	sort_array(&array, size);
-// 	while (b)
-// 	{
-// 		i = -1;
-// 		while (array[++i])
-// 			if(array[i] == b->value)
-// 				b->value == i;
-// 		b = b->next;
-// 	}
-// }
+void	transform_to_index(t_stack *a, int size)
+{
+	int	array[size];
+	int	i;
+	t_stack	*b;
+
+	b = a;
+	i = 0;
+	while (a)
+	{
+		array[i++] = a->value;
+		a = a->next;
+	}
+	sort_array(array, size);
+	while (b)
+	{
+		i = -1;
+		while (array[++i])
+			if(array[i] == b->value)
+				b->value = i;
+		b = b->next;
+	}
+}
 
 void	complex_sort(t_stack **a, t_stack **b)
 {
-	(void)a;
-	(void)b;
-	// int	size;
-	// int	max;
-	// int	div;
+	int	size;
+	int	max;
+	int	i;
+	int	is_sorted;
 
-	// div = 1;
-	// size = ft_lstsize(a);
-	
-	// max = find_max(*a);
-	// while ((max / div) > 0)
-	// {
-	// 	sort(*a, *b, div);
-	// 	div *= 10;
-	// }
+	is_sorted = 0;
+	size = ft_lstsize(*a);
+	i = 0;
+	transform_to_index(*a, size);
+	max = find_max(*a);
+	while (i <= max && is_sorted != (size - 1))
+		is_sorted = sort(a, b, i++, size);
 }

@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/10 17:06:03 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/11 16:10:39 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,6 @@ t_stack	*parse_input(int nb_input, char **numbers)
 	return (stack_a);
 }
 
-void	dispatch(t_stack **a, t_flags flags)
-{
-	if (flags.adaptative)
-	{
-		complex_sort(a);
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	int	i;
@@ -83,11 +75,11 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	if (argc < 2)
 		return (0);
-	ft_printf("check\n");
+	// ft_printf("check\n");
 	while (argv[i][0] == '-' && argv[i][1] == '-')
 		check_flags(argv[i++], &flags);
-	ft_printf("Flags - simple: %d, medium: %d, complex: %d, adaptative: %d, bench_mode: %d\n",
-		flags.simple, flags.medium, flags.complex, flags.adaptative, flags.bench_mode);
+	// ft_printf("Flags - simple: %d, medium: %d, complex: %d, adaptative: %d, bench_mode: %d\n",
+	// 	flags.simple, flags.medium, flags.complex, flags.adaptative, flags.bench_mode);
 	stack_a = parse_input(argc - i, &argv[i]);
 	if (!stack_a)
 		return (1);
@@ -96,14 +88,14 @@ int	main(int argc, char **argv)
 	// else if (flags.medium)
 	// 	medium_sort(&stack_a, &stack_b);
 	else if (flags.complex)
-		complex_sort(&stack_a);
-	ft_printf("Stack A:\n");
-	t_stack *current = stack_a;
-	while (current != NULL)
-	{
-		ft_printf("%d\n", current->value);
-		current = current->next;
-	}
+		complex_sort(&stack_a, &stack_b);
+	// ft_printf("Stack A:\n");
+	// t_stack *current = stack_a;
+	// while (current != NULL)
+	// {
+	// 	ft_printf("%d\n", current->value);
+	// 	current = current->next;
+	// }
 	ft_lstclear(&stack_a, delete_value);
 	return (0);
 }
