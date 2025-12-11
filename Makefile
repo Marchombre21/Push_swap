@@ -27,7 +27,8 @@ SRC_FILES := main.c\
 	reverse_op.c\
 	rotate_op.c\
 	simple_sort.c\
-	swap_op.c
+	swap_op.c\
+	push_swap_utils.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 
