@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/11 12:20:20 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/11 12:48:04 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,7 @@ void	rev_bubble_sort_bucket(t_stack **stack_a, t_stack **stack_b, int limit)
 	if (limit == 1)
 		return (pa(stack_a, stack_b));
 	while (a_push_limited(stack_a, stack_b, limit) != 0)
-	{
-		print_stack(*stack_a, "A during rev buble sort");
-		print_stack(*stack_b, "B during rev buble sort");
 		b_push_limited(stack_a, stack_b, limit);
-		print_stack(*stack_a, "A during rev buble sort");
-		print_stack(*stack_b, "B during rev buble sort");
-	}
 }
 
 void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets)
@@ -96,12 +90,10 @@ void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets)
 	if (bucket_size == 0)
 		bucket_size = 1;
 	i = 0;
-	print_stack(*stack_a, "A before bucket sort");
 	while (i < nb_buckets && to_sort > 0)
 	{
 		j = 0;
 		count = 0;
-		ft_printf("to_sort %d\n", to_sort);
 		while (j++ < to_sort)
 		{
 			rra(stack_a);
@@ -112,18 +104,11 @@ void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets)
 				count++;
 			}
 		}
-		ft_printf("count %d\n", count);
 		j = 0;
-		print_stack(*stack_a, "A after bucket push");
-		print_stack(*stack_b, "B after bucket push");
-		ft_printf("min_bucket %d max_bucket %d count %d\n",
-			(min + i * bucket_size), (min + (i + 1) * bucket_size), count);
 		rev_bubble_sort_bucket(stack_a, stack_b, count);
-		print_stack(*stack_a, "A after bucket sort");
 		j = 0;
 		while (j++ < size_a - to_sort)
 			rra(stack_a);
-		print_stack(*stack_a, "A after rra");
 		to_sort -= count;
 		i++;
 	}
