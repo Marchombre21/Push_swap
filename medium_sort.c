@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/10 23:29:20 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/11 10:51:52 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,35 +69,63 @@ int	find_max(t_stack *stack)
 	return (max);
 }
 
-void sort_stack_b(t_stack **stack_b)
+int	b_push_limited(t_stack **stack_a, t_stack **stack_b, int limit)
 {
-	int		sorted;
-	int		i;
-	int		size;
-	int		max;
+	int	j;
+	int	sorted;
+
+	sorted = 0;
+	j = limit - 1;
+	pb(stack_a, stack_b);
+	while (j > 0 || *stack_a)
+	{
+		if ((*stack_a)->value < (*stack_b)->value)
+		{
+			pb(stack_a, stack_b);
+			sb(stack_b);
+			sorted++;
+		}
+		else
+			pb(stack_a, stack_b);
+		j--;
+	}
+	return (sorted);
+}
+
+int a_push_limited(t_stack **stack_a, t_stack **stack_b, int limit)
+{
+	int	j;
+	int	sorted;
+
+	sorted = 0;
+	j = limit - 1;
+	pa(stack_a, stack_b);
+	while (j > 0 || *stack_b)
+	{
+		if ((*stack_a)->value < (*stack_b)->value)
+		{
+			pa(stack_a, stack_b);
+			sa(stack_a);
+			sorted++;
+		}
+		else
+			pa(stack_a, stack_b);
+		j--;
+	}
+	return (sorted);
+}
+
+void	rev_buble_sort_limited(t_stack **stack_a, t_stack **stack_b, int limit)
+{
+	int	sorted;
 
 	sorted = 1;
-	max = find_max(*stack_b);
-	size = ft_lstsize(*stack_b);
-	if (size <= 1)
+	if (limit == 0)
 		return ;
-	while (sorted != 0)
-	{
-		sorted = 0;
-		i = 1;
-		while (i < size)
-		{
-			if ((*stack_b)->value < (*stack_b)->next->value)
-			{
-				sb(stack_b);
-				rb(stack_b);
-				sorted = 1;
-			}
-			else
-				rb(stack_b);
-			i++;
-		}
-	}
+	if (limit == 1)
+		return (pa(stack_a, stack_b));
+	while (a_push_limited(stack_a, stack_b, limit) != 0)
+		b_push_limited(stack_a, stack_b, limit);
 }
 
 void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets)
@@ -107,41 +135,53 @@ void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets)
 	int bucket_size;
 	int i;
 	int j;
+	int to_sort;
+	int count;
 	int size_a;
 
 	min = find_min(*stack_a);
 	max = find_max(*stack_a);
 	bucket_size = (max - min + 1) / nb_buckets;
-	size_a = ft_lstsize(*stack_a);
+	to_sort = ft_lstsize(*stack_a);
+	size_a = to_sort;
 	if (bucket_size == 0)
 		bucket_size = 1;
 	i = 0;
 	while (i < nb_buckets)
 	{
-		j = -1;
-		while (++j < size_a)
+		j = 0;
+		count = 0;
+		while (j++ < to_sort)
 		{
 			if ((*stack_a)->value <= (min + (i + 1) * bucket_size) &&
 				(*stack_a)->value >= (min + i * bucket_size))
+			{
 				pb(stack_a, stack_b);
+				count++;
+			}
 			else
 				ra(stack_a);
 		}
-		sort_stack_b(stack_b);
-		while (*stack_b)
-			pa(stack_a, stack_b);
+		j = 0;
+		rev_buble_sort_limited(stack_a, stack_b, count);
+		j = 0;
+		while (j++ < size_a + count - to_sort)
+			ra(stack_a);
+		to_sort -= count;
 		i++;
 	}
 }
 
 /* ****************************************************	*/
-/* Bucket sort is used here								*/
+/* Bucket sort --> get number of buckets then call sort	*/
 /* ****************************************************	*/
 
 int	medium_sort(t_stack **stack_a, t_stack **stack_b)
 {
 	int	nb_buckets;
 
+	if (!*stack_a || ft_lstsize(*stack_a) <= 1)
+		return (-1);
 	nb_buckets = next_sqrt(ft_lstsize(*stack_a));
 	if (nb_buckets <= 0)
 		return (-1);
