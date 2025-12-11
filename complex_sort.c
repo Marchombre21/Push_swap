@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/11 16:42:16 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/11 17:28:58 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int	sort(t_stack **a, t_stack **b, int shift_byte, int size)
 }
 
 
-int	find_max(t_stack *a)
+int	find_max_complex(t_stack *a)
 {
 	int	max;
 	int	shift_byte;
-	
+
 	shift_byte = 0;
 	max = a->value;
 	while (a)
@@ -118,7 +118,7 @@ void	complex_sort(t_stack **a, t_stack **b)
 	size = ft_lstsize(*a);
 	i = 0;
 	transform_to_index(*a, size);
-	max = find_max(*a);
+	max = find_max_complex(*a);
 	while (i <= max && is_sorted != (size - 1))
 		is_sorted = sort(a, b, i++, size);
 }
