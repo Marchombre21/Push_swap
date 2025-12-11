@@ -16,7 +16,7 @@ LIBFT := $(LIBFT_DIR)libft.a
 
 PRINTF := $(PRINTF_DIR)libftprintf.a
 
-FLAGS := -Wall -Werror -Wextra -I $(LIBFT_DIR) -I $(PRINTF_DIR)
+FLAGS := -Wall -Werror -Wextra -g3 -I $(LIBFT_DIR) -I $(PRINTF_DIR)
 
 SRC_FILES := main.c\
 	complex_sort.c\

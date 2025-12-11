@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/17 10:37:31 by gmach             #+#    #+#              #
-#    Updated: 2025/12/09 10:20:17 by gmach            ###   ########lyon.fr    #
+#    Updated: 2025/12/11 07:04:39 by bfitte/gmac      ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 #flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 CFLAGS += -MMD -MP -I. -I$(LIBFT_DIR)
 
 #directories
