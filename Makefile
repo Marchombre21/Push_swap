@@ -40,25 +40,25 @@ $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
 
 $(LIBFT):
-	make -C $(LIBFT_DIR) bonus
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(PRINTF):
-	make -C $(PRINTF_DIR)
+	$(MAKE) -C $(PRINTF_DIR)
 
-$(BUILD_DIR)/%.o: %.c $(BUILD_DIR)
+$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 	$(CC) $(FLAGS) $(DEPFLAGS) -c $< -o $@
 
 $(BUILD_DIR):
 	mkdir -p $@
 
 clean:
-	make clean -C $(LIBFT_DIR)
-	make clean -C $(PRINTF_DIR)
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(PRINTF_DIR) clean
 	$(RM) $(OBJ) $(DEPS)
 
 fclean: clean
-	make fclean -C $(LIBFT_DIR)
-	make fclean -C $(PRINTF_DIR)
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(PRINTF_DIR) fclean
 	rmdir -p $(BUILD_DIR)
 	$(RM) $(NAME)
 
