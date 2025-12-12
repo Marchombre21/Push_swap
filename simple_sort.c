@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/11 17:55:27 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 16:52:17 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,89 @@ void	refill_a(t_stack **stack_a, t_stack **stack_b)
 		pa(stack_a, stack_b);
 }
 
-int	simple_sort(t_stack **stack_a, t_stack **stack_b)
+void	rotate_b_to_min(t_stack **stack_b, int target, int size_b)
 {
-	int	size_a;
+	int count;
+
+	count = count_nodes_until_value(*stack_b, target);
+	if (count <= size_b / 2)
+		while (size_b > 0 && (ft_lstlast(*stack_b))->value != target)
+		{
+			rb(stack_b);
+			size_b--;
+		}
+	else
+		while (size_b > 0 && (ft_lstlast(*stack_b))->value != target)
+		{
+			rrb(stack_b);
+			size_b--;
+		}
+}
+
+void	rotate_b_to_max(t_stack **stack_b, int target, int size_b)
+{
+	int count;
+
+	count = count_nodes_until_value(*stack_b, target);
+	if (count <= size_b / 2)
+		while (size_b > 0 && (*stack_b)->value != target)
+		{
+			rb(stack_b);
+			size_b--;
+		}
+	else
+		while (size_b > 0 && (*stack_b)->value != target)
+		{
+			rrb(stack_b);
+			size_b--;
+		}
+}
+
+int	count_to_spot(t_stack *stack_b, int value)
+{
+	int	spot_pos;
+	t_stack	*current;
+	int	min_b;
+	int	max_b;
+
+	min_b = find_min(stack_b);
+	max_b = find_max(stack_b);
+	spot_pos = 1;
+	current = stack_b;
+	while (current && current->next)
+	{
+		if (value < current->value && value > current->next->value && !(current->value == min_b && current->next->value == max_b))
+			return (spot_pos);
+		spot_pos++;
+		current = current->next;
+	}
+	return (spot_pos);
+}
+int	rotate_b_to_spot(t_stack **stack_b, int value, int size_b)
+{
+	int	spot_pos;
+
+	spot_pos = count_to_spot(*stack_b, value);
+	if (spot_pos == -1)
+		return (-1);
+	if (spot_pos <= size_b / 2)
+		while (spot_pos-- > 0)
+			rb(stack_b);
+	else
+		while (size_b-- > spot_pos)
+			rrb(stack_b);
+	return (0);
+}
+
+int	simple_sort(t_stack **stack_a, t_stack **stack_b, int limit)
+{
 	int	size_b;
 	int	i;
 	int	min_b;
 	int	max_b;
 
-	size_a = ft_lstsize(*stack_a);
 	i = 0;
-	if (size_a <= 1)
+	if (limit <= 1)
 		return (-1);
 	//init 2 first terms in B
 	pb(stack_a, stack_b);
@@ -124,49 +196,34 @@ int	simple_sort(t_stack **stack_a, t_stack **stack_b)
 		pb(stack_a, stack_b);
 		sb(stack_b);
 	}
-	while (*stack_a)
+	while (i++ < limit - 2)
 	{
 		size_b = ft_lstsize(*stack_b);
-		// if top a < min b
+		if (size_b < 2)
+			return (-1);
+		// check if top a is new min b and insert accordingly
 		if ((*stack_a)->value < min_b)
 		{
-			set_min_b((*stack_a)->value, &min_b);
+			rotate_b_to_min(stack_b, min_b, size_b);
 			pb(stack_a, stack_b);
 			min_b = (*stack_b)->value;
-			print_stack(*stack_b, "B after pb");
 		}
-		// else if top a > max b
+		// check if top a is new max b and insert accordingly
 		else if ((*stack_a)->value > max_b)
 		{
-			set_max_b((*stack_a)->value, &max_b);
+			rotate_b_to_max(stack_b, max_b, size_b);
 			pb(stack_a, stack_b);
-			max_b = (*stack_b)->next->value;
-			print_stack(*stack_b, "B after pb and rb");
+			max_b = (*stack_b)->value;
 		}
-		else if((*stack_a)->value > (*stack_b)->value && (*stack_a)->value < ft_lstlast(*stack_b)->value)
-		{
-			pb(stack_a, stack_b);
-			print_stack(*stack_b, "B after pb");
-		}
-		else if ((*stack_a)->value > (*stack_b)->next->value)
-		{
-			pb(stack_a, stack_b);
-			sb(stack_b);
-			print_stack(*stack_b, "B after pb and sb");
-		}
+		// else find the right spot by rotating B
 		else
 		{
-			while (size_b > 0 && (*stack_a)->value < (*stack_b)->value)
-			{
-				print_stack(*stack_a, "A");
-				print_stack(*stack_b, "B");
-				rb(stack_b);
-				size_b--;
-			}
+			if (rotate_b_to_spot(stack_b, (*stack_a)->value, size_b) == -1)
+				return (-1);
 			pb(stack_a, stack_b);
-			print_stack(*stack_b, "B after pb");
 		}
 	}
+	rotate_b_to_max(stack_b, max_b, ft_lstsize(*stack_b));;
 	refill_a(stack_a, stack_b);
 	return (0);
 }

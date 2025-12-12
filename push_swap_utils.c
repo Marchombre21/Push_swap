@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 10:58:46 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/11 11:20:36 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 10:56:14 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,17 @@ void	print_stack(t_stack *stack, char *name)
 		current = current->next;
 	}
 	ft_printf("NULL\n");
+}
+
+int	count_nodes_until_value(t_stack *stack, int value)
+{
+	int	count;
+
+	count = 0;
+	while (stack && stack->value != value)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
 }

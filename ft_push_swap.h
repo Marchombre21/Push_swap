@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/11 11:20:43 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 16:43:41 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,10 @@ int	next_sqrt(int nb);
 int	find_min(t_stack *stack);
 int	find_max(t_stack *stack);
 void print_stack(t_stack *stack, char *name);
+int	count_nodes_until_value(t_stack *stack, int value);
 
 /* Sort functions */
-int		simple_sort(t_stack **stack_a, t_stack **stack_b);
+int		simple_sort(t_stack **stack_a, t_stack **stack_b, int size);
 int		medium_sort(t_stack **stack_a, t_stack **stack_b);
 
 #endif
