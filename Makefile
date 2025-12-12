@@ -39,11 +39,13 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
 
-$(LIBFT):
-	$(MAKE) -C $(LIBFT_DIR)
+$(LIBFT): FORCE
+	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 
-$(PRINTF):
-	$(MAKE) -C $(PRINTF_DIR)
+$(PRINTF): FORCE
+	@$(MAKE) -C $(PRINTF_DIR) --no-print-directory
+
+FORCE:
 
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 	$(CC) $(FLAGS) $(DEPFLAGS) -c $< -o $@
@@ -64,6 +66,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re FORCE
 
 -include $(DEPS)
