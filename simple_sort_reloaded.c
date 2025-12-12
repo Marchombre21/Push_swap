@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/12 20:28:16 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 20:30:36 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,6 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 	}
 	size_b = ft_lstsize(*stack_b);
 	print_stack(*stack_b, "B initial");
-	if (size_b)
-	{
-		rotate_b_to_min(stack_b, find_min(*stack_b, size_b), size_b);
-		rrb(stack_b);
-	}
-	print_stack(*stack_b, "B after rot to min");
 	//init 2 first terms in A
 	pa(stack_a, stack_b);
 	if ((*stack_b)->value > (*stack_a)->value)
@@ -125,8 +119,9 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 		max_a_rel = (*stack_a)->value;
 		pa(stack_a, stack_b);
 	}
+	print_stack(*stack_a, "A after init of 2");
 	limit -= 2;
-	to_sort = 0;
+	to_sort = 2;
 	//insert rest of stack B into A
 	while (i++ < limit)
 	{
@@ -157,6 +152,7 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 			to_sort++;
 		}
 	}
+	print_stack(*stack_b, "B after refill A");
 	rel_rot_a_to_min(stack_a, min_a_rel, to_sort);
 	return (0);
 }
