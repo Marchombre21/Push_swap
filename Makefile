@@ -37,15 +37,15 @@ DEPS := $(patsubst %.o, %.d, $(OBJ))
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(PRINTF) $(LIBFT) -o $(NAME)
 
 $(LIBFT):
-	make -C $(LIBFT_DIR) bonus
+	make -C $(LIBFT_DIR)
 
 $(PRINTF):
 	make -C $(PRINTF_DIR)
 
-$(BUILD_DIR)/%.o: %.c $(BUILD_DIR)
+$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 	$(CC) $(FLAGS) $(DEPFLAGS) -c $< -o $@
 
 $(BUILD_DIR):

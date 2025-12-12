@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/11 17:28:58 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 09:25:01 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,26 @@ int	sort(t_stack **a, t_stack **b, int shift_byte, int size)
 {
 	while (size-- != 0)
 	{
+		// if ((*a)->next && (*a)->value > (*a)->next->value)
+		// 	sa(a);
 		if ((*a)->value >> shift_byte & 1)
+		{
 			ra(a);
+			// if (ft_lstsize(*b) == 0)
+			// 	if ()
+		}
 		else
 			pb(a, b);
+		// if ((*a)->next && (*a)->value > (*a)->next->value)
+		// 	sa(a);
 	}
 	size = ft_lstsize(*b);
-	while (size-- != 0)
+	while (size-- > 0)
+	{
 		pa(a, b);
+		// if ((*a)->next && (*a)->value > (*a)->next->value)
+		// 	sa(a);
+	}
 	return(check_sort(*a));
 }
 
