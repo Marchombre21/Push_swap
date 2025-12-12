@@ -3,17 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+         #
+#    By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/06 06:57:02 by bfitte            #+#    #+#              #
-#    Updated: 2025/12/09 10:11:29 by bfitte/gmac      ###   ########lyon.fr    #
+#    Updated: 2025/12/12 09:30:23 by gmach            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=libft.a
 CC=cc
-HEADERS=libft.h
 CFLAGS=-Wall -Werror -Wextra
+DEPFLAGS=-MMD -MP
+
 SRC_FILES=ft_isalpha.c\
 	ft_memcpy.c\
 	ft_strrchr.c\
@@ -48,8 +49,7 @@ SRC_FILES=ft_isalpha.c\
 	ft_putendl_fd.c\
 	ft_putnbr_fd.c\
 	ft_putstr_fd.c\
-
-BONUS_FILES=ft_lstnew_bonus.c\
+	ft_lstnew_bonus.c\
 	ft_lstadd_front_bonus.c\
 	ft_lstsize_bonus.c\
 	ft_lstlast_bonus.c\
@@ -61,25 +61,24 @@ BONUS_FILES=ft_lstnew_bonus.c\
 
 OBJ=$(SRC_FILES:.c=.o)
 
-OBJ_BONUS=$(BONUS_FILES:.c=.o)
+DEP=$(SRC_FILES:.c=.d)
+
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
-%.o: %.c $(HEADERS)
-	$(CC) $(CFLAGS) -o $@ -c $<
+%.o: %.c
+	$(CC) $(CFLAGS) $(DEPFLAGS) -o $@ -c $<
 
-all: $(NAME)
-
-bonus: $(NAME) $(OBJ_BONUS)
-	ar rcs $(NAME) $(OBJ_BONUS)
-
-clean: 
-	rm -f $(OBJ) $(OBJ_BONUS)
+clean:
+	rm -f $(OBJ) $(DEP)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+-include $(DEP)
 
 .PHONY: all clean fclean re
