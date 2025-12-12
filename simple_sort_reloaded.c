@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/12 20:26:09 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 20:28:16 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 	int	min_a_rel;
 	int	max_a_rel;
 	int to_sort;
+	int	size_b;
 
 	i = 0;
 	if (limit == 0)
@@ -101,12 +102,31 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 		pa(stack_a, stack_b);
 		return (0);
 	}
-	min_a_rel = find_min(*stack_b, limit);
-	max_a_rel = find_max(*stack_b, limit);
-	//insert min from B to A
-	rotate_b_to_min(stack_b, min_a_rel, limit);
+	size_b = ft_lstsize(*stack_b);
+	print_stack(*stack_b, "B initial");
+	if (size_b)
+	{
+		rotate_b_to_min(stack_b, find_min(*stack_b, size_b), size_b);
+		rrb(stack_b);
+	}
+	print_stack(*stack_b, "B after rot to min");
+	//init 2 first terms in A
 	pa(stack_a, stack_b);
-	to_sort = 1;
+	if ((*stack_b)->value > (*stack_a)->value)
+	{
+		min_a_rel = (*stack_a)->value;
+		max_a_rel = (*stack_b)->value;
+		pa(stack_a, stack_b);
+		sa(stack_a);
+	}
+	else
+	{
+		min_a_rel = (*stack_b)->value;
+		max_a_rel = (*stack_a)->value;
+		pa(stack_a, stack_b);
+	}
+	limit -= 2;
+	to_sort = 0;
 	//insert rest of stack B into A
 	while (i++ < limit)
 	{
