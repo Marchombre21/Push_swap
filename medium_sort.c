@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/11 15:39:20 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 17:38:25 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,8 @@ void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets, int bucke
 		else
 			while (j++ < to_sort - count && i != 0)
 				rra(stack_a);
-		rev_bubble_sort_bucket(stack_a, stack_b, count);
+		//rev_bubble_sort_bucket(stack_a, stack_b, count);
+		simple_sort(stack_a, stack_b, count);
 		j = 0;
 		while (j++ < count)
 			ra(stack_a);
