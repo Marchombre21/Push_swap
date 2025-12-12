@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 10:58:46 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/12 10:56:14 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 19:44:36 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	next_sqrt(int nb)
 	return ((int)root + 1);
 }
 
-int	find_min(t_stack *stack)
+int	find_min(t_stack *stack, int size)
 {
 	int		min;
 	t_stack	*current;
@@ -42,7 +42,7 @@ int	find_min(t_stack *stack)
 		return (0);
 	min = stack->value;
 	current = stack->next;
-	while (current)
+	while (current && size-- > 1)
 	{
 		if (current->value < min)
 			min = current->value;
@@ -51,7 +51,7 @@ int	find_min(t_stack *stack)
 	return (min);
 }
 
-int	find_max(t_stack *stack)
+int	find_max(t_stack *stack, int size)
 {
 	int		max;
 	t_stack	*current;
@@ -60,7 +60,7 @@ int	find_max(t_stack *stack)
 		return (0);
 	max = stack->value;
 	current = stack->next;
-	while (current)
+	while (current && size-- > 1)
 	{
 		if (current->value > max)
 			max = current->value;

@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/12 16:52:17 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 19:46:41 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,15 +135,15 @@ void	rotate_b_to_max(t_stack **stack_b, int target, int size_b)
 		}
 }
 
-int	count_to_spot(t_stack *stack_b, int value)
+int	count_to_spot(t_stack *stack_b, int value, int size_b)
 {
 	int	spot_pos;
 	t_stack	*current;
 	int	min_b;
 	int	max_b;
 
-	min_b = find_min(stack_b);
-	max_b = find_max(stack_b);
+	min_b = find_min(stack_b, size_b);
+	max_b = find_max(stack_b, size_b);
 	spot_pos = 1;
 	current = stack_b;
 	while (current && current->next)
@@ -159,7 +159,7 @@ int	rotate_b_to_spot(t_stack **stack_b, int value, int size_b)
 {
 	int	spot_pos;
 
-	spot_pos = count_to_spot(*stack_b, value);
+	spot_pos = count_to_spot(*stack_b, value, size_b);
 	if (spot_pos == -1)
 		return (-1);
 	if (spot_pos <= size_b / 2)

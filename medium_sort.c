@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/12 17:38:25 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 20:12:39 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,14 +118,16 @@ void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets, int bucke
 	int count;
 	int size_a;
 
-	min = find_min(*stack_a);
 	size_a = ft_lstsize(*stack_a);
+	min = find_min(*stack_a, size_a);
 	to_sort = size_a;
 	i = 0;
 	count = 0;
 	while (i < nb_buckets && to_sort > 0)
 	{
 		count = fill_bucket(stack_a, stack_b, min + i * bucket_size, min + (i + 1) * bucket_size, to_sort);
+		ft_printf("Bucket %d: min_bucket %d, max_bucket %d\n", i, min + i * bucket_size, min + (i + 1) * bucket_size);
+		print_stack(*stack_b, "B after filling bucket");
 		j = 0;
 		if (size_a - to_sort < to_sort - count)
 			while (j++ < size_a - to_sort && i != 0)
@@ -133,11 +135,14 @@ void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets, int bucke
 		else
 			while (j++ < to_sort - count && i != 0)
 				rra(stack_a);
+		print_stack(*stack_a, "A after filling bucket");
 		//rev_bubble_sort_bucket(stack_a, stack_b, count);
-		simple_sort(stack_a, stack_b, count);
+		simple_sort_reloaded(stack_a, stack_b, count);
+		print_stack(*stack_a, "A after sorting bucket");
 		j = 0;
 		while (j++ < count)
 			ra(stack_a);
+		print_stack(*stack_a, "A after rotating sorted bucket");
 		to_sort -= count;
 		i++;
 	}
@@ -154,17 +159,20 @@ int	medium_sort(t_stack **stack_a, t_stack **stack_b)
 	int	min;
 	int	max;
 	int	bucket_size;
+	int size_a;
 
 	if (!*stack_a || ft_lstsize(*stack_a) <= 1)
 		return (-1);
-	min = find_min(*stack_a);
-	max = find_max(*stack_a);
-	nb_buckets = next_sqrt(ft_lstsize(*stack_a));
+	size_a = ft_lstsize(*stack_a);
+	min = find_min(*stack_a, size_a);
+	max = find_max(*stack_a, size_a);
+	nb_buckets = next_sqrt(size_a);
 	if (nb_buckets <= 0)
 		return (-1);
 	bucket_size = (max - min + 1) / nb_buckets;
 	if (bucket_size == 0)
 		bucket_size = 1;
 	bucket_sort(stack_a, stack_b, nb_buckets, bucket_size);
+	print_stack(*stack_a, "A after bucket sort");
 	return (0);
 }

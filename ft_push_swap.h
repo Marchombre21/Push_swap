@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/12 16:43:41 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 20:19:11 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,18 @@ void	rrr(t_stack **a, t_stack **b);
 
 /* Utils functions */
 int	next_sqrt(int nb);
-int	find_min(t_stack *stack);
-int	find_max(t_stack *stack);
+int	find_min(t_stack *stack, int size);
+int	find_max(t_stack *stack, int size);
 void print_stack(t_stack *stack, char *name);
 int	count_nodes_until_value(t_stack *stack, int value);
 
+void	rel_rot_a_to_min(t_stack **stack_a, int target, int to_sort);
+int		rotate_b_to_spot(t_stack **stack_b, int value, int size_b);
+void	rotate_b_to_min(t_stack **stack_b, int target, int size_b);
+
 /* Sort functions */
 int		simple_sort(t_stack **stack_a, t_stack **stack_b, int size);
+int		simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit);
 int		medium_sort(t_stack **stack_a, t_stack **stack_b);
 
 #endif

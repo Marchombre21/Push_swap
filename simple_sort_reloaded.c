@@ -6,13 +6,13 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/12 19:08:47 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/12 20:26:09 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	rel_rot_a_to_min(t_stack **stack_a, int target, int to_sort, int limit)
+void	rel_rot_a_to_min(t_stack **stack_a, int target, int to_sort)
 {
 	int count;
 
@@ -31,34 +31,34 @@ void	rel_rot_a_to_min(t_stack **stack_a, int target, int to_sort, int limit)
 		}
 }
 
-void	rel_rot_a_to_max(t_stack **stack_a, int target, int size_a, int limit)
+void	rel_rot_a_to_max(t_stack **stack_a, int target, int to_sort)
 {
 	int count;
 
 	count = count_nodes_until_value(*stack_a, target);
-	if (count <= size_a / 2)
-		while (size_a > 0 && (*stack_a)->value != target)
+	if (count <= to_sort / 2)
+		while (to_sort > 0 && (*stack_a)->value != target)
 		{
 			ra(stack_a);
-			size_a--;
+			to_sort--;
 		}
 	else
-		while (size_a > 0 && (*stack_a)->value != target)
+		while (to_sort > 0 && (*stack_a)->value != target)
 		{
 			rra(stack_a);
-			size_a--;
+			to_sort--;
 		}
 }
 
-int	rel_count_to_spot(t_stack *stack_a, int value)
+int	rel_count_to_spot(t_stack *stack_a, int value, int to_sort)
 {
 	int	spot_pos;
 	t_stack	*current;
 	int	min_a;
 	int	max_a;
 
-	min_a = find_min(stack_a);
-	max_a = find_max(stack_a);
+	min_a = find_min(stack_a, to_sort);
+	max_a = find_max(stack_a, to_sort);
 	spot_pos = 1;
 	current = stack_a;
 	while (current && current->next)
@@ -70,18 +70,18 @@ int	rel_count_to_spot(t_stack *stack_a, int value)
 	}
 	return (spot_pos);
 }
-int	rel_rot_a_to_spot(t_stack **stack_a, int value, int size_a)
+int	rel_rot_a_to_spot(t_stack **stack_a, int value, int to_sort)
 {
 	int	spot_pos;
 
-	spot_pos = rel_count_to_spot(*stack_a, value);
+	spot_pos = rel_count_to_spot(*stack_a, value, to_sort);
 	if (spot_pos == -1)
 		return (-1);
-	if (spot_pos <= size_a / 2)
+	if (spot_pos <= to_sort / 2)
 		while (spot_pos-- > 0)
 			ra(stack_a);
 	else
-		while (size_a-- > spot_pos)
+		while (to_sort-- > spot_pos)
 			rra(stack_a);
 	return (0);
 }
@@ -101,23 +101,12 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 		pa(stack_a, stack_b);
 		return (0);
 	}
-	//init 2 first terms in A
+	min_a_rel = find_min(*stack_b, limit);
+	max_a_rel = find_max(*stack_b, limit);
+	//insert min from B to A
+	rotate_b_to_min(stack_b, min_a_rel, limit);
 	pa(stack_a, stack_b);
-	if ((*stack_b)->value > (*stack_a)->value)
-	{
-		min_a_rel = (*stack_a)->value;
-		max_a_rel = (*stack_b)->value;
-		pa(stack_a, stack_b);
-		sa(stack_a);
-	}
-	else
-	{
-		min_a_rel = (*stack_b)->value;
-		max_a_rel = (*stack_a)->value;
-		pa(stack_a, stack_b);
-	}
-	limit -= 2;
-	to_sort = 2;
+	to_sort = 1;
 	//insert rest of stack B into A
 	while (i++ < limit)
 	{
@@ -148,6 +137,6 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 			to_sort++;
 		}
 	}
-	rel_rot_a_to_max(stack_a, max_a_rel, to_sort, limit);
+	rel_rot_a_to_min(stack_a, min_a_rel, to_sort);
 	return (0);
 }
