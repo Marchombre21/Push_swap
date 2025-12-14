@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/12 20:12:39 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/13 10:43:50 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ int a_push_limited(t_stack **stack_a, t_stack **stack_b, int limit)
 
 void	rev_bubble_sort_bucket(t_stack **stack_a, t_stack **stack_b, int limit)
 {
-	int	sorted;
-
-	sorted = 1;
 	if (limit == 0)
 		return ;
 	if (limit == 1)

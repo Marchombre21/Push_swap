@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort_reloaded.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/12 20:30:36 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/13 16:39:04 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	rel_count_to_spot(t_stack *stack_a, int value, int to_sort)
 	current = stack_a;
 	while (current && current->next)
 	{
-		if (value < current->value && value > current->next->value && !(current->value == min_a && current->next->value == max_a))
+		if (value > current->value && value < current->next->value && !(current->value == max_a && current->next->value == min_a))
 			return (spot_pos);
 		spot_pos++;
 		current = current->next;
@@ -92,7 +92,6 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 	int	min_a_rel;
 	int	max_a_rel;
 	int to_sort;
-	int	size_b;
 
 	i = 0;
 	if (limit == 0)
@@ -102,7 +101,6 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 		pa(stack_a, stack_b);
 		return (0);
 	}
-	size_b = ft_lstsize(*stack_b);
 	print_stack(*stack_b, "B initial");
 	//init 2 first terms in A
 	pa(stack_a, stack_b);

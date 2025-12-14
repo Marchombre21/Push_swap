@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 10:58:46 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/12 19:44:36 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/13 16:40:23 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,19 @@ void	print_stack(t_stack *stack, char *name)
 }
 
 int	count_nodes_until_value(t_stack *stack, int value)
+{
+	int	count;
+
+	count = 0;
+	while (stack && stack->value != value)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
+}
+
+int	rel_count_nodes_until_value(t_stack *stack, int value)
 {
 	int	count;
 

@@ -35,6 +35,9 @@ OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 
 DEPS := $(patsubst %.o, %.d, $(OBJ))
 
+TEST_FILE := args.txt
+TFLAGS := --medium
+
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
@@ -64,6 +67,14 @@ fclean: clean
 	$(MAKE) -C $(PRINTF_DIR) fclean
 	rmdir -p $(BUILD_DIR)
 	$(RM) $(NAME)
+
+t:
+	make
+	./push_swap $(TFLAGS) $(shell cat $(TEST_FILE))
+
+tn:
+	make
+	./push_swap $(TFLAGS) $(shell cat $(TEST_FILE)) | wc -l
 
 re: fclean all
 
