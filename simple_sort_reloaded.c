@@ -3,88 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort_reloaded.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/13 16:39:04 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 13:05:54 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-
-void	rel_rot_a_to_min(t_stack **stack_a, int target, int to_sort)
-{
-	int count;
-
-	count = count_nodes_until_value(*stack_a, target);
-	if (count <= to_sort / 2)
-		while (to_sort > 0 && (ft_lstlast(*stack_a))->value != target)
-		{
-			ra(stack_a);
-			to_sort--;
-		}
-	else
-		while (to_sort > 0 && (ft_lstlast(*stack_a))->value != target)
-		{
-			rra(stack_a);
-			to_sort--;
-		}
-}
-
-void	rel_rot_a_to_max(t_stack **stack_a, int target, int to_sort)
-{
-	int count;
-
-	count = count_nodes_until_value(*stack_a, target);
-	if (count <= to_sort / 2)
-		while (to_sort > 0 && (*stack_a)->value != target)
-		{
-			ra(stack_a);
-			to_sort--;
-		}
-	else
-		while (to_sort > 0 && (*stack_a)->value != target)
-		{
-			rra(stack_a);
-			to_sort--;
-		}
-}
-
-int	rel_count_to_spot(t_stack *stack_a, int value, int to_sort)
-{
-	int	spot_pos;
-	t_stack	*current;
-	int	min_a;
-	int	max_a;
-
-	min_a = find_min(stack_a, to_sort);
-	max_a = find_max(stack_a, to_sort);
-	spot_pos = 1;
-	current = stack_a;
-	while (current && current->next)
-	{
-		if (value > current->value && value < current->next->value && !(current->value == max_a && current->next->value == min_a))
-			return (spot_pos);
-		spot_pos++;
-		current = current->next;
-	}
-	return (spot_pos);
-}
-int	rel_rot_a_to_spot(t_stack **stack_a, int value, int to_sort)
-{
-	int	spot_pos;
-
-	spot_pos = rel_count_to_spot(*stack_a, value, to_sort);
-	if (spot_pos == -1)
-		return (-1);
-	if (spot_pos <= to_sort / 2)
-		while (spot_pos-- > 0)
-			ra(stack_a);
-	else
-		while (to_sort-- > spot_pos)
-			rra(stack_a);
-	return (0);
-}
 
 int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 {

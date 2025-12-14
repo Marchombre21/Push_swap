@@ -30,6 +30,7 @@ SRC_FILES := main.c\
 	simple_sort_reloaded.c\
 	swap_op.c\
 	push_swap_utils.c\
+	push_swap_utils2.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 

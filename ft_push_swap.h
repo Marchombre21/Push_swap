@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/12 20:19:11 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 13:18:14 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@ typedef struct  s_flags
 	int	disorder;
 	int	error;
 }	t_flags;
+
+/* Stack_operations structure */
+typedef struct s_stack_ops
+{
+	char	letter;
+	t_stack	**ptr;
+	void	(*rotate)(t_stack **);
+	void	(*rrotate)(t_stack **);
+	void	(*swap)(t_stack **);
+}   t_stack_ops;
 
 /* Push_swap operations */
 void	sa(t_stack **stack_a);
