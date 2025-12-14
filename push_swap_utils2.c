@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:06:59 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/14 17:36:34 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 17:51:12 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	rotate_value_to_top(t_stack_ops s, int value, int size)
 	i = 0;
 	count = count_nodes_until_value(*s.ptr, value);
 	if (count == 0)
-		return (ft_printf("value already at top\n"), 0);
+		return (0);
 	if (count <= size / 2)
 	{
 		while (i++ < count)
@@ -95,7 +95,6 @@ int	rotate_value_to_top(t_stack_ops s, int value, int size)
 		while (i++ < count)
 			s.rrotate(s.ptr);
 	}
-	ft_printf("rotate_value_to_top\n");
 	return (count);
 }
 
@@ -105,9 +104,9 @@ int	rotate_value_to_bottom(t_stack_ops s, int value, int size)
 	int	count;
 
 	i = 0;
-	count =  size - count_nodes_until_value(*s.ptr, value);
+	count = size - count_nodes_until_value(*s.ptr, value);
 	if (count == 0)
-		return (ft_printf("value already at bottom\n"), 0);
+		return (0);
 	if (count <= size / 2)
 	{
 		while (i++ < count)
@@ -119,7 +118,6 @@ int	rotate_value_to_bottom(t_stack_ops s, int value, int size)
 		while (i++ <= count)
 			s.rotate(s.ptr);
 	}
-	ft_printf("rotate_value_to_bottom de %d, size %d\n", count, size);
 	return (count);
 }
 
@@ -139,6 +137,5 @@ int	rotate_to_spot(t_stack_ops s, int value, int size)
 		while (i++ < spot_pos)
 			s.rrotate(s.ptr);
 	}
-	ft_printf("rotate_to_spot\n");
 	return (spot_pos);
 }

@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/14 17:10:39 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 18:06:39 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets, int bucke
 		marker = find_max(*stack_b, count);
 		ft_printf("Bucket %d: min_bucket %d, max_bucket %d\n", i, min + i * bucket_size, min + (i + 1) * bucket_size);
 		print_stack(*stack_b, "B after filling bucket");
+		print_stack(*stack_a, "A after filling bucket");
 		j = 0;
 		if (size_a - to_sort < to_sort - count)
 			while (j++ < size_a - to_sort && i != 0)
@@ -160,13 +161,13 @@ void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets, int bucke
 		//rev_bubble_sort_bucket(stack_a, stack_b, count);
 		rev_simple_sort(stack_a, stack_b, count);
 		print_stack(*stack_a, "A after sorting bucket");
-		rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), marker, size_a);
+		ft_printf("rotate bottom %d\n", rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), marker, size_a));
 		print_stack(*stack_a, "A after rotating sorted bucket");
 		to_sort -= count;
 		i++;
 	}
 	print_stack(*stack_a, "A before final rotate to min");
-	rotate_value_to_top(get_stack_ops(stack_a, 'a'), min, size_a);
+	ft_printf("rotate top %d\n", rotate_value_to_top(get_stack_ops(stack_a, 'a'), min, size_a));
 	print_stack(*stack_a, "A after final rotate to min");
 }
 

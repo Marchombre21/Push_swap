@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/14 17:15:06 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 17:52:55 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
 		// check if top b is new min a and insert accordingly
 		if ((*stack_b)->value < min_a)
 		{
-			rotate_value_to_top(get_stack_ops(stack_a, 'a'), min_a, ft_lstsize(*stack_a));
+			ft_printf("rotate top %d\n", rotate_value_to_top(get_stack_ops(stack_a, 'a'), min_a, ft_lstsize(*stack_a)));
 			pa(stack_a, stack_b);
 			sorted++;
 			min_a = (*stack_a)->value;
@@ -67,7 +67,7 @@ int	rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
 		// check if top a is new max b and insert accordingly
 		else if ((*stack_b)->value > max_a)
 		{
-			rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), max_a, ft_lstsize(*stack_a));
+			ft_printf("rotate bottom %d\n", rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), max_a, ft_lstsize(*stack_a)));
 			pa(stack_a, stack_b);
 			sorted++;
 			max_a = (*stack_a)->value;
@@ -75,12 +75,12 @@ int	rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
 		// else find the right spot by rotating B
 		else
 		{
-			rotate_to_spot(get_stack_ops(stack_a, 'a'), (*stack_b)->value, ft_lstsize(*stack_a));
+			ft_printf("rotate to spot %d\n", rotate_to_spot(get_stack_ops(stack_a, 'a'), (*stack_b)->value, ft_lstsize(*stack_a)));
 			pa(stack_a, stack_b);
 			sorted++;
 		}
 	}
 	print_stack(*stack_b, "B after refill A");
-	ft_printf("count %d\n", rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), min_a, sorted));
+	ft_printf("rotate bottom %d\n", rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), min_a, sorted));
 	return (0);
 }
