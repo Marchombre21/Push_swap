@@ -6,15 +6,14 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/14 17:52:55 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 19:06:18 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	init_rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int *min, int *max)
+static int	init(t_stack **stack_a, t_stack **stack_b, int *min, int *max)
 {
-	//init 2 first terms in A
 	pa(stack_a, stack_b);
 	if ((*stack_b)->value > (*stack_a)->value)
 	{
@@ -29,58 +28,56 @@ void	init_rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int *min, int *m
 		*max = (*stack_a)->value;
 		pa(stack_a, stack_b);
 	}
+	return (2);
 }
 
-int	rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
+static void	exec(t_stack **s_a, t_stack **s_b, int to_sort)//, int size_a)
 {
-	int	i;
-	int	min_a;
-	int	max_a;
-	int sorted;
+	int min_a;
+	int max_a;
 
-	i = 0;
 	min_a = 0;
 	max_a = 0;
+	to_sort -= init(s_a, s_b, &min_a, &max_a);
+	while (to_sort-- > 0)
+	{
+		if ((*s_b)->value < min_a)
+		{
+			rotate_value_to_top(get_stack_ops(s_a, 'a'), min_a, ft_lstsize(*s_a));
+			pa(s_a, s_b);
+			min_a = (*s_a)->value;
+		}
+		else if ((*s_b)->value > max_a)
+		{
+			rotate_value_to_bottom(get_stack_ops(s_a, 'a'), max_a, ft_lstsize(*s_a));
+			pa(s_a, s_b);
+			max_a = (*s_a)->value;
+		}
+		else
+		{
+			rotate_to_spot(get_stack_ops(s_a, 'a'), (*s_b)->value, ft_lstsize(*s_a));
+			pa(s_a, s_b);
+		}
+	}
+}
+
+
+void	rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
+{
+	int	i;
+	int	min;
+	int	size_a;
+
+	i = 0;
 	if (to_sort == 0)
-		return (0);
+	return ;
 	if (to_sort == 1)
 	{
 		pa(stack_a, stack_b);
-		return (0);
+		return ;
 	}
-	print_stack(*stack_b, "B initial");
-	init_rev_simple_sort(stack_a, stack_b, &min_a, &max_a);
-	print_stack(*stack_a, "A after init of 2");
-	to_sort -= 2;
-	sorted = 2;
-	//insert rest of stack B into A
-	while (i++ < to_sort)
-	{
-		// check if top b is new min a and insert accordingly
-		if ((*stack_b)->value < min_a)
-		{
-			ft_printf("rotate top %d\n", rotate_value_to_top(get_stack_ops(stack_a, 'a'), min_a, ft_lstsize(*stack_a)));
-			pa(stack_a, stack_b);
-			sorted++;
-			min_a = (*stack_a)->value;
-		}
-		// check if top a is new max b and insert accordingly
-		else if ((*stack_b)->value > max_a)
-		{
-			ft_printf("rotate bottom %d\n", rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), max_a, ft_lstsize(*stack_a)));
-			pa(stack_a, stack_b);
-			sorted++;
-			max_a = (*stack_a)->value;
-		}
-		// else find the right spot by rotating B
-		else
-		{
-			ft_printf("rotate to spot %d\n", rotate_to_spot(get_stack_ops(stack_a, 'a'), (*stack_b)->value, ft_lstsize(*stack_a)));
-			pa(stack_a, stack_b);
-			sorted++;
-		}
-	}
-	print_stack(*stack_b, "B after refill A");
-	ft_printf("rotate bottom %d\n", rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), min_a, sorted));
-	return (0);
+	min = find_min(*stack_b, to_sort);
+	size_a = ft_lstsize(*stack_a);
+	exec(stack_a, stack_b, to_sort);//, size_a);
+	rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), min, size_a);
 }
