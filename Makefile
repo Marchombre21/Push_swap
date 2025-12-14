@@ -27,7 +27,7 @@ SRC_FILES := main.c\
 	reverse_op.c\
 	rotate_op.c\
 	simple_sort.c\
-	simple_sort_reloaded.c\
+	rev_simple_sort.c\
 	swap_op.c\
 	push_swap_utils.c\
 	push_swap_utils2.c\

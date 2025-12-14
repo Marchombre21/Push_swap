@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/14 13:56:12 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 14:30:54 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	rotate_b_to_min(t_stack **stack_b, int target, int size_b);
 
 /* Sort functions */
 int		simple_sort(t_stack **stack_a, t_stack **stack_b, int size);
-int		simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit);
+int		rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort);
 int		medium_sort(t_stack **stack_a, t_stack **stack_b);
 
 #endif

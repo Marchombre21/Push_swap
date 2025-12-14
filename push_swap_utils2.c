@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:06:59 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/14 13:53:23 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 17:36:34 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,63 +75,70 @@ int	count_nodes_to_spot(t_stack_ops s, int value, int to_sort)
 	return (spot_pos);
 }
 
-int	rotate_value_to_top(t_stack_ops s, int value, int limit)
+int	rotate_value_to_top(t_stack_ops s, int value, int size)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = count_nodes_until_value(*s.ptr, value);
-	if (count <= limit / 2)
+	if (count == 0)
+		return (ft_printf("value already at top\n"), 0);
+	if (count <= size / 2)
 	{
 		while (i++ < count)
 			s.rotate(s.ptr);
 	}
 	else
 	{
-		count = limit - count;
+		count = size - count;
 		while (i++ < count)
 			s.rrotate(s.ptr);
 	}
+	ft_printf("rotate_value_to_top\n");
 	return (count);
 }
 
-int	rotate_value_to_bottom(t_stack_ops s, int value, int limit)
+int	rotate_value_to_bottom(t_stack_ops s, int value, int size)
 {
 	int	i;
 	int	count;
 
 	i = 0;
-	count = count_nodes_until_value(*s.ptr, value);
-	if (count <= limit / 2)
+	count =  size - count_nodes_until_value(*s.ptr, value);
+	if (count == 0)
+		return (ft_printf("value already at bottom\n"), 0);
+	if (count <= size / 2)
 	{
-		count = limit - count;
 		while (i++ < count)
 			s.rrotate(s.ptr);
 	}
 	else
 	{
-		while (i++ < count)
+		count = size - count;
+		while (i++ <= count)
 			s.rotate(s.ptr);
 	}
+	ft_printf("rotate_value_to_bottom de %d, size %d\n", count, size);
 	return (count);
 }
 
-int	rotate_to_spot(t_stack_ops s, int value, int limit)
+int	rotate_to_spot(t_stack_ops s, int value, int size)
 {
 	int	i;
 	int	spot_pos;
 
 	i = 0;
-	spot_pos = count_nodes_to_spot(s, value, limit);
-	if (spot_pos <= limit / 2)
+	spot_pos = count_nodes_to_spot(s, value, size);
+	if (spot_pos <= size / 2)
 		while (i++ < spot_pos)
 			s.rotate(s.ptr);
 	else
 	{
-		spot_pos = limit - spot_pos;
+		spot_pos = size - spot_pos;
 		while (i++ < spot_pos)
 			s.rrotate(s.ptr);
 	}
+	ft_printf("rotate_to_spot\n");
 	return (spot_pos);
 }
