@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:06:59 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/14 13:20:22 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 13:53:23 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,22 @@ t_stack_ops	get_stack_ops(t_stack **stack, char which)
 		s.rrotate = &rra;
 		s.swap = &sa;
 	}
-	else
+	else if (which == 'b')
 	{
 		s.letter = 'b';
 		s.ptr = stack;
 		s.rotate = &rb;
 		s.rrotate = &rrb;
 		s.swap = &sb;
+	}
+	else
+	{
+		ft_printf("Error: Invalid stack identifier in get_stack_ops\n");
+		s.letter = 'x';
+		s.ptr = NULL;
+		s.rotate = NULL;
+		s.rrotate = NULL;
+		s.swap = NULL;
 	}
 	return (s);
 }

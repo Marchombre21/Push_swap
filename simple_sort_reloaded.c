@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/14 13:05:54 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 13:58:57 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 		// check if top b is new min a and insert accordingly
 		if ((*stack_b)->value < min_a_rel)
 		{
-			rel_rot_a_to_min(stack_a, min_a_rel, to_sort);
+			rotate_value_to_top(get_stack_ops(stack_a, 'a'), min_a_rel, to_sort);
 			pa(stack_a, stack_b);
 			to_sort++;
 			min_a_rel = (*stack_a)->value;
@@ -62,7 +62,7 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 		// check if top a is new max b and insert accordingly
 		else if ((*stack_b)->value > max_a_rel)
 		{
-			rel_rot_a_to_max(stack_a, max_a_rel, to_sort);
+			rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), max_a_rel, to_sort);
 			pa(stack_a, stack_b);
 			to_sort++;
 			max_a_rel = (*stack_a)->value;
@@ -70,8 +70,7 @@ int	simple_sort_reloaded(t_stack **stack_a, t_stack **stack_b, int limit)
 		// else find the right spot by rotating B
 		else
 		{
-			if (rel_rot_a_to_spot(stack_a, (*stack_b)->value, to_sort) == -1)
-				return (-1);
+			rotate_to_spot(get_stack_ops(stack_a, 'a'), (*stack_b)->value, to_sort);
 			pa(stack_a, stack_b);
 			to_sort++;
 		}
