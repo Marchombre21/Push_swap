@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   reverse_op.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 08:28:59 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/10 09:50:05 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 09:29:43 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ void	rrr(t_stack **a, t_stack **b)
 {
 	reverse_op(a);
 	reverse_op(b);
-	ft_printf("rra\n");
-	ft_printf("rrb\n");
+	ft_printf("rrr\n");
 }
