@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 10:58:46 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/13 16:40:23 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 11:12:29 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	next_sqrt(int nb)
 		root = (root + (nb / root)) / 2;
 		diff = last - root;
 	}
-	if ((int)(root) * (int)(root) == nb)
+	if ((int)(root) *(int)(root) == nb)
 		return ((int)root);
 	return ((int)root + 1);
 }
@@ -71,7 +71,7 @@ int	find_max(t_stack *stack, int size)
 
 void	print_stack(t_stack *stack, char *name)
 {
-	t_stack *current;
+	t_stack	*current;
 
 	ft_printf("Stack %s: ", name);
 	current = stack;
@@ -84,19 +84,6 @@ void	print_stack(t_stack *stack, char *name)
 }
 
 int	count_nodes_until_value(t_stack *stack, int value)
-{
-	int	count;
-
-	count = 0;
-	while (stack && stack->value != value)
-	{
-		count++;
-		stack = stack->next;
-	}
-	return (count);
-}
-
-int	rel_count_nodes_until_value(t_stack *stack, int value)
 {
 	int	count;
 
