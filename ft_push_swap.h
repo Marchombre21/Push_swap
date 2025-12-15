@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 12:03:09 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 17:33:22 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,6 @@ int		count_nodes_to_spot(t_stack_ops stack, int value, int to_sort);
 int		rot_top(t_stack_ops stack, int value);
 int		rot_bottom(t_stack_ops stack, int value);
 int		rot_spot(t_stack_ops stack, int value);
-
-void	rel_rot_a_to_min(t_stack **stack_a, int target, int to_sort);
-int		rotate_b_to_spot(t_stack **stack_b, int value, int size_b);
-void	rotate_b_to_min(t_stack **stack_b, int target, int size_b);
 
 /* Sort functions */
 int		simple_sort(t_stack **stack_a, t_stack **stack_b, int size);
