@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 07:19:04 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 09:41:17 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,21 @@ typedef struct  s_flags
 	int	simple;
 	int	medium;
 	int	complex;
-	int	adaptative;
+	int	adaptive;
 	int	disorder;
 	int	error;
+	char	*strategy;
+	int	sa;
+	int	sb;
+	int	ss;
+	int	pa;
+	int	pb;
+	int	ra;
+	int	rb;
+	int	rr;
+	int	rra;
+	int	rrb;
+	int	rrr;
 }	t_flags;
 
 /* Push_swap operations */
@@ -46,14 +58,15 @@ void	rrr(t_stack **a, t_stack **b);
 void	complex_sort(t_stack **a, t_stack **b);
 
 /* Utils functions */
-int	next_sqrt(int nb);
-int	find_min(t_stack *stack);
-int	find_max(t_stack *stack);
-void print_stack(t_stack *stack, char *name);
+int		next_sqrt(int nb);
+int		find_min(t_stack *stack);
+int		find_max(t_stack *stack);
+void	print_stack(t_stack *stack, char *name);
 
 /* Sort functions */
 int		simple_sort(t_stack **stack_a, t_stack **stack_b);
 int		medium_sort(t_stack **stack_a, t_stack **stack_b);
-void	adaptative_sort(t_stack *stack_a, t_stack *stack_b);
+void	adaptive_sort(t_stack *stack_a, t_stack *stack_b);
+float	check_disorder(t_stack *stack_a);
 
 #endif

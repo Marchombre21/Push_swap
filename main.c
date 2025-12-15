@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 08:03:18 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 08:45:07 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ void	check_flags(char *s, t_flags *flags)
 	if (ft_strncmp("--simple", s, 8) == 0)
 	{
 		flags->simple = 1;
-		flags->adaptative = 0;
+		flags->adaptive = 0;
 	}
 	else if(ft_strncmp("--medium", s, 8) == 0)
 	{
 		flags->medium = 1;
-		flags->adaptative = 0;
+		flags->adaptive = 0;
 	}
 	else if(ft_strncmp("--complex", s, 9) == 0)
 	{
 		flags->complex = 1;
-		flags->adaptative = 0;
+		flags->adaptive = 0;
 	}
 	else if(ft_strncmp("--bench", s, 7) == 0)
 		flags->bench_mode = 1;
@@ -70,7 +70,7 @@ int	main(int argc, char **argv)
 	t_flags flags;
 
 	ft_bzero(&flags, sizeof(t_flags));
-	flags.adaptative = 1;
+	flags.adaptive = 1;
 	i = 1;
 	stack_b = NULL;
 	if (argc < 2)
@@ -78,8 +78,8 @@ int	main(int argc, char **argv)
 	// ft_printf("check\n");
 	while (argv[i][0] == '-' && argv[i][1] == '-')
 		check_flags(argv[i++], &flags);
-	// ft_printf("Flags - simple: %d, medium: %d, complex: %d, adaptative: %d, bench_mode: %d\n",
-	// 	flags.simple, flags.medium, flags.complex, flags.adaptative, flags.bench_mode);
+	// ft_printf("Flags - simple: %d, medium: %d, complex: %d, adaptive: %d, bench_mode: %d\n",
+	// 	flags.simple, flags.medium, flags.complex, flags.adaptive, flags.bench_mode);
 	stack_a = parse_input(argc - i, &argv[i]);
 	if (!stack_a)
 		return (1);
@@ -89,8 +89,8 @@ int	main(int argc, char **argv)
 		medium_sort(&stack_a, &stack_b);
 	else if (flags.complex)
 		complex_sort(&stack_a, &stack_b);
-	else if (flags.adaptative)
-		adaptative_sort(stack_a, stack_b);
+	else if (flags.adaptive)
+		adaptive_sort(stack_a, stack_b);
 	// ft_printf("Stack A:\n");
 	// t_stack *current = stack_a;
 	// while (current != NULL)

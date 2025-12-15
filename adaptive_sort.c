@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   adaptative_sort.c                                  :+:      :+:    :+:   */
+/*   adaptive_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -29,7 +29,7 @@ float	check_disorder(t_stack *stack_a)
 	return (mistakes / total_pairs);
 }
 
-void	adaptative_sort(t_stack *stack_a, t_stack *stack_b)
+void	adaptive_sort(t_stack *stack_a, t_stack *stack_b)
 {
 	float	disorder;
 
