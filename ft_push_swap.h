@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 11:34:37 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 12:03:09 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_bucket
 {
 	int	min;
 	int	max;
-	int	size;
+	int	count;
 	int	number;
 }	t_bucket;
 
