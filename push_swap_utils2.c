@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:06:59 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 09:21:10 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 11:06:00 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,14 @@ int	count_nodes_to_spot(t_stack_ops s, int value, int to_sort)
 	return (spot_pos);
 }
 
-int	rot_top(t_stack_ops s, int value, int size)
+int	rot_top(t_stack_ops s, int value)
 {
 	int	i;
 	int	count;
+	int	size;
 
 	i = 0;
+	size = ft_lstsize(*s.ptr);
 	count = count_nodes_until_value(*s.ptr, value);
 	if (count == 0)
 		return (0);
@@ -89,12 +91,14 @@ int	rot_top(t_stack_ops s, int value, int size)
 	return (count);
 }
 
-int	rot_bottom(t_stack_ops s, int value, int size)
+int	rot_bottom(t_stack_ops s, int value)
 {
 	int	i;
 	int	count;
+	int	size;
 
 	i = 0;
+	size = ft_lstsize(*s.ptr);
 	count = size - count_nodes_until_value(*s.ptr, value);
 	if (count == 0)
 		return (0);
@@ -112,12 +116,14 @@ int	rot_bottom(t_stack_ops s, int value, int size)
 	return (count);
 }
 
-int	rot_spot(t_stack_ops s, int value, int size)
+int	rot_spot(t_stack_ops s, int value)
 {
 	int	i;
 	int	spot_pos;
+	int	size;
 
 	i = 0;
+	size = ft_lstsize(*s.ptr);
 	spot_pos = count_nodes_to_spot(s, value, size);
 	if (spot_pos <= size / 2)
 		while (i++ < spot_pos)

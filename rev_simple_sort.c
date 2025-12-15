@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 09:18:48 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 11:07:06 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,19 @@ static void	exec(t_stack **s_a, t_stack **s_b, int to_sort)
 	{
 		if ((*s_b)->value < min_a)
 		{
-			rot_top(get_stack_ops(s_a, 'a'), min_a, ft_lstsize(*s_a));
+			rot_top(get_stack_ops(s_a, 'a'), min_a);
 			pa(s_a, s_b);
 			min_a = (*s_a)->value;
 		}
 		else if ((*s_b)->value > max_a)
 		{
-			rot_bottom(get_stack_ops(s_a, 'a'), max_a, ft_lstsize(*s_a));
+			rot_bottom(get_stack_ops(s_a, 'a'), max_a);
 			pa(s_a, s_b);
 			max_a = (*s_a)->value;
 		}
 		else
 		{
-			rot_spot(get_stack_ops(s_a, 'a'), (*s_b)->value, ft_lstsize(*s_a));
+			rot_spot(get_stack_ops(s_a, 'a'), (*s_b)->value);
 			pa(s_a, s_b);
 		}
 	}
@@ -64,7 +64,6 @@ static void	exec(t_stack **s_a, t_stack **s_b, int to_sort)
 void	rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
 {
 	int	min;
-	int	size_a;
 
 	if (to_sort == 0)
 		return ;
@@ -74,7 +73,6 @@ void	rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
 		return ;
 	}
 	min = find_min(*stack_b, to_sort);
-	size_a = ft_lstsize(*stack_a);
 	exec(stack_a, stack_b, to_sort);
-	rot_bottom(get_stack_ops(stack_a, 'a'), min, size_a);
+	rot_bottom(get_stack_ops(stack_a, 'a'), min);
 }

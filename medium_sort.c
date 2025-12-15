@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 10:59:01 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 11:04:22 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,11 +162,11 @@ void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets, int bucke
 		if (i != 0)
 			reset_stack_a(stack_a, to_sort, count, size_a);
 		rev_simple_sort(stack_a, stack_b, count);
-		rot_bottom(get_stack_ops(stack_a, 'a'), marker, size_a);
+		rot_bottom(get_stack_ops(stack_a, 'a'), marker);
 		to_sort -= count;
 		i++;
 	}
-	rot_top(get_stack_ops(stack_a, 'a'), min, size_a);
+	rot_top(get_stack_ops(stack_a, 'a'), min);
 }
 
 /* ****************************************************	*/
