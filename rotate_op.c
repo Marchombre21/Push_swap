@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 10:21:51 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 13:21:46 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 15:32:58 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,24 @@ void	rotate_op(t_stack **stack)
 	last->next->next = NULL;
 }
 
-void	ra(t_stack **stack_a)
+void	ra(t_count *count_op)
 {
-	rotate_op(stack_a);
+	rotate_op(&count_op->stack_a);
+	count_op->ra++;
 	ft_printf("ra\n");
 }
 
-void	rb(t_stack **stack_b)
+void	rb(t_count *count_op)
 {
-	rotate_op(stack_b);
+	rotate_op(&count_op->stack_b);
+	count_op->rb++;
 	ft_printf("rb\n");
 }
 
-void	rr(t_stack **stack_a, t_stack **stack_b)
+void	rr(t_count *count_op)
 {
-	rotate_op(stack_a);
-	rotate_op(stack_b);
+	rotate_op(&count_op->stack_a);
+	rotate_op(&count_op->stack_b);
+	count_op->rr++;
 	ft_printf("rr\n");
 }

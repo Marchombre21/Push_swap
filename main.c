@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 13:22:22 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 16:52:28 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	delete_value(int value)
 	(void)value;
 }
 
-t_stack	*parse_input(int nb_input, char **numbers, t_flags flags)
+t_stack	*parse_input(int nb_input, char **numbers)
 {
 	int		i;
 	t_stack	*stack_a;
@@ -73,29 +73,31 @@ t_stack	*parse_input(int nb_input, char **numbers, t_flags flags)
 int	main(int argc, char **argv)
 {
 	int	i;
-	t_stack	*stack_a;
-	t_stack	*stack_b;
 	t_flags flags;
+	t_count *count_op;
 
 	ft_bzero(&flags, sizeof(t_flags));
+	ft_bzero(&count_op, sizeof(t_count));
 	flags.adaptive = 1;
 	i = 1;
-	stack_b = NULL;
+	count_op->stack_b = NULL;
 	if (argc < 2)
 		return (0);
 	while (argv[i][0] == '-' && argv[i][1] == '-')
 		check_flags(argv[i++], &flags);
-	stack_a = parse_input(argc - i, &argv[i], flags);
-	if (!stack_a)
+	count_op->stack_a = parse_input(argc - i, &argv[i]);
+	if (!count_op->stack_a)
 		return (1);
 	if (flags.simple)
-		simple_sort(&stack_a, &stack_b, ft_lstsize(stack_a));
+		simple_sort(count_op, ft_lstsize(count_op->stack_a));
 	else if (flags.medium)
-		medium_sort(&stack_a, &stack_b);
+		medium_sort(count_op);
 	else if (flags.complex)
-		complex_sort(&stack_a, &stack_b);
+		complex_sort(count_op);
 	else if (flags.adaptive)
-		adaptive_sort(stack_a, stack_b);
-	ft_lstclear(&stack_a, delete_value);
+		adaptive_sort(count_op);
+	ft_printf("pb : %d\n", count_op->pb);
+	ft_printf("pa : %d\n", count_op->pa);
+	ft_lstclear(&count_op->stack_a, delete_value);
 	return (0);
 }
