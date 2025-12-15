@@ -6,169 +6,149 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 09:18:33 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 12:08:15 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-int	b_push_limited(t_stack **stack_a, t_stack **stack_b, int limit)
-{
-	int	j;
-	int	sorted;
-
-	sorted = 0;
-	j = limit - 1;
-	pb(stack_a, stack_b);
-	while (j > 0)
-	{
-		if ((*stack_a)->value < (*stack_b)->value)
-		{
-			pb(stack_a, stack_b);
-			sb(stack_b);
-			sorted++;
-		}
-		else
-			pb(stack_a, stack_b);
-		j--;
-	}
-	return (sorted);
-}
-
-int a_push_limited(t_stack **stack_a, t_stack **stack_b, int limit)
-{
-	int	j;
-	int	sorted;
-
-	sorted = 0;
-	j = limit - 1;
-	pa(stack_a, stack_b);
-	while (j > 0)
-	{
-		if ((*stack_a)->value < (*stack_b)->value)
-		{
-			pa(stack_a, stack_b);
-			sa(stack_a);
-			sorted++;
-		}
-		else
-			pa(stack_a, stack_b);
-		j--;
-	}
-	return (sorted);
-}
-
-void	rev_bubble_sort_bucket(t_stack **stack_a, t_stack **stack_b, int limit)
-{
-	if (limit == 0)
-		return ;
-	if (limit == 1)
-		return (pa(stack_a, stack_b));
-	while (a_push_limited(stack_a, stack_b, limit) != 0)
-		b_push_limited(stack_a, stack_b, limit);
-}
-
-int fill_bucket(t_stack **stack_a, t_stack **stack_b, int min, int max, int to_sort)
-{
-	int count;
-	int i;
-
-	count = 0;
-	i = 0;
-	while (i++ < to_sort)
-	{
-		if ((*stack_a)->value >= min && (*stack_a)->value <= max)
-		{
-			pb(stack_a, stack_b);
-			if (stack_b && (*stack_b)->next && (*stack_b)->value < (*stack_b)->next->value)
-				sb(stack_b);
-			count++;
-		}
-		else
-			ra(stack_a);
-	}
-	return (count);
-}
-
-int	rev_fill_bucket(t_stack **stack_a, t_stack **stack_b, int min, int max, int to_sort)
-{
-	int count;
-	int i;
-
-	count = 0;
-	i = 0;
-	while (i++ < to_sort)
-	{
-		if ((*stack_a)->value >= min && (*stack_a)->value <= max)
-		{
-			pb(stack_a, stack_b);
-			if (stack_b && (*stack_b)->next && (*stack_b)->value > (*stack_b)->next->value)
-				sb(stack_b);
-			count++;
-		}
-		else
-			rra(stack_a);
-	}
-	return (count);
-}
-
-// void	prep_stack_a(t_stack **stack_a, int min)
+// int	b_push_limited(t_stack **stack_a, t_stack **stack_b, int limit)
 // {
-// 	int	size;
-// 	int	i;
+// 	int	j;
+// 	int	sorted;
 
-// 	size = ft_lstsize(*stack_a);
-// 	i = 0;
-// 	while (i < size)
+// 	sorted = 0;
+// 	j = limit - 1;
+// 	pb(stack_a, stack_b);
+// 	while (j > 0)
 // 	{
-// 		if ((*stack_a)->value == min)
-// 			return ;
-// 		rra(stack_a);
-// 		i++;
+// 		if ((*stack_a)->value < (*stack_b)->value)
+// 		{
+// 			pb(stack_a, stack_b);
+// 			sb(stack_b);
+// 			sorted++;
+// 		}
+// 		else
+// 			pb(stack_a, stack_b);
+// 		j--;
 // 	}
+// 	return (sorted);
 // }
 
-void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets, int bucket_size)
-{
-	int min;
-	int i;
-	int j;
-	int to_sort;
-	int count;
-	int size_a;
-	int marker;
+// int a_push_limited(t_stack **stack_a, t_stack **stack_b, int limit)
+// {
+// 	int	j;
+// 	int	sorted;
 
-	size_a = ft_lstsize(*stack_a);
-	min = find_min(*stack_a, size_a);
+// 	sorted = 0;
+// 	j = limit - 1;
+// 	pa(stack_a, stack_b);
+// 	while (j > 0)
+// 	{
+// 		if ((*stack_a)->value < (*stack_b)->value)
+// 		{
+// 			pa(stack_a, stack_b);
+// 			sa(stack_a);
+// 			sorted++;
+// 		}
+// 		else
+// 			pa(stack_a, stack_b);
+// 		j--;
+// 	}
+// 	return (sorted);
+// }
+
+// void	rev_bubble_sort_bucket(t_stack **stack_a, t_stack **stack_b, int limit)
+// {
+// 	if (limit == 0)
+// 		return ;
+// 	if (limit == 1)
+// 		return (pa(stack_a, stack_b));
+// 	while (a_push_limited(stack_a, stack_b, limit) != 0)
+// 		b_push_limited(stack_a, stack_b, limit);
+// }
+
+int	fill_bucket(t_stack **s_a, t_stack **s_b, t_bucket bucket, int to_sort)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < to_sort)
+	{
+		if ((*s_a)->value >= bucket.min && (*s_a)->value <= bucket.max)
+		{
+			pb(s_a, s_b);
+			if (s_b && (*s_b)->next && (*s_b)->value < (*s_b)->next->value)
+				sb(s_b);
+			bucket.count++;
+		}
+		else
+			ra(s_a);
+	}
+	return (bucket.count);
+}
+
+void	reset_stack_a(t_stack **stack_a, int to_sort, int count, int size_a)
+{
+	int	i;
+
+	i = 0;
+	if (size_a - to_sort < to_sort - count)
+		while (i++ < size_a - to_sort)
+			ra(stack_a);
+	else
+		while (i++ < to_sort - count)
+			rra(stack_a);
+}
+
+void	bucket_sort(t_stack **s_a, t_stack **s_b, t_bucket *buckets, int nb)
+{
+	int			i;
+	int			to_sort;
+	int			size_a;
+	int			marker;
+	t_bucket	bucket;
+
+	size_a = ft_lstsize(*s_a);
 	to_sort = size_a;
 	i = 0;
-	count = 0;
-	while (i < nb_buckets && to_sort > 0)
+	while (i < nb && to_sort > 0)
 	{
-		count = fill_bucket(stack_a, stack_b, min + i * bucket_size, min + (i + 1) * bucket_size, to_sort);
-		marker = find_max(*stack_b, count);
-		ft_printf("Bucket %d: min_bucket %d, max_bucket %d\n", i, min + i * bucket_size, min + (i + 1) * bucket_size);
-		print_stack(*stack_b, "B after filling bucket");
-		print_stack(*stack_a, "A after filling bucket");
-		j = 0;
-		if (size_a - to_sort < to_sort - count)
-			while (j++ < size_a - to_sort && i != 0)
-				ra(stack_a);
-		else
-			while (j++ < to_sort - count && i != 0)
-				rra(stack_a);
-		print_stack(*stack_a, "A after filling bucket");
-		//rev_bubble_sort_bucket(stack_a, stack_b, count);
-		rev_simple_sort(stack_a, stack_b, count);
-		print_stack(*stack_a, "A after sorting bucket");
-		ft_printf("rotate bottom %d\n", rot_bottom(get_stack_ops(stack_a, 'a'), marker, size_a));
-		print_stack(*stack_a, "A after rotating sorted bucket");
-		to_sort -= count;
+		bucket = buckets[i];
+		bucket.count = fill_bucket(s_a, s_b, bucket, to_sort);
+		marker = find_max(*s_b, bucket.count);
+		if (i != 0)
+			reset_stack_a(s_a, to_sort, bucket.count, size_a);
+		rev_simple_sort(s_a, s_b, bucket.count);
+		rot_bottom(get_stack_ops(s_a, 'a'), marker);
+		to_sort -= bucket.count;
 		i++;
 	}
-	print_stack(*stack_a, "A before final rotate to min");
-	ft_printf("rotate top %d\n", rot_top(get_stack_ops(stack_a, 'a'), min, size_a));
-	print_stack(*stack_a, "A after final rotate to min");
+	rot_top(get_stack_ops(s_a, 'a'), buckets[0].min);
+}
+
+t_bucket	*init_buckets(int nb_buckets, int min, int max)
+{
+	t_bucket	*buckets;
+	int			i;
+	int			bucket_size;
+
+	bucket_size = (max - min + 1) / nb_buckets;
+	if (bucket_size == 0)
+		bucket_size = 1;
+	buckets = malloc(sizeof(t_bucket) * nb_buckets);
+	if (!buckets)
+		return (NULL);
+	i = 0;
+	while (i < nb_buckets)
+	{
+		buckets[i].min = min + i * bucket_size;
+		buckets[i].max = min + (i + 1) * bucket_size - 1;
+		buckets[i].count = 0;
+		buckets[i].number = i;
+		i++;
+	}
+	return (buckets);
 }
 
 /* ****************************************************	*/
@@ -177,11 +157,11 @@ void	bucket_sort(t_stack **stack_a, t_stack **stack_b, int nb_buckets, int bucke
 
 int	medium_sort(t_stack **stack_a, t_stack **stack_b)
 {
-	int	nb_buckets;
-	int	min;
-	int	max;
-	int	bucket_size;
-	int size_a;
+	int			nb_buckets;
+	int			min;
+	int			max;
+	int			size_a;
+	t_bucket	*buckets;
 
 	if (!*stack_a || ft_lstsize(*stack_a) <= 1)
 		return (-1);
@@ -191,10 +171,9 @@ int	medium_sort(t_stack **stack_a, t_stack **stack_b)
 	nb_buckets = next_sqrt(size_a);
 	if (nb_buckets <= 0)
 		return (-1);
-	bucket_size = (max - min + 1) / nb_buckets;
-	if (bucket_size == 0)
-		bucket_size = 1;
-	bucket_sort(stack_a, stack_b, nb_buckets, bucket_size);
-	print_stack(*stack_a, "A after bucket sort");
+	buckets = init_buckets(nb_buckets, min, max);
+	if (!buckets)
+		return (-1);
+	bucket_sort(stack_a, stack_b, buckets, nb_buckets);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 10:25:15 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 11:06:51 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,6 @@ static int	init(t_stack **stack_a, t_stack **stack_b, int *min, int *max)
 static void	exec(t_stack **stack_a, t_stack **stack_b, int *min_b, int *max_b)
 {
 	int			i;
-	int			size_b;
 	int			to_sort;
 	t_stack_ops	b_ops;
 
@@ -202,19 +201,18 @@ static void	exec(t_stack **stack_a, t_stack **stack_b, int *min_b, int *max_b)
 	b_ops = get_stack_ops(stack_b, 'b');
 	while (i++ < to_sort)
 	{
-		size_b = ft_lstsize(*stack_b);
 		if ((*stack_a)->value < *min_b)
 		{
-			rot_top(b_ops, *max_b, size_b);
+			rot_top(b_ops, *max_b);
 			*min_b = (*stack_a)->value;
 		}
 		else if ((*stack_a)->value > *max_b)
 		{
-			rot_top(b_ops, *max_b, size_b);
+			rot_top(b_ops, *max_b);
 			*max_b = (*stack_a)->value;
 		}
 		else
-			rot_spot(b_ops, (*stack_a)->value, size_b);
+			rot_spot(b_ops, (*stack_a)->value);
 		pb(stack_a, stack_b);
 	}
 }
@@ -230,7 +228,7 @@ int	simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
 	max_b = 0;
 	init(stack_a, stack_b, &min_b, &max_b);
 	exec(stack_a, stack_b, &min_b, &max_b);
-	rot_top(get_stack_ops(stack_b, 'b'), max_b, ft_lstsize(*stack_b));
+	rot_top(get_stack_ops(stack_b, 'b'), max_b);
 	refill_a(stack_a, stack_b);
 	return (0);
 }
