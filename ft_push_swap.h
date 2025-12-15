@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 11:27:56 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 11:34:37 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ typedef struct s_stack_ops
 	void	(*rrotate)(t_stack **);
 	void	(*swap)(t_stack **);
 }	t_stack_ops;
+
+/* Bucket structure */
+typedef struct s_bucket
+{
+	int	min;
+	int	max;
+	int	size;
+	int	number;
+}	t_bucket;
 
 /* Push_swap operations */
 void	sa(t_stack **stack_a);
