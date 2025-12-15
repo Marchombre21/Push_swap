@@ -2,6 +2,8 @@ CC := cc
 
 NAME := push_swap
 
+BONUS := checker
+
 RM := rm -f
 
 DEPFLAGS := -MMD -MP
@@ -33,11 +35,12 @@ SRC_FILES := main.c\
 	push_swap_utils2.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
-
 DEPS := $(patsubst %.o, %.d, $(OBJ))
 
-TEST_FILE := args.txt
-TFLAGS := --medium
+SRC_FILES_BONUS := checker.c\
+
+OBJ_BONUS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES_BONUS))
+DEPS_BONUS := $(patsubst %.o, %.d, $(OBJ_BONUS))
 
 all: $(NAME)
 
@@ -58,24 +61,20 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir -p $@
 
+bonus: all
+	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT) $(PRINTF) -o $(BONUS)
+
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(MAKE) -C $(PRINTF_DIR) clean
-	$(RM) $(OBJ) $(DEPS)
+	$(RM) $(OBJ) $(DEPS) $(OBJ_BONUS) $(DEPS_BONUS)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	$(MAKE) -C $(PRINTF_DIR) fclean
 	rmdir -p $(BUILD_DIR)
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(BONUS)
 
-t:
-	make
-	./push_swap $(TFLAGS) $(shell cat $(TEST_FILE))
-
-tn:
-	make
-	./push_swap $(TFLAGS) $(shell cat $(TEST_FILE)) | wc -l
 
 re: fclean all
 
