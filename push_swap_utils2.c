@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:06:59 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/14 17:51:12 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 09:21:10 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,13 @@ t_stack_ops	get_stack_ops(t_stack **stack, char which)
 		s.rrotate = &rra;
 		s.swap = &sa;
 	}
-	else if (which == 'b')
+	else
 	{
 		s.letter = 'b';
 		s.ptr = stack;
 		s.rotate = &rb;
 		s.rrotate = &rrb;
 		s.swap = &sb;
-	}
-	else
-	{
-		ft_printf("Error: Invalid stack identifier in get_stack_ops\n");
-		s.letter = 'x';
-		s.ptr = NULL;
-		s.rotate = NULL;
-		s.rrotate = NULL;
-		s.swap = NULL;
 	}
 	return (s);
 }
@@ -75,7 +66,7 @@ int	count_nodes_to_spot(t_stack_ops s, int value, int to_sort)
 	return (spot_pos);
 }
 
-int	rotate_value_to_top(t_stack_ops s, int value, int size)
+int	rot_top(t_stack_ops s, int value, int size)
 {
 	int	i;
 	int	count;
@@ -98,7 +89,7 @@ int	rotate_value_to_top(t_stack_ops s, int value, int size)
 	return (count);
 }
 
-int	rotate_value_to_bottom(t_stack_ops s, int value, int size)
+int	rot_bottom(t_stack_ops s, int value, int size)
 {
 	int	i;
 	int	count;
@@ -121,7 +112,7 @@ int	rotate_value_to_bottom(t_stack_ops s, int value, int size)
 	return (count);
 }
 
-int	rotate_to_spot(t_stack_ops s, int value, int size)
+int	rot_spot(t_stack_ops s, int value, int size)
 {
 	int	i;
 	int	spot_pos;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rev_simple_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/14 19:06:18 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 09:18:48 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ static int	init(t_stack **stack_a, t_stack **stack_b, int *min, int *max)
 	return (2);
 }
 
-static void	exec(t_stack **s_a, t_stack **s_b, int to_sort)//, int size_a)
+static void	exec(t_stack **s_a, t_stack **s_b, int to_sort)
 {
-	int min_a;
-	int max_a;
+	int	min_a;
+	int	max_a;
 
 	min_a = 0;
 	max_a = 0;
@@ -43,34 +43,31 @@ static void	exec(t_stack **s_a, t_stack **s_b, int to_sort)//, int size_a)
 	{
 		if ((*s_b)->value < min_a)
 		{
-			rotate_value_to_top(get_stack_ops(s_a, 'a'), min_a, ft_lstsize(*s_a));
+			rot_top(get_stack_ops(s_a, 'a'), min_a, ft_lstsize(*s_a));
 			pa(s_a, s_b);
 			min_a = (*s_a)->value;
 		}
 		else if ((*s_b)->value > max_a)
 		{
-			rotate_value_to_bottom(get_stack_ops(s_a, 'a'), max_a, ft_lstsize(*s_a));
+			rot_bottom(get_stack_ops(s_a, 'a'), max_a, ft_lstsize(*s_a));
 			pa(s_a, s_b);
 			max_a = (*s_a)->value;
 		}
 		else
 		{
-			rotate_to_spot(get_stack_ops(s_a, 'a'), (*s_b)->value, ft_lstsize(*s_a));
+			rot_spot(get_stack_ops(s_a, 'a'), (*s_b)->value, ft_lstsize(*s_a));
 			pa(s_a, s_b);
 		}
 	}
 }
 
-
 void	rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
 {
-	int	i;
 	int	min;
 	int	size_a;
 
-	i = 0;
 	if (to_sort == 0)
-	return ;
+		return ;
 	if (to_sort == 1)
 	{
 		pa(stack_a, stack_b);
@@ -78,6 +75,6 @@ void	rev_simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
 	}
 	min = find_min(*stack_b, to_sort);
 	size_a = ft_lstsize(*stack_a);
-	exec(stack_a, stack_b, to_sort);//, size_a);
-	rotate_value_to_bottom(get_stack_ops(stack_a, 'a'), min, size_a);
+	exec(stack_a, stack_b, to_sort);
+	rot_bottom(get_stack_ops(stack_a, 'a'), min, size_a);
 }
