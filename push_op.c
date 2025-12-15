@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:29:57 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/09 09:49:28 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 09:26:01 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	push_op(t_stack **dest, t_stack **src)
 	temp->next = *dest;
 	*dest = temp;
 }
+
 void	pa(t_stack **stack_a, t_stack **stack_b)
 {
 	if (!*stack_b)

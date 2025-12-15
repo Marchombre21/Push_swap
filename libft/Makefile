@@ -6,17 +6,15 @@
 #    By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/06 06:57:02 by bfitte            #+#    #+#              #
-#    Updated: 2025/12/12 09:11:04 by bfitte/gmac      ###   ########lyon.fr    #
+#    Updated: 2025/12/15 09:53:38 by bfitte/gmac      ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=libft.a
 
 CC=cc
-
-CFLAGS=-Wall -Werror -Wextra -g3
-
-DEPFAGS := -MMD -MP
+CFLAGS=-Wall -Werror -Wextra
+DEPFLAGS=-MMD -MP
 
 SRC_FILES=ft_isalpha.c\
 	ft_memcpy.c\
@@ -64,24 +62,24 @@ SRC_FILES=ft_isalpha.c\
 
 OBJ=$(SRC_FILES:.c=.o)
 
-DEPS := $(patsubst %.o, %.d, $(OBJ))
+DEP=$(SRC_FILES:.c=.d)
+
+all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(DEPFAGS) -o $@ -c $<
+	$(CC) $(CFLAGS) $(DEPFLAGS) -o $@ -c $<
 
-all: $(NAME)
-
-clean: 
-	rm -f $(OBJ) $(DEPS)
+clean:
+	rm -f $(OBJ) $(DEP)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+-include $(DEP)
 
--include $(DEPS)
+.PHONY: all clean fclean re

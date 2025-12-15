@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_op.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 10:21:51 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/10 08:28:29 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/14 09:29:49 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ void	rr(t_stack **a, t_stack **b)
 {
 	rotate_op(a);
 	rotate_op(b);
-	ft_printf("ra\n");
-	ft_printf("rb\n");
+	ft_printf("rr\n");
 }

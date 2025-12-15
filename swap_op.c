@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:17:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/09 09:49:41 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 09:26:11 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ void	sa(t_stack **stack_a)
 	swap_op(stack_a);
 	ft_printf("sa\n");
 }
+
 void	sb(t_stack **stack_b)
 {
 	swap_op(stack_b);
 	ft_printf("sb\n");
 }
+
 void	ss(t_stack **stack_a, t_stack **stack_b)
 {
 	swap_op(stack_a);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 06:55:11 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/10 11:15:11 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 09:24:17 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct s_stack
 {
-	int	value;
+	int				value;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -60,7 +60,7 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
-t_stack			*ft_lstnew(int	value);
+t_stack			*ft_lstnew(int value);
 void			ft_lstadd_front(t_stack **lst, t_stack *new);
 int				ft_lstsize(t_stack *lst);
 t_stack			*ft_lstlast(t_stack *lst);
@@ -68,7 +68,6 @@ void			ft_lstadd_back(t_stack **lst, t_stack *new);
 void			ft_lstdelone(t_stack *lst, void (*del)(int));
 void			ft_lstclear(t_stack **lst, void (*del)(int));
 void			ft_lstiter(t_stack *lst, void (*f)(int));
-t_stack			*ft_lstmap(t_stack *lst, int (*f)(int), void (*del)
-					(int));
+t_stack			*ft_lstmap(t_stack *lst, int (*f)(int), void (*del)(int));
 
 #endif

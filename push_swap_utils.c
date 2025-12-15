@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 10:58:46 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/11 11:20:36 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/13 16:40:23 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	next_sqrt(int nb)
 	return ((int)root + 1);
 }
 
-int	find_min(t_stack *stack)
+int	find_min(t_stack *stack, int size)
 {
 	int		min;
 	t_stack	*current;
@@ -42,7 +42,7 @@ int	find_min(t_stack *stack)
 		return (0);
 	min = stack->value;
 	current = stack->next;
-	while (current)
+	while (current && size-- > 1)
 	{
 		if (current->value < min)
 			min = current->value;
@@ -51,7 +51,7 @@ int	find_min(t_stack *stack)
 	return (min);
 }
 
-int	find_max(t_stack *stack)
+int	find_max(t_stack *stack, int size)
 {
 	int		max;
 	t_stack	*current;
@@ -60,7 +60,7 @@ int	find_max(t_stack *stack)
 		return (0);
 	max = stack->value;
 	current = stack->next;
-	while (current)
+	while (current && size-- > 1)
 	{
 		if (current->value > max)
 			max = current->value;
@@ -81,4 +81,30 @@ void	print_stack(t_stack *stack, char *name)
 		current = current->next;
 	}
 	ft_printf("NULL\n");
+}
+
+int	count_nodes_until_value(t_stack *stack, int value)
+{
+	int	count;
+
+	count = 0;
+	while (stack && stack->value != value)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
+}
+
+int	rel_count_nodes_until_value(t_stack *stack, int value)
+{
+	int	count;
+
+	count = 0;
+	while (stack && stack->value != value)
+	{
+		count++;
+		stack = stack->next;
+	}
+	return (count);
 }

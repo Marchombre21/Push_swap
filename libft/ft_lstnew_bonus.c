@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-t_stack	*ft_lstnew(int	value)
+t_stack	*ft_lstnew(int value)
 {
 	t_stack	*new_node;
 

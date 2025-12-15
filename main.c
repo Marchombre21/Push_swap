@@ -6,11 +6,19 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 08:45:07 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 09:52:07 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
+
+// void handle_bench(t_flags *flags, t_stack *stack_a)
+// {
+// 	if (flags->bench_mode)
+// 	{
+
+// 	}
+// }
 
 void	check_flags(char *s, t_flags *flags)
 {
@@ -84,7 +92,7 @@ int	main(int argc, char **argv)
 	if (!stack_a)
 		return (1);
 	if (flags.simple)
-		simple_sort(&stack_a, &stack_b);
+		simple_sort(&stack_a, &stack_b, ft_lstsize(stack_a));
 	else if (flags.medium)
 		medium_sort(&stack_a, &stack_b);
 	else if (flags.complex)

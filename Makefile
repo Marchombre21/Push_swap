@@ -27,23 +27,30 @@ SRC_FILES := main.c\
 	reverse_op.c\
 	rotate_op.c\
 	simple_sort.c\
+	rev_simple_sort.c\
 	swap_op.c\
 	push_swap_utils.c\
+	push_swap_utils2.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 
 DEPS := $(patsubst %.o, %.d, $(OBJ))
+
+TEST_FILE := args.txt
+TFLAGS := --medium
 
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(FLAGS) $(OBJ) $(PRINTF) $(LIBFT) -o $(NAME)
 
-$(LIBFT):
-	make -C $(LIBFT_DIR)
+$(LIBFT): FORCE
+	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 
-$(PRINTF):
-	make -C $(PRINTF_DIR)
+$(PRINTF): FORCE
+	@$(MAKE) -C $(PRINTF_DIR) --no-print-directory
+
+FORCE:
 
 $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 	$(CC) $(FLAGS) $(DEPFLAGS) -c $< -o $@
@@ -52,18 +59,26 @@ $(BUILD_DIR):
 	mkdir -p $@
 
 clean:
-	make clean -C $(LIBFT_DIR)
-	make clean -C $(PRINTF_DIR)
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(PRINTF_DIR) clean
 	$(RM) $(OBJ) $(DEPS)
 
 fclean: clean
-	make fclean -C $(LIBFT_DIR)
-	make fclean -C $(PRINTF_DIR)
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(PRINTF_DIR) fclean
 	rmdir -p $(BUILD_DIR)
 	$(RM) $(NAME)
 
+t:
+	make
+	./push_swap $(TFLAGS) $(shell cat $(TEST_FILE))
+
+tn:
+	make
+	./push_swap $(TFLAGS) $(shell cat $(TEST_FILE)) | wc -l
+
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re FORCE
 
 -include $(DEPS)
