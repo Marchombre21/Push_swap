@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 11:04:22 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 11:13:56 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,22 +111,6 @@ int	rev_fill_bucket(t_stack **stack_a, t_stack **stack_b, int min, int max, int 
 	}
 	return (count);
 }
-
-// void	prep_stack_a(t_stack **stack_a, int min)
-// {
-// 	int	size;
-// 	int	i;
-
-// 	size = ft_lstsize(*stack_a);
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		if ((*stack_a)->value == min)
-// 			return ;
-// 		rra(stack_a);
-// 		i++;
-// 	}
-// }
 
 void	reset_stack_a(t_stack **stack_a, int to_sort, int count, int size_a)
 {
