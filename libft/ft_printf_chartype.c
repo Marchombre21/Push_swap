@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_chartype.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 12:08:22 by gildas            #+#    #+#             */
-/*   Updated: 2025/11/30 15:05:48 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 09:43:38 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
-#include <libft.h>
+#include "libft.h"
 
 void	handle_char(va_list args, int *count)
 {

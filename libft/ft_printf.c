@@ -6,12 +6,11 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 10:37:37 by gmach             #+#    #+#             */
-/*   Updated: 2025/11/28 11:54:04 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 09:44:02 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
-#include <libft.h>
+#include "libft.h"
 
 static void	manage_args(va_list args, const char *format, int *count)
 {

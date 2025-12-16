@@ -1,26 +1,21 @@
-CC := cc
 
 NAME := push_swap
 
 BONUS := checker
 
-RM := rm -f
-
-DEPFLAGS := -MMD -MP
-
-HEADER := ft_push_swap.h
-
-LIBFT_DIR := libft/
-
-PRINTF_DIR := ft_printf/
+LIBFT_DIR := libft
 
 BUILD_DIR := .build
 
-LIBFT := $(LIBFT_DIR)libft.a
+RM := rm -f
 
-PRINTF := $(PRINTF_DIR)libftprintf.a
+CC := cc
 
-FLAGS := -Wall -Werror -Wextra -I $(LIBFT_DIR) -I $(PRINTF_DIR) -g -g3
+FLAGS := -Wall -Werror -Wextra -I $(LIBFT_DIR) -g -g3
+
+DEPFLAGS := -MMD -MP
+
+LIBFT := $(LIBFT_DIR)/libft.a
 
 SRC_FILES := main.c\
 	complex_sort.c\
@@ -44,14 +39,11 @@ DEPS_BONUS := $(patsubst %.o, %.d, $(OBJ_BONUS))
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(PRINTF)
-	$(CC) $(FLAGS) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
+$(NAME): $(OBJ) $(LIBFT)
+	$(CC) $(FLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 $(LIBFT): FORCE
 	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
-
-$(PRINTF): FORCE
-	@$(MAKE) -C $(PRINTF_DIR) --no-print-directory
 
 FORCE:
 
@@ -66,15 +58,12 @@ bonus: all
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(PRINTF_DIR) clean
 	$(RM) $(OBJ) $(DEPS) $(OBJ_BONUS) $(DEPS_BONUS)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(MAKE) -C $(PRINTF_DIR) fclean
 	rmdir -p $(BUILD_DIR)
 	$(RM) $(NAME) $(BONUS)
-
 
 re: fclean all
 

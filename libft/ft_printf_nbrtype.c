@@ -6,12 +6,11 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 12:04:25 by gildas            #+#    #+#             */
-/*   Updated: 2025/12/01 10:10:33 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 09:43:44 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <ft_printf.h>
-#include <libft.h>
+#include "libft.h"
 
 void	handle_int(va_list args, int *count)
 {

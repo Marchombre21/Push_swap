@@ -6,11 +6,14 @@
 #    By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/06 06:57:02 by bfitte            #+#    #+#              #
-#    Updated: 2025/12/12 09:30:23 by gmach            ###   ########lyon.fr    #
+#    Updated: 2025/12/16 09:48:26 by gmach            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=libft.a
+
+BUILD_DIR=.build
+
 CC=cc
 CFLAGS=-Wall -Werror -Wextra
 DEPFLAGS=-MMD -MP
@@ -58,24 +61,31 @@ SRC_FILES=ft_isalpha.c\
 	ft_lstclear_bonus.c\
 	ft_lstiter_bonus.c\
 	ft_lstmap_bonus.c\
+	ft_printf.c\
+	ft_printf_chartype.c\
+	ft_printf_nbrtype.c\
+	ft_printf_nbrbase.c\
 
-OBJ=$(SRC_FILES:.c=.o)
-
-DEP=$(SRC_FILES:.c=.d)
+OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
+DEP=$(OBJ:.o=.d)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	ar rcs $(NAME) $(OBJ)
 
-%.o: %.c
+$(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $(DEPFLAGS) -o $@ -c $<
+
+$(BUILD_DIR):
+	mkdir -p $@
 
 clean:
 	rm -f $(OBJ) $(DEP)
 
 fclean: clean
 	rm -f $(NAME)
+	rmdir -p $(BUILD_DIR)
 
 re: fclean all
 

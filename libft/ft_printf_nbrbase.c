@@ -6,11 +6,11 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 12:10:32 by gildas            #+#    #+#             */
-/*   Updated: 2025/12/01 10:09:01 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 09:43:52 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
 void	ft_putnbrbase_fd(long n, int fd, const char *base)
 {
