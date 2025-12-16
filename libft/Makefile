@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+         #
+#    By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/06 06:57:02 by bfitte            #+#    #+#              #
-#    Updated: 2025/12/16 09:48:26 by gmach            ###   ########lyon.fr    #
+#    Updated: 2025/12/16 10:52:17 by bfitte/gmac      ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
