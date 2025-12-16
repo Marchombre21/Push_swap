@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 10:39:09 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 11:11:26 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	main(int argc, char **argv)
 	// ft_printf("pb : %d\n", count_op.pb);
 	// ft_printf("ra : %d\n", count_op.ra);
 	// ft_printf("strat : %s\n", count_op.strategy);
-	// ft_printf("disorder : %f\n", flags.disorder);
+	ft_printf("disorder : %f\n", flags.disorder);
 	ft_lstclear(&count_op.stack_a, delete_value);
 	return (0);
 }
