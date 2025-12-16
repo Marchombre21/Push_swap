@@ -6,19 +6,11 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 11:38:47 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 13:33:34 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-
-// void handle_bench(t_flags *flags, t_stack *stack_a)
-// {
-// 	if (flags->bench_mode)
-// 	{
-
-// 	}
-// }
 
 void	check_flags(char *s, t_flags *flags, t_count *count_op)
 {
@@ -26,19 +18,19 @@ void	check_flags(char *s, t_flags *flags, t_count *count_op)
 	{
 		flags->simple = 1;
 		flags->adaptive = 0;
-		count_op->strategy = "Simple /";
+		count_op->strategy = "Simple / O(𝑛²)";
 	}
 	else if(ft_strncmp("--medium", s, 8) == 0)
 	{
 		flags->medium = 1;
 		flags->adaptive = 0;
-		count_op->strategy = "Medium /";
+		count_op->strategy = "Medium / O(𝑛\u221a𝑛)";
 	}
 	else if(ft_strncmp("--complex", s, 9) == 0)
 	{
 		flags->complex = 1;
 		flags->adaptive = 0;
-		count_op->strategy = "Complex / O";
+		count_op->strategy = "Complex / O(𝑛log𝑛)";
 	}
 	else if(ft_strncmp("--bench", s, 7) == 0)
 		flags->bench_mode = 1;
@@ -84,6 +76,18 @@ void	dispatch(t_flags *flags, t_count *count_op)
 		complex_sort(count_op);
 	else if (flags->adaptive)
 		adaptive_sort(count_op);
+	if (flags->bench_mode)
+	{
+		ft_printf("disorder:	%f%%\n", 2, flags->disorder);
+		ft_printf("strategy:	%s\n", 2, count_op->strategy);
+		ft_printf("total_ops:	%d\n", 2, count_op->total);
+		ft_printf("sa: %d sb: %d ss: %d pa: %d pb: %d\n", 2,
+			 count_op->sa, count_op->sb, count_op->ss, count_op->pa,
+			 count_op->pb);
+		ft_printf("ra: %d rb: %d rr: %d rra: %d rrb: %d rrr: %d\n", 2, 
+			count_op->ra, count_op->rb, count_op->rr, count_op->rra,
+			 count_op->rrb, count_op->rrr);
+	}
 }
 
 int	main(int argc, char **argv)
@@ -95,7 +99,6 @@ int	main(int argc, char **argv)
 	ft_bzero(&flags, sizeof(t_flags));
 	ft_bzero(&count_op, sizeof(t_count));
 	flags.adaptive = 1;
-	count_op.strategy = "Adaptive /";
 	i = 1;
 	if (argc < 2)
 		return (0);
@@ -109,7 +112,8 @@ int	main(int argc, char **argv)
 	// ft_printf("pb : %d\n", count_op.pb);
 	// ft_printf("ra : %d\n", count_op.ra);
 	// ft_printf("strat : %s\n", count_op.strategy);
-	ft_printf("disorder : %f\n", flags.disorder);
+	// ft_printf("disorder : %f\n", flags.disorder);
+	// ft_printf("\u221a\n");
 	ft_lstclear(&count_op.stack_a, delete_value);
 	return (0);
 }

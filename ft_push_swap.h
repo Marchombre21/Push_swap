@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 10:59:47 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 13:18:26 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_count
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	char	*strategy;
+	int		total;
 	int		sa;
 	int		sb;
 	int		ss;

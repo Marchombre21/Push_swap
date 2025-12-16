@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:29:57 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 15:42:45 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 13:20:40 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	pa(t_count *count_op)
 		return ;
 	push_op(&count_op->stack_a, &count_op->stack_b);
 	count_op->pa++;
-	ft_printf("pa\n");
+	count_op->total++;
+	ft_printf("pa\n", 1);
 }
 
 void	pb(t_count *count_op)
@@ -39,5 +40,6 @@ void	pb(t_count *count_op)
 		return ;
 	push_op(&count_op->stack_b, &count_op->stack_a);
 	count_op->pb++;
-	ft_printf("pb\n");
+	count_op->total++;
+	ft_printf("pb\n", 1);
 }
