@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 06:55:11 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/16 12:21:42 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 13:14:53 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void			ft_lstiter(t_stack *lst, void (*f)(int));
 t_stack			*ft_lstmap(t_stack *lst, int (*f)(int), void (*del)(int));
 
 /* ft_printf functions */
-int				ft_printf(const char *format, ...);
+int				ft_printf(const char *format, int fd, ...);
 
 size_t			ft_nbrlen(long n, size_t lbase);
 size_t			ft_unbrlen(unsigned long n, size_t lbase);
@@ -91,15 +91,15 @@ char			*ft_itoabase(unsigned long n, const char *base);
 void			ft_putnbrbase_fd(long n, int fd, const char *base);
 void			ft_uputnbrbase_fd(unsigned long n, int fd, const char *base);
 
-void			handle_int(va_list args, int *count);
-void			handle_float(va_list args, int *count);
-void			handle_unsint(va_list args, int *count);
-void			handle_hex(va_list args, int *count, char *base);
-void			handle_ptr(va_list args, int *count, const char *base);
+void			handle_int(va_list args, int *count, int fd);
+void			handle_float(va_list args, int *count, int fd);
+void			handle_unsint(va_list args, int *count, int fd);
+void			handle_hex(va_list args, int *count, char *base, int fd);
+void			handle_ptr(va_list args, int *count, const char *base, int fd);
 
-void			handle_char(va_list args, int *count);
-void			handle_str(va_list args, int *count);
-void			handle_perc(int *count);
-void			handle_noargs(int *count, char c);
+void			handle_char(va_list args, int *count, int fd);
+void			handle_str(va_list args, int *count, int fd);
+void			handle_perc(int *count, int fd);
+void			handle_noargs(int *count, char c, int fd);
 
 #endif

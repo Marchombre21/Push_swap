@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:17:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 15:29:47 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 13:19:21 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ void	sa(t_count *count_op)
 {
 	swap_op(&count_op->stack_a);
 	count_op->sa++;
-	ft_printf("sa\n");
+	count_op->total++;
+	ft_printf("sa\n", 1);
 }
 
 void	sb(t_count *count_op)
 {
 	swap_op(&count_op->stack_b);
 	count_op->sb++;
-	ft_printf("sb\n");
+	count_op->total++;
+	ft_printf("sb\n", 1);
 }
 
 void	ss(t_count *count_op)
@@ -45,5 +47,6 @@ void	ss(t_count *count_op)
 	swap_op(&count_op->stack_a);
 	swap_op(&count_op->stack_b);
 	count_op->ss++;
-	ft_printf("ss\n");
+	count_op->total++;
+	ft_printf("ss\n", 1);
 }

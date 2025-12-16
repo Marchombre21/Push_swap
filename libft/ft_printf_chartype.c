@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_chartype.c                                  :+:      :+:    :+:   */
+/*   ft_printf_chartype.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 12:08:22 by gildas            #+#    #+#             */
-/*   Updated: 2025/12/16 09:43:38 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 13:14:29 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	handle_char(va_list args, int *count)
+void	handle_char(va_list args, int *count, int fd)
 {
 	(*count)++;
-	ft_putchar_fd(va_arg(args, int), 1);
+	ft_putchar_fd(va_arg(args, int), fd);
 }
 
-void	handle_str(va_list args, int *count)
+void	handle_str(va_list args, int *count, int fd)
 {
 	char	*str;
 
@@ -30,21 +30,21 @@ void	handle_str(va_list args, int *count)
 		return ;
 	}
 	*count += ft_strlen(str);
-	ft_putstr_fd(str, 1);
+	ft_putstr_fd(str, fd);
 }
 
-void	handle_perc(int *count)
+void	handle_perc(int *count, int fd)
 {
 	(*count)++;
-	ft_putchar_fd('%', 1);
+	ft_putchar_fd('%', fd);
 }
 
-void	handle_noargs(int *count, char c)
+void	handle_noargs(int *count, char c, int fd)
 {
-	ft_putchar_fd('%', 1);
+	ft_putchar_fd('%', fd);
 	(*count)++;
 	if (!c)
 		return ;
-	ft_putchar_fd(c, 1);
+	ft_putchar_fd(c, fd);
 	(*count)++;
 }

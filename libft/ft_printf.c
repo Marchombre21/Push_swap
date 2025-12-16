@@ -6,37 +6,37 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 10:37:37 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/16 11:56:47 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 13:14:41 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	manage_args(va_list args, const char *format, int *count)
+static void	manage_args(va_list args, const char *format, int *count, int fd)
 {
 	if (*format == 'c')
-		handle_char(args, count);
+		handle_char(args, count, fd);
 	else if (*format == 's')
-		handle_str(args, count);
+		handle_str(args, count, fd);
 	else if (*format == 'p')
-		handle_ptr(args, count, "0123456789abcdef");
+		handle_ptr(args, count, "0123456789abcdef", fd);
 	else if (*format == 'd' || *format == 'i')
-		handle_int(args, count);
+		handle_int(args, count, fd);
 	else if (*format == 'f')
-		handle_float(args, count);
+		handle_float(args, count, fd);
 	else if (*format == 'u')
-		handle_unsint(args, count);
+		handle_unsint(args, count, fd);
 	else if (*format == 'x')
-		handle_hex(args, count, "0123456789abcdef");
+		handle_hex(args, count, "0123456789abcdef", fd);
 	else if (*format == 'X')
-		handle_hex(args, count, "0123456789ABCDEF");
+		handle_hex(args, count, "0123456789ABCDEF", fd);
 	else if (*format == '%')
-		handle_perc(count);
+		handle_perc(count, fd);
 	else
-		handle_noargs(count, *format);
+		handle_noargs(count, *format, fd);
 }
 
-int	ft_printf(const char *format, ...)
+int	ft_printf(const char *format, int fd, ...)
 {
 	va_list	args;
 	int		count;
@@ -44,17 +44,17 @@ int	ft_printf(const char *format, ...)
 	count = 0;
 	if (!format)
 		return (-1);
-	va_start(args, format);
+	va_start(args, fd);
 	while (*format)
 	{
 		if (*format == '%')
 		{
 			format++;
-			manage_args(args, format, &count);
+			manage_args(args, format, &count, fd);
 		}
 		else if (*format)
 		{
-			ft_putchar_fd((char)*format, 1);
+			ft_putchar_fd((char)*format, fd);
 			count++;
 		}
 		format++;
