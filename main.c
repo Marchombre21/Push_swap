@@ -3,31 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/14 16:56:30 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 10:39:09 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	check_flags(char *s, t_flags *flags)
+// void handle_bench(t_flags *flags, t_stack *stack_a)
+// {
+// 	if (flags->bench_mode)
+// 	{
+
+// 	}
+// }
+
+void	check_flags(char *s, t_flags *flags, t_count *count_op)
 {
 	if (ft_strncmp("--simple", s, 8) == 0)
 	{
 		flags->simple = 1;
-		flags->adaptative = 0;
+		flags->adaptive = 0;
+		count_op->strategy = "Simple /";
 	}
 	else if(ft_strncmp("--medium", s, 8) == 0)
 	{
 		flags->medium = 1;
-		flags->adaptative = 0;
+		flags->adaptive = 0;
+		count_op->strategy = "Medium /";
 	}
 	else if(ft_strncmp("--complex", s, 9) == 0)
 	{
 		flags->complex = 1;
-		flags->adaptative = 0;
+		flags->adaptive = 0;
+		count_op->strategy = "Complex / O";
 	}
 	else if(ft_strncmp("--bench", s, 7) == 0)
 		flags->bench_mode = 1;
@@ -62,41 +73,43 @@ t_stack	*parse_input(int nb_input, char **numbers)
 	return (stack_a);
 }
 
+void	dispatch(t_flags *flags, t_count *count_op)
+{
+	flags->disorder = check_disorder(count_op->stack_a);
+	if (flags->simple)
+		simple_sort(count_op, ft_lstsize(count_op->stack_a));
+	else if (flags->medium)
+		medium_sort(count_op);
+	else if (flags->complex)
+		complex_sort(count_op);
+	else if (flags->adaptive)
+		adaptive_sort(count_op);
+}
 
 int	main(int argc, char **argv)
 {
 	int	i;
-	t_stack	*stack_a;
-	t_stack	*stack_b;
 	t_flags flags;
+	t_count count_op;
 
 	ft_bzero(&flags, sizeof(t_flags));
-	flags.adaptative = 1;
+	ft_bzero(&count_op, sizeof(t_count));
+	flags.adaptive = 1;
+	count_op.strategy = "Adaptive /";
 	i = 1;
-	stack_b = NULL;
 	if (argc < 2)
 		return (0);
-	ft_printf("check\n");
 	while (argv[i][0] == '-' && argv[i][1] == '-')
-		check_flags(argv[i++], &flags);
-	ft_printf("Flags - simple: %d, medium: %d, complex: %d, adaptative: %d, bench_mode: %d\n",
-		flags.simple, flags.medium, flags.complex, flags.adaptative, flags.bench_mode);
-	stack_a = parse_input(argc - i, &argv[i]);
-	if (!stack_a)
+		check_flags(argv[i++], &flags, &count_op);
+	count_op.stack_a = parse_input(argc - i, &argv[i]);
+	if (!count_op.stack_a)
 		return (1);
-	if (flags.simple)
-		simple_sort(&stack_a, &stack_b, ft_lstsize(stack_a));
-	else if (flags.medium)
-		medium_sort(&stack_a, &stack_b);
-	// else if (flags.complex)
-	// 	complex_sort(&stack_a, &stack_b);
-	ft_printf("Stack A:\n");
-	t_stack *current = stack_a;
-	while (current != NULL)
-	{
-		ft_printf("%d\n", current->value);
-		current = current->next;
-	}
-	ft_lstclear(&stack_a, delete_value);
+	dispatch(&flags, &count_op);
+	// ft_printf("pa : %d\n", count_op.pa);
+	// ft_printf("pb : %d\n", count_op.pb);
+	// ft_printf("ra : %d\n", count_op.ra);
+	// ft_printf("strat : %s\n", count_op.strategy);
+	// ft_printf("disorder : %f\n", flags.disorder);
+	ft_lstclear(&count_op.stack_a, delete_value);
 	return (0);
 }

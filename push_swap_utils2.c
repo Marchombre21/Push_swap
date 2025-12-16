@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:06:59 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 11:06:00 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 16:48:55 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-t_stack_ops	get_stack_ops(t_stack **stack, char which)
+t_stack_ops	get_stack_ops(t_count *count_op, char which)
 {
 	t_stack_ops	s;
 
 	if (which == 'a')
 	{
 		s.letter = 'a';
-		s.ptr = stack;
+		s.ptr = count_op->stack_a;
 		s.rotate = &ra;
 		s.rrotate = &rra;
 		s.swap = &sa;
@@ -27,7 +27,7 @@ t_stack_ops	get_stack_ops(t_stack **stack, char which)
 	else
 	{
 		s.letter = 'b';
-		s.ptr = stack;
+		s.ptr = count_op->stack_b;
 		s.rotate = &rb;
 		s.rrotate = &rrb;
 		s.swap = &sb;
@@ -42,10 +42,10 @@ int	count_nodes_to_spot(t_stack_ops s, int value, int to_sort)
 	int		max;
 	t_stack	*current;
 
-	min = find_min(*s.ptr, to_sort);
-	max = find_max(*s.ptr, to_sort);
+	min = find_min(s.ptr, to_sort);
+	max = find_max(s.ptr, to_sort);
 	spot_pos = 1;
-	current = *s.ptr;
+	current = s.ptr;
 	while (current && current->next)
 	{
 		if (s.letter == 'b')
@@ -66,73 +66,73 @@ int	count_nodes_to_spot(t_stack_ops s, int value, int to_sort)
 	return (spot_pos);
 }
 
-int	rot_top(t_stack_ops s, int value)
+int	rot_top(t_stack_ops s, int value, t_count *count_op)
 {
 	int	i;
 	int	count;
 	int	size;
 
 	i = 0;
-	size = ft_lstsize(*s.ptr);
-	count = count_nodes_until_value(*s.ptr, value);
+	size = ft_lstsize(s.ptr);
+	count = count_nodes_until_value(s.ptr, value);
 	if (count == 0)
 		return (0);
 	if (count <= size / 2)
 	{
 		while (i++ < count)
-			s.rotate(s.ptr);
+			s.rotate(count_op);
 	}
 	else
 	{
 		count = size - count;
 		while (i++ < count)
-			s.rrotate(s.ptr);
+			s.rrotate(count_op);
 	}
 	return (count);
 }
 
-int	rot_bottom(t_stack_ops s, int value)
+int	rot_bottom(t_stack_ops s, int value, t_count *count_op)
 {
 	int	i;
 	int	count;
 	int	size;
 
 	i = 0;
-	size = ft_lstsize(*s.ptr);
-	count = size - count_nodes_until_value(*s.ptr, value);
+	size = ft_lstsize(s.ptr);
+	count = size - count_nodes_until_value(s.ptr, value);
 	if (count == 0)
 		return (0);
 	if (count <= size / 2)
 	{
 		while (i++ < count)
-			s.rrotate(s.ptr);
+			s.rrotate(count_op);
 	}
 	else
 	{
 		count = size - count;
 		while (i++ <= count)
-			s.rotate(s.ptr);
+			s.rotate(count_op);
 	}
 	return (count);
 }
 
-int	rot_spot(t_stack_ops s, int value)
+int	rot_spot(t_stack_ops s, int value, t_count *count_op)
 {
 	int	i;
 	int	spot_pos;
 	int	size;
 
 	i = 0;
-	size = ft_lstsize(*s.ptr);
+	size = ft_lstsize(s.ptr);
 	spot_pos = count_nodes_to_spot(s, value, size);
 	if (spot_pos <= size / 2)
 		while (i++ < spot_pos)
-			s.rotate(s.ptr);
+			s.rotate(count_op);
 	else
 	{
 		spot_pos = size - spot_pos;
 		while (i++ < spot_pos)
-			s.rrotate(s.ptr);
+			s.rrotate(count_op);
 	}
 	return (spot_pos);
 }
