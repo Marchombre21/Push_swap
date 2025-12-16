@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 15:06:13 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 15:16:00 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,42 +29,17 @@ int	sort(t_count *count_op, int shift_byte, int size)
 {
 	while (size-- > 0)
 	{
-		// if ((*a)->next && (*a)->value > (*a)->next->value)
-		// 	sa(a);
 		if (((count_op->stack_a)->value >> shift_byte & 1))
-		{
 			ra(count_op);
-			// if (ft_lstsize(*b) == 0)
-			// 	if (check_sort(*a) == size)
-			// 		return (size + 1);
-		}
-		// else if (!((*a)->value >> shift_byte & 1) && ((*a)->value >> (shift_byte + 1) & 1))
-		// 	pb(a, b);
 		else
-		{
-			// if (((*a)->value >> shift_byte & 1) && ((*a)->value >> (shift_byte + 1) & 1))
-			// {
-			// 	rr(a, b);
-			// 	size--;
-			// }	
-			// else
-			// 	rb(b);
 			if (size > 1)
 				pb(count_op);
-		}
-		// if ((*a)->next && (*a)->value > (*a)->next->value)
-		// 	sa(a);
 	}
 	size = ft_lstsize(count_op->stack_b);
 	while (size-- > 0)
-	{
 		pa(count_op);
-		// if ((*a)->next && (*a)->value > (*a)->next->value)
-		// 	sa(a);
-	}
-	return(check_sort(count_op->stack_a));
+	return (check_sort(count_op->stack_a));
 }
-
 
 int	find_max_complex(t_stack *a)
 {
@@ -76,7 +51,7 @@ int	find_max_complex(t_stack *a)
 	while (a)
 	{
 		if (a->value > max)
-		max = a->value;
+			max = a->value;
 		a = a->next;
 	}
 	while (max >> shift_byte != 0)
@@ -84,34 +59,34 @@ int	find_max_complex(t_stack *a)
 	return (shift_byte);
 }
 
-void sort_array(int *tab, int size)
+void	sort_array(int *tab, int size)
 {
-	int i;
-	int j;
-	int tmp;
+	int	i;
+	int	j;
+	int	tmp;
 
 	i = 0;
 	while (i < size)
 	{
-	j = 0;
-	while (j < size - 1)
-	{
-		if (tab[j] > tab[j + 1])
+		j = 0;
+		while (j < size - 1)
 		{
-		tmp = tab[j];
-		tab[j] = tab[j + 1];
-		tab[j + 1] = tmp;
+			if (tab[j] > tab[j + 1])
+			{
+				tmp = tab[j];
+				tab[j] = tab[j + 1];
+				tab[j + 1] = tmp;
+			}
+			j++;
 		}
-		j++;
-	}
-	i++;
+		i++;
 	}
 }
 
 void	transform_to_index(t_stack *a, int size)
 {
-	int	array[size];
-	int	i;
+	int		array[size];
+	int		i;
 	t_stack	*b;
 
 	b = a;
@@ -126,7 +101,7 @@ void	transform_to_index(t_stack *a, int size)
 	{
 		i = -1;
 		while (array[++i])
-			if(array[i] == b->value)
+			if (array[i] == b->value)
 				b->value = i;
 		b = b->next;
 	}

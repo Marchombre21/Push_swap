@@ -6,10 +6,9 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 13:18:26 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 15:11:20 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_PUSH_SWAP_H
 # define FT_PUSH_SWAP_H
@@ -70,36 +69,36 @@ typedef struct s_bucket
 }	t_bucket;
 
 /* Push_swap operations */
-void	sa(t_count *count_op);
-void	sb(t_count *count_op);
-void	ss(t_count *count_op);
-void	pa(t_count *count_op);
-void	pb(t_count *count_op);
-void	ra(t_count *count_op);
-void	rb(t_count *count_op);
-void	rr(t_count *count_op);
-void	rra(t_count *count_op);
-void	rrb(t_count *count_op);
-void	rrr(t_count *count_op);
+void		sa(t_count *count_op);
+void		sb(t_count *count_op);
+void		ss(t_count *count_op);
+void		pa(t_count *count_op);
+void		pb(t_count *count_op);
+void		ra(t_count *count_op);
+void		rb(t_count *count_op);
+void		rr(t_count *count_op);
+void		rra(t_count *count_op);
+void		rrb(t_count *count_op);
+void		rrr(t_count *count_op);
 
 /* Utils functions */
-int		next_sqrt(int nb);
-int		find_min(t_stack *stack, int size);
-int		find_max(t_stack *stack, int size);
-void	print_stack(t_stack *stack, char *name);
-int		count_nodes_until_value(t_stack *stack, int value);
+int			next_sqrt(int nb);
+int			find_min(t_stack *stack, int size);
+int			find_max(t_stack *stack, int size);
+void		print_stack(t_stack *stack, char *name);
+int			count_nodes_until_value(t_stack *stack, int value);
 t_stack_ops	get_stack_ops(t_count *count_op, char which);
-int		count_nodes_to_spot(t_stack_ops stack, int value, int to_sort);
-int		rot_top(t_stack_ops stack, int value, t_count *count_op);
-int		rot_bottom(t_stack_ops stack, int value, t_count *count_op);
-int		rot_spot(t_stack_ops stack, int value, t_count *count_op);
+int			count_nodes_to_spot(t_stack_ops stack, int value, int to_sort);
+int			rot_top(t_stack_ops stack, int value, t_count *count_op);
+int			rot_bottom(t_stack_ops stack, int value, t_count *count_op);
+int			rot_spot(t_stack_ops stack, int value, t_count *count_op);
 
 /* Sort functions */
-int		simple_sort(t_count *count_op, int size);
-void	rev_simple_sort(t_count *count_op, int to_sort);
-int		medium_sort(t_count *count_op);
-void	complex_sort(t_count *count_op);
-void	adaptive_sort(t_count *count_op);
-float	check_disorder(t_stack *stack_a);
+int			simple_sort(t_count *count_op, int size);
+void		rev_simple_sort(t_count *count_op, int to_sort);
+int			medium_sort(t_count *count_op);
+void		complex_sort(t_count *count_op);
+void		adaptive_sort(t_count *count_op);
+float		check_disorder(t_stack *stack_a);
 
 #endif
