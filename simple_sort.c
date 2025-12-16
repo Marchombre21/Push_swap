@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 11:06:51 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 16:50:02 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /* Loop to push from stack A to stack B					*/
 /* ****************************************************	*/
 
-// int	b_loop(t_stack **stack_a, t_stack **stack_b, int size)
+// int	b_loop(t_count *count_op, int size)
 // {
 // 	int	j;
 // 	int	sorted;
@@ -26,15 +26,15 @@
 // 	while (j > 0 || *stack_a)
 // 	{
 // 		if (!*stack_b)
-// 			pb(stack_a, stack_b);
+// 			pb(count_op);
 // 		else if ((*stack_a)->value < (*stack_b)->value)
 // 		{
-// 			pb(stack_a, stack_b);
+// 			pb(count_op);
 // 			sb(stack_b);
 // 			sorted++;
 // 		}
 // 		else
-// 			pb(stack_a, stack_b);
+// 			pb(count_op);
 // 		j--;
 // 	}
 // 	return (sorted);
@@ -44,7 +44,7 @@
 // /* Loop to push from stack B to stack A					*/
 // /* ****************************************************	*/
 
-// int	a_loop(t_stack **stack_a, t_stack **stack_b, int size)
+// int	a_loop(t_count *count_op, int size)
 // {
 // 	int	j;
 // 	int	sorted;
@@ -54,15 +54,15 @@
 // 	while (j > 0 || *stack_b)
 // 	{
 // 		if (!*stack_a)
-// 			pa(stack_a, stack_b);
+// 			pa(count_op);
 // 		else if ((*stack_a)->value < (*stack_b)->value)
 // 		{
-// 			pa(stack_a, stack_b);
+// 			pa(count_op);
 // 			sa(stack_a);
 // 			sorted++;
 // 		}
 // 		else
-// 			pa(stack_a, stack_b);
+// 			pa(count_op);
 // 		j--;
 // 	}
 // 	return (sorted);
@@ -73,7 +73,7 @@
 /* of the bubble sort algorithm adapted for two stacks.	*/
 /* ****************************************************	*/
 
-// int	simple_sort(t_stack **stack_a, t_stack **stack_b)
+// int	simple_sort(t_count *count_op)
 // {
 // 	int		size;
 // 	int		sorted;
@@ -85,8 +85,8 @@
 // 	while (sorted != 0)
 // 	{
 // 		sorted = 0;
-// 		b_loop(stack_a, stack_b, size);
-// 		sorted += a_loop(stack_a, stack_b, size);
+// 		b_loop(count_op, size);
+// 		sorted += a_loop(count_op, size);
 // 	}
 // 	return (0);
 // }
@@ -166,69 +166,73 @@
 // 	return (0);
 // }
 
-static void	refill_a(t_stack **stack_a, t_stack **stack_b)
+static void	refill_a(t_count *count_op)
 {
-	while (*stack_b)
-		pa(stack_a, stack_b);
+	while (count_op->stack_b)
+		pa(count_op);
 }
 
-static int	init(t_stack **stack_a, t_stack **stack_b, int *min, int *max)
+static int	init(t_count *count_op, int *min, int *max)
 {
-	pb(stack_a, stack_b);
-	if ((*stack_a)->value > (*stack_b)->value)
+	pb(count_op);
+	if ((count_op->stack_a)->value > (count_op->stack_b)->value)
 	{
-		*min = (*stack_b)->value;
-		pb(stack_a, stack_b);
-		*max = (*stack_b)->value;
+		*min = (count_op->stack_b)->value;
+		pb(count_op);
+		*max = (count_op->stack_b)->value;
 	}
 	else
 	{
-		*min = (*stack_a)->value;
-		*max = (*stack_b)->value;
-		pb(stack_a, stack_b);
+		*min = (count_op->stack_a)->value;
+		*max = (count_op->stack_b)->value;
+		pb(count_op);
 	}
 	return (2);
 }
 
-static void	exec(t_stack **stack_a, t_stack **stack_b, int *min_b, int *max_b)
+static void	exec(t_count *count_op, int *min_b, int *max_b)
 {
 	int			i;
 	int			to_sort;
 	t_stack_ops	b_ops;
 
 	i = 0;
-	to_sort = ft_lstsize(*stack_a);
-	b_ops = get_stack_ops(stack_b, 'b');
+	to_sort = ft_lstsize(count_op->stack_a);
+	b_ops = get_stack_ops(count_op, 'b');
 	while (i++ < to_sort)
 	{
-		if ((*stack_a)->value < *min_b)
+		if ((count_op->stack_a)->value < *min_b)
 		{
-			rot_top(b_ops, *max_b);
-			*min_b = (*stack_a)->value;
+			rot_top(b_ops, *max_b, count_op);
+			*min_b = (count_op->stack_a)->value;
 		}
-		else if ((*stack_a)->value > *max_b)
+		else if ((count_op->stack_a)->value > *max_b)
 		{
-			rot_top(b_ops, *max_b);
-			*max_b = (*stack_a)->value;
+			rot_top(b_ops, *max_b, count_op);
+			*max_b = (count_op->stack_a)->value;
 		}
 		else
-			rot_spot(b_ops, (*stack_a)->value);
-		pb(stack_a, stack_b);
+			rot_spot(b_ops, (count_op->stack_a)->value, count_op);
+		pb(count_op);
 	}
 }
 
-int	simple_sort(t_stack **stack_a, t_stack **stack_b, int to_sort)
+int	simple_sort(t_count *count_op, int to_sort)
 {
 	int	min_b;
 	int	max_b;
+	t_stack	**stack_a;
+	t_stack	**stack_b;
 
+	stack_a = &count_op->stack_a;
+	stack_b = &count_op->stack_b;
 	if (to_sort <= 1 || !*stack_a || ft_lstsize(*stack_a) < to_sort)
 		return (-1);
 	min_b = 0;
 	max_b = 0;
-	init(stack_a, stack_b, &min_b, &max_b);
-	exec(stack_a, stack_b, &min_b, &max_b);
-	rot_top(get_stack_ops(stack_b, 'b'), max_b);
-	refill_a(stack_a, stack_b);
+	init(count_op, &min_b, &max_b);
+	exec(count_op, &min_b, &max_b);
+	rot_top(get_stack_ops(count_op, 'b'), max_b, count_op);
+	refill_a(count_op);
 	return (0);
 }

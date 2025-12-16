@@ -22,22 +22,22 @@ float	check_disorder(t_stack *stack_a)
 	while (stack_a->next)
 	{
 		total_pairs++;
-		if (stack_a->value > stack_a->next->value);
+		if (stack_a->value > stack_a->next->value)
 			mistakes++;
 		stack_a = stack_a->next;
 	}
 	return (mistakes / total_pairs);
 }
 
-void	adaptive_sort(t_stack *stack_a, t_stack *stack_b)
+void	adaptive_sort(t_count *count_op)
 {
 	float	disorder;
 
-	disorder = check_disorder(stack_a);
+	disorder = check_disorder(count_op->stack_a);
 	if (disorder < 0.2)
-		simple_sort(&stack_a, &stack_b);
+		simple_sort(count_op, ft_lstsize(count_op->stack_a));
 	else if (0.2 <= disorder && disorder < 0.5)
-		medium_sort(&stack_a, &stack_b);
+		medium_sort(count_op);
 	else if (disorder >= 0.5)
-		complex_sort(&stack_a, &stack_b);
+		complex_sort(count_op);
 }

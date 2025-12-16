@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 13:29:48 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 15:06:13 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ int	check_sort(t_stack *stack_a)
 	return (i);
 }
 
-int	sort(t_stack **a, t_stack **b, int shift_byte, int size)
+int	sort(t_count *count_op, int shift_byte, int size)
 {
 	while (size-- > 0)
 	{
 		// if ((*a)->next && (*a)->value > (*a)->next->value)
 		// 	sa(a);
-		if (((*a)->value >> shift_byte & 1))
+		if (((count_op->stack_a)->value >> shift_byte & 1))
 		{
-			ra(a);
+			ra(count_op);
 			// if (ft_lstsize(*b) == 0)
 			// 	if (check_sort(*a) == size)
 			// 		return (size + 1);
@@ -50,19 +50,19 @@ int	sort(t_stack **a, t_stack **b, int shift_byte, int size)
 			// else
 			// 	rb(b);
 			if (size > 1)
-				pb(a, b);
+				pb(count_op);
 		}
 		// if ((*a)->next && (*a)->value > (*a)->next->value)
 		// 	sa(a);
 	}
-	size = ft_lstsize(*b);
+	size = ft_lstsize(count_op->stack_b);
 	while (size-- > 0)
 	{
-		pa(a, b);
+		pa(count_op);
 		// if ((*a)->next && (*a)->value > (*a)->next->value)
 		// 	sa(a);
 	}
-	return(check_sort(*a));
+	return(check_sort(count_op->stack_a));
 }
 
 
@@ -132,7 +132,7 @@ void	transform_to_index(t_stack *a, int size)
 	}
 }
 
-void	complex_sort(t_stack **a, t_stack **b)
+void	complex_sort(t_count *count_op)
 {
 	int	size;
 	int	max;
@@ -140,10 +140,10 @@ void	complex_sort(t_stack **a, t_stack **b)
 	int	is_sorted;
 
 	is_sorted = 0;
-	size = ft_lstsize(*a);
+	size = ft_lstsize(count_op->stack_a);
 	i = 0;
-	transform_to_index(*a, size);
-	max = find_max_complex(*a);
+	transform_to_index(count_op->stack_a, size);
+	max = find_max_complex(count_op->stack_a);
 	while (i < max && is_sorted != size)
-		is_sorted = sort(a, b, i++, size);
+		is_sorted = sort(count_op, i++, size);
 }

@@ -31,6 +31,7 @@ SRC_FILES := main.c\
 	swap_op.c\
 	push_swap_utils.c\
 	push_swap_utils2.c\
+	adaptive_sort.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 

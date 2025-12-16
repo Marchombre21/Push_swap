@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:29:57 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 13:22:10 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/15 15:42:45 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,20 @@ void	push_op(t_stack **dest, t_stack **src)
 	*dest = temp;
 }
 
-void	pa(t_stack **stack_a, t_stack **stack_b)
+void	pa(t_count *count_op)
 {
-	if (!*stack_b)
+	if (!count_op->stack_a)
 		return ;
-	push_op(stack_a, stack_b);
+	push_op(&count_op->stack_a, &count_op->stack_b);
+	count_op->pa++;
 	ft_printf("pa\n");
 }
 
-void	pb(t_stack **stack_a, t_stack **stack_b)
+void	pb(t_count *count_op)
 {
-	if (!*stack_a)
+	if (!count_op->stack_a)
 		return ;
-	push_op(stack_b, stack_a);
+	push_op(&count_op->stack_b, &count_op->stack_a);
+	count_op->pb++;
 	ft_printf("pb\n");
 }
