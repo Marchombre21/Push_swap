@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 15:22:10 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 15:36:23 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,17 @@ typedef struct s_bucket
 }	t_bucket;
 
 /* Push_swap operations */
-void		sa(t_count *count_op);
-void		sb(t_count *count_op);
-void		ss(t_count *count_op);
-void		pa(t_count *count_op);
-void		pb(t_count *count_op);
-void		ra(t_count *count_op);
-void		rb(t_count *count_op);
-void		rr(t_count *count_op);
-void		rra(t_count *count_op);
-void		rrb(t_count *count_op);
-void		rrr(t_count *count_op);
+void	sa(t_count *count_op);
+void	sb(t_count *count_op);
+void	ss(t_count *count_op);
+void	pa(t_count *count_op);
+void	pb(t_count *count_op);
+void	ra(t_count *count_op);
+void	rb(t_count *count_op);
+void	rr(t_count *count_op);
+void	rra(t_count *count_op);
+void	rrb(t_count *count_op);
+void	rrr(t_count *count_op);
 
 /* Utils functions */
 int		next_sqrt(int nb);
@@ -94,11 +94,11 @@ int		rot_bottom(t_ops stack, int value, t_count *count_op);
 int		rot_spot(t_ops stack, int value, t_count *count_op);
 
 /* Sort functions */
-int			simple_sort(t_count *count_op, int size);
-void		rev_simple_sort(t_count *count_op, int to_sort);
-int			medium_sort(t_count *count_op);
-void		complex_sort(t_count *count_op);
-void		adaptive_sort(t_count *count_op);
-float		check_disorder(t_stack *stack_a);
+int		simple_sort(t_count *count_op, int size);
+void	rev_simple_sort(t_count *count_op, int to_sort);
+int		medium_sort(t_count *count_op);
+void	complex_sort(t_count *count_op);
+void	adaptive_sort(t_count *count_op);
+float	check_disorder(t_stack *stack_a);
 
 #endif

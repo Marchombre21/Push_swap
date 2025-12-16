@@ -6,26 +6,13 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 15:16:00 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 15:56:34 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-int	check_sort(t_stack *stack_a)
-{
-	int	i;
-
-	i = 0;
-	while (stack_a->next && stack_a->value < stack_a->next->value)
-	{
-		i++;
-		stack_a = stack_a->next;
-	}
-	return (i);
-}
-
-int	sort(t_count *count_op, int shift_byte, int size)
+void	sort(t_count *count_op, int shift_byte, int size)
 {
 	while (size-- > 0)
 	{
@@ -38,7 +25,6 @@ int	sort(t_count *count_op, int shift_byte, int size)
 	size = ft_lstsize(count_op->stack_b);
 	while (size-- > 0)
 		pa(count_op);
-	return (check_sort(count_op->stack_a));
 }
 
 int	find_max_complex(t_stack *a)
@@ -85,10 +71,13 @@ void	sort_array(int *tab, int size)
 
 void	transform_to_index(t_stack *a, int size)
 {
-	int		array[size];
+	int		*array;
 	int		i;
 	t_stack	*b;
 
+	array = ft_calloc(size + 1, sizeof(int));
+	if (!array)
+		return ;
 	b = a;
 	i = 0;
 	while (a)
@@ -105,6 +94,7 @@ void	transform_to_index(t_stack *a, int size)
 				b->value = i;
 		b = b->next;
 	}
+	free(array);
 }
 
 void	complex_sort(t_count *count_op)
@@ -119,6 +109,6 @@ void	complex_sort(t_count *count_op)
 	i = 0;
 	transform_to_index(count_op->stack_a, size);
 	max = find_max_complex(count_op->stack_a);
-	while (i < max && is_sorted != size)
-		is_sorted = sort(count_op, i++, size);
+	while (i < max)
+		sort(count_op, i++, size);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 15:02:20 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 15:49:56 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_flags(char *s, t_flags *flags, t_count *count_op)
 	{
 		flags->medium = 1;
 		flags->adaptive = 0;
-		count_op->strategy = "Medium / O(𝑛\u221a𝑛)";
+		count_op->strategy = "Medium / O(𝑛√𝑛)";
 	}
 	else if (ft_strncmp("--complex", s, 9) == 0)
 	{
@@ -108,12 +108,6 @@ int	main(int argc, char **argv)
 	if (!count_op.stack_a)
 		return (1);
 	dispatch(&flags, &count_op);
-	// ft_printf("pa : %d\n", count_op.pa);
-	// ft_printf("pb : %d\n", count_op.pb);
-	// ft_printf("ra : %d\n", count_op.ra);
-	// ft_printf("strat : %s\n", count_op.strategy);
-	// ft_printf("disorder : %f\n", flags.disorder);
-	// ft_printf("\u221a\n");
 	ft_lstclear(&count_op.stack_a, delete_value);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rev_simple_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/16 14:05:27 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 15:49:12 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	exec(t_count *count_op, int to_sort)
 			max_a = (count_op->stack_b)->value;
 		}
 		else
-			rot_spot(get_ops(count_op, 'a'), (count_op->stack_b)->value, count_op);
+			rot_spot(get_ops(count_op, 'a'),
+				(count_op->stack_b)->value, count_op);
 		pa(count_op);
 	}
 }
