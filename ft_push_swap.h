@@ -6,7 +6,7 @@
 /*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/15 16:48:24 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 08:39:27 by bfitte/gmac      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@
 /* Flags structure */
 typedef struct s_flags
 {
-	int	bench_mode;
-	int	simple;
-	int	medium;
-	int	complex;
-	int	adaptive;
-	int	disorder;
-	int	error;
+	int		bench_mode;
+	int		simple;
+	int		medium;
+	int		complex;
+	int		adaptive;
+	float	disorder;
+	int		error;
 }	t_flags;
 
 /*Count_operations structure*/
