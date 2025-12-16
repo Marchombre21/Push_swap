@@ -1,5 +1,5 @@
 **.o
-.build/
+.build
 .vscode/
 **.d
 **.swp
@@ -7,3 +7,7 @@
 push_swap
 **.out
 **.txt
+checker_linux
+checker
+libft/libft.a
+libft/.build
