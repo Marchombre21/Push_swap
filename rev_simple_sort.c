@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rev_simple_sort.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 18:26:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 16:50:23 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 14:05:27 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ static void	exec(t_count *count_op, int to_sort)
 	{
 		if ((count_op->stack_b)->value < min_a)
 		{
-			rot_top(get_stack_ops(count_op, 'a'), min_a, count_op);
+			rot_top(get_ops(count_op, 'a'), min_a, count_op);
 			min_a = (count_op->stack_b)->value;
 		}
 		else if ((count_op->stack_b)->value > max_a)
 		{
-			rot_bottom(get_stack_ops(count_op, 'a'), max_a, count_op);
+			rot_bottom(get_ops(count_op, 'a'), max_a, count_op);
 			max_a = (count_op->stack_b)->value;
 		}
 		else
-			rot_spot(get_stack_ops(count_op, 'a'), (count_op->stack_b)->value, count_op);
+			rot_spot(get_ops(count_op, 'a'), (count_op->stack_b)->value, count_op);
 		pa(count_op);
 	}
 }
@@ -70,5 +70,5 @@ void	rev_simple_sort(t_count *count_op, int to_sort)
 	}
 	min = find_min(count_op->stack_b, to_sort);
 	exec(count_op, to_sort);
-	rot_bottom(get_stack_ops(count_op, 'a'), min, count_op);
+	rot_bottom(get_ops(count_op, 'a'), min, count_op);
 }

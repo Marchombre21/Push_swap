@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 16:49:15 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 14:29:23 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 
 int	fill_bucket(t_count *count_op, t_bucket bucket, int to_sort)
 {
-	int	i;
+	int		i;
 	t_stack	**s_a;
 	t_stack	**s_b;
 
@@ -105,7 +105,7 @@ void	reset_stack_a(t_count *count_op, int to_sort, int count, int size_a)
 			rra(count_op);
 }
 
-void	bucket_sort(t_count *count_op, t_bucket *buckets, int nb)
+void	bucket_sort(t_count *stacks, t_bucket *buckets, int nb)
 {
 	int			i;
 	int			to_sort;
@@ -113,22 +113,22 @@ void	bucket_sort(t_count *count_op, t_bucket *buckets, int nb)
 	int			marker;
 	t_bucket	bucket;
 
-	size_a = ft_lstsize(count_op->stack_a);
+	size_a = ft_lstsize(stacks->stack_a);
 	to_sort = size_a;
 	i = 0;
 	while (i < nb && to_sort > 0)
 	{
 		bucket = buckets[i];
-		bucket.count = fill_bucket(count_op, bucket, to_sort);
-		marker = find_max(count_op->stack_b, bucket.count);
+		bucket.count = fill_bucket(stacks, bucket, to_sort);
+		marker = find_max(stacks->stack_b, bucket.count);
 		if (i != 0)
-			reset_stack_a(count_op, to_sort, bucket.count, size_a);
-		rev_simple_sort(count_op, bucket.count);
-		rot_bottom(get_stack_ops(count_op, 'a'), marker, count_op);
+			reset_stack_a(stacks, to_sort, bucket.count, size_a);
+		rev_simple_sort(stacks, bucket.count);
+		rot_bottom(get_ops(stacks, 'a'), marker, stacks);
 		to_sort -= bucket.count;
 		i++;
 	}
-	rot_top(get_stack_ops(count_op, 'a'), buckets[0].min, count_op);
+	rot_top(get_ops(stacks, 'a'), buckets[0].min, stacks);
 }
 
 t_bucket	*init_buckets(int nb_buckets, int min, int max)
@@ -159,7 +159,7 @@ t_bucket	*init_buckets(int nb_buckets, int min, int max)
 /* Bucket sort --> get number of buckets then call sort	*/
 /* ****************************************************	*/
 
-int	medium_sort(t_count *count_op)
+int	medium_sort(t_count *stacks)
 {
 	int			nb_buckets;
 	int			min;
@@ -167,17 +167,17 @@ int	medium_sort(t_count *count_op)
 	int			size_a;
 	t_bucket	*buckets;
 
-	if (!count_op->stack_a || ft_lstsize(count_op->stack_a) <= 1)
+	if (!stacks->stack_a || ft_lstsize(stacks->stack_a) <= 1)
 		return (-1);
-	size_a = ft_lstsize(count_op->stack_a);
-	min = find_min(count_op->stack_a, size_a);
-	max = find_max(count_op->stack_a, size_a);
+	size_a = ft_lstsize(stacks->stack_a);
+	min = find_min(stacks->stack_a, size_a);
+	max = find_max(stacks->stack_a, size_a);
 	nb_buckets = next_sqrt(size_a);
 	if (nb_buckets <= 0)
 		return (-1);
 	buckets = init_buckets(nb_buckets, min, max);
 	if (!buckets)
 		return (-1);
-	bucket_sort(count_op, buckets, nb_buckets);
+	bucket_sort(stacks, buckets, nb_buckets);
 	return (0);
 }

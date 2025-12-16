@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 10:58:46 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/16 13:31:32 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 14:04:18 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_stack(t_stack *stack, char *name)
 {
 	t_stack	*current;
 
-	ft_printf("Stack %s: ", 1,  name);
+	ft_printf("Stack %s: ", 1, name);
 	current = stack;
 	while (current)
 	{

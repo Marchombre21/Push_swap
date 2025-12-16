@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:06:59 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/15 16:48:55 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 14:05:27 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-t_stack_ops	get_stack_ops(t_count *count_op, char which)
+t_ops	get_ops(t_count *count_op, char which)
 {
-	t_stack_ops	s;
+	t_ops	s;
 
 	if (which == 'a')
 	{
@@ -35,7 +35,7 @@ t_stack_ops	get_stack_ops(t_count *count_op, char which)
 	return (s);
 }
 
-int	count_nodes_to_spot(t_stack_ops s, int value, int to_sort)
+int	count_nodes_to_spot(t_ops s, int value, int to_sort)
 {
 	int		spot_pos;
 	int		min;
@@ -66,7 +66,7 @@ int	count_nodes_to_spot(t_stack_ops s, int value, int to_sort)
 	return (spot_pos);
 }
 
-int	rot_top(t_stack_ops s, int value, t_count *count_op)
+int	rot_top(t_ops s, int value, t_count *count_op)
 {
 	int	i;
 	int	count;
@@ -91,7 +91,7 @@ int	rot_top(t_stack_ops s, int value, t_count *count_op)
 	return (count);
 }
 
-int	rot_bottom(t_stack_ops s, int value, t_count *count_op)
+int	rot_bottom(t_ops s, int value, t_count *count_op)
 {
 	int	i;
 	int	count;
@@ -116,7 +116,7 @@ int	rot_bottom(t_stack_ops s, int value, t_count *count_op)
 	return (count);
 }
 
-int	rot_spot(t_stack_ops s, int value, t_count *count_op)
+int	rot_spot(t_ops s, int value, t_count *count_op)
 {
 	int	i;
 	int	spot_pos;
