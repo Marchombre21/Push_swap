@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 10:37:37 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/16 09:44:02 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 11:56:47 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	manage_args(va_list args, const char *format, int *count)
 		handle_ptr(args, count, "0123456789abcdef");
 	else if (*format == 'd' || *format == 'i')
 		handle_int(args, count);
+	else if (*format == 'f')
+		handle_float(args, count);
 	else if (*format == 'u')
 		handle_unsint(args, count);
 	else if (*format == 'x')

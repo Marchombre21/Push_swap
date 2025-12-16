@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 06:55:11 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/16 10:54:41 by bfitte/gmac      ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 12:21:42 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void			ft_putnbrbase_fd(long n, int fd, const char *base);
 void			ft_uputnbrbase_fd(unsigned long n, int fd, const char *base);
 
 void			handle_int(va_list args, int *count);
+void			handle_float(va_list args, int *count);
 void			handle_unsint(va_list args, int *count);
 void			handle_hex(va_list args, int *count, char *base);
 void			handle_ptr(va_list args, int *count, const char *base);

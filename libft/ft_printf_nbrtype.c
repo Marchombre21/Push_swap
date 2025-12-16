@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_nbrtype.c                                   :+:      :+:    :+:   */
+/*   ft_printf_nbrtype.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 12:04:25 by gildas            #+#    #+#             */
-/*   Updated: 2025/12/16 09:43:44 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 12:23:59 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,28 @@ void	handle_int(va_list args, int *count)
 		(*count)++;
 	*count += ft_nbrlen(n, 10);
 	ft_putnbr_fd(n, 1);
+}
+
+void	handle_float(va_list args, int *count)
+{
+	double	n;
+	int	i;
+	int	before_float;
+
+	i = 0;
+	n = va_arg(args, double);
+	before_float = (int)n;
+	ft_putnbr_fd(before_float, 1);
+	write(1, ".", 1);
+	*count += 2;
+	while (i++ < 2)
+	{
+		(*count)++;
+		n -= before_float;
+		n *= 10;
+		before_float = (int)n;
+		ft_putnbr_fd(before_float, 1);
+	}
 }
 
 void	handle_unsint(va_list args, int *count)
