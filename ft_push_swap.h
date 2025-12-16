@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 15:11:20 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 15:22:10 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ typedef struct s_count
 }	t_count;
 
 /* Stack_operations structure */
-typedef struct s_stack_ops
+typedef struct s_ops
 {
 	char	letter;
 	t_stack	*ptr;
 	void	(*rotate)(t_count *);
 	void	(*rrotate)(t_count *);
 	void	(*swap)(t_count *);
-}	t_stack_ops;
+}	t_ops;
 
 /* Bucket structure */
 typedef struct s_bucket
@@ -82,16 +82,16 @@ void		rrb(t_count *count_op);
 void		rrr(t_count *count_op);
 
 /* Utils functions */
-int			next_sqrt(int nb);
-int			find_min(t_stack *stack, int size);
-int			find_max(t_stack *stack, int size);
-void		print_stack(t_stack *stack, char *name);
-int			count_nodes_until_value(t_stack *stack, int value);
-t_stack_ops	get_stack_ops(t_count *count_op, char which);
-int			count_nodes_to_spot(t_stack_ops stack, int value, int to_sort);
-int			rot_top(t_stack_ops stack, int value, t_count *count_op);
-int			rot_bottom(t_stack_ops stack, int value, t_count *count_op);
-int			rot_spot(t_stack_ops stack, int value, t_count *count_op);
+int		next_sqrt(int nb);
+int		find_min(t_stack *stack, int size);
+int		find_max(t_stack *stack, int size);
+void	print_stack(t_stack *stack, char *name);
+int		count_nodes_until_value(t_stack *stack, int value);
+t_ops	get_ops(t_count *count_op, char which);
+int		count_nodes_to_spot(t_ops stack, int value, int to_sort);
+int		rot_top(t_ops stack, int value, t_count *count_op);
+int		rot_bottom(t_ops stack, int value, t_count *count_op);
+int		rot_spot(t_ops stack, int value, t_count *count_op);
 
 /* Sort functions */
 int			simple_sort(t_count *count_op, int size);

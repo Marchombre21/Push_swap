@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:29:57 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/16 13:20:40 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 14:47:45 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	push_op(t_stack **dest, t_stack **src)
 
 void	pa(t_count *count_op)
 {
-	if (!count_op->stack_a)
+	if (!count_op->stack_b)
 		return ;
 	push_op(&count_op->stack_a, &count_op->stack_b);
 	count_op->pa++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_nbrtype.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 12:04:25 by gildas            #+#    #+#             */
-/*   Updated: 2025/12/16 13:41:35 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 14:03:28 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	handle_int(va_list args, int *count, int fd)
 void	handle_float(va_list args, int *count, int fd)
 {
 	double	n;
-	int	i;
-	int	before_float;
+	int		i;
+	int		before_float;
 
 	i = 0;
 	n = va_arg(args, double);

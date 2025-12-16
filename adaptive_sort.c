@@ -41,7 +41,7 @@ void	adaptive_sort(t_count *count_op)
 	}
 	else if (0.2 <= disorder && disorder < 0.5)
 	{
-		count_op->strategy = "Adaptive / O(𝑛\u221a𝑛)";
+		count_op->strategy = "Adaptive / O(𝑛√𝑛)";
 		medium_sort(count_op);
 	}
 	else if (disorder >= 0.5)
