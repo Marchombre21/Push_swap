@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 15:56:34 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 16:57:46 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,12 @@ void	sort_array(int *tab, int size)
 		i++;
 	}
 }
-
+/**
+ * @brief Put all values of chained list in array, sort the array and replace 
+ * values of chained list by their index in sorted array.
+ * @param a chained list
+ * @param size Size of list to malloc the array
+ */
 void	transform_to_index(t_stack *a, int size)
 {
 	int		*array;

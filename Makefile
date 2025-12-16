@@ -15,7 +15,7 @@ DEPFLAGS := -MMD -MP
 
 LIBFT := $(LIBFT_DIR)/libft.a
 
-SRC_FILES := main.c\
+SRC_FILES := ft_push_swap.c\
 	complex_sort.c\
 	medium_sort.c\
 	push_op.c\
