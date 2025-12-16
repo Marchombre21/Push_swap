@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:06:59 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/16 14:05:27 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/16 15:23:36 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,9 @@ int	count_nodes_to_spot(t_ops s, int value, int to_sort)
 				return (spot_pos);
 		}
 		else if (s.letter == 'a')
-		{
 			if (value > current->value && value < current->next->value
 				&& !(current->value == max && current->next->value == min))
 				return (spot_pos);
-		}
 		spot_pos++;
 		current = current->next;
 	}
