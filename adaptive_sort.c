@@ -35,9 +35,18 @@ void	adaptive_sort(t_count *count_op)
 
 	disorder = check_disorder(count_op->stack_a);
 	if (disorder < 0.2)
+	{
+		count_op->strategy = "Adaptive /  O(𝑛²)";
 		simple_sort(count_op, ft_lstsize(count_op->stack_a));
+	}
 	else if (0.2 <= disorder && disorder < 0.5)
+	{
+		count_op->strategy = "Adaptive / O(𝑛\u221a𝑛)";
 		medium_sort(count_op);
+	}
 	else if (disorder >= 0.5)
+	{
+		count_op->strategy = "Adaptive / O(𝑛log𝑛)";
 		complex_sort(count_op);
+	}
 }
