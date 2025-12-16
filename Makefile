@@ -1,6 +1,8 @@
 
 NAME := push_swap
 
+BONUS := checker
+
 LIBFT_DIR := libft
 
 BUILD_DIR := .build
@@ -29,8 +31,12 @@ SRC_FILES := ft_push_swap.c\
 	push_swap_utils2.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
-
 DEPS := $(patsubst %.o, %.d, $(OBJ))
+
+SRC_FILES_BONUS := checker.c\
+
+OBJ_BONUS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES_BONUS))
+DEPS_BONUS := $(patsubst %.o, %.d, $(OBJ_BONUS))
 
 all: $(NAME)
 
@@ -48,17 +54,20 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir -p $@
 
+bonus: all
+	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT) $(PRINTF) -o $(BONUS)
+
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
-	$(RM) $(OBJ) $(DEPS)
+	$(RM) $(OBJ) $(DEPS) $(OBJ_BONUS) $(DEPS_BONUS)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	rmdir -p $(BUILD_DIR)
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(BONUS)
 
 re: fclean all
 
-.PHONY: all clean fclean re FORCE
+.PHONY: all clean fclean re FORCE bonus
 
 -include $(DEPS)
