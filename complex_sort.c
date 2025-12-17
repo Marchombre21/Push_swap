@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 16:57:46 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 07:24:31 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void	sort(t_count *count_op, int shift_byte, int size)
 	while (size-- > 0)
 		pa(count_op);
 }
-
+/**
+ * @brief Find the highest number of the list then find the place of the last 1
+ * in his bit version.
+ * @param a The chained list.
+ */
 int	find_max_complex(t_stack *a)
 {
 	int	max;
@@ -44,7 +48,11 @@ int	find_max_complex(t_stack *a)
 		shift_byte++;
 	return (shift_byte);
 }
-
+/**
+ * @brief Sort the array so that we can retrieve the indexes later.
+ * @param tab The array
+ * @param size Size of the array
+ */
 void	sort_array(int *tab, int size)
 {
 	int	i;
