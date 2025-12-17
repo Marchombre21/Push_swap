@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_op.c                                          :+:      :+:    :+:   */
+/*   push_op_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:29:57 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/17 09:53:54 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 12:28:33 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ void	pa(t_stacks *stacks)
 	if (!stacks->stack_b)
 		return ;
 	push_op(&stacks->stack_a, &stacks->stack_b);
-	stacks->pa++;
-	stacks->total++;
-	ft_printf("pa\n", 1);
 }
 
 void	pb(t_stacks *stacks)
@@ -39,7 +36,4 @@ void	pb(t_stacks *stacks)
 	if (!stacks->stack_a)
 		return ;
 	push_op(&stacks->stack_b, &stacks->stack_a);
-	stacks->pb++;
-	stacks->total++;
-	ft_printf("pb\n", 1);
 }

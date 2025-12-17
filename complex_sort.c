@@ -6,25 +6,26 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/17 07:30:47 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 16:40:22 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	sort(t_count *count_op, int shift_byte, int size)
+void	sort(t_stacks *stacks, int shift_byte, int size)
 {
-	while (size-- > 0)
+	while (size > 0)
 	{
-		if (((count_op->stack_a)->value >> shift_byte & 1))
-			ra(count_op);
+		if (((stacks->stack_a)->value >> shift_byte & 1))
+			ra(stacks);
 		else
 			if (size > 1)
-				pb(count_op);
+				pb(stacks);
+		size--;
 	}
-	size = ft_lstsize(count_op->stack_b);
+	size = ft_lstsize(stacks->stack_b);
 	while (size-- > 0)
-		pa(count_op);
+		pa(stacks);
 }
 /**
  * @brief Find the highest number of the list then find the place of the last 1
@@ -110,7 +111,7 @@ void	transform_to_index(t_stack *a, int size)
 	free(array);
 }
 
-void	complex_sort(t_count *count_op)
+void	complex_sort(t_stacks *stacks)
 {
 	int	size;
 	int	max;
@@ -118,10 +119,10 @@ void	complex_sort(t_count *count_op)
 	int	is_sorted;
 
 	is_sorted = 0;
-	size = ft_lstsize(count_op->stack_a);
+	size = ft_lstsize(stacks->stack_a);
 	i = 0;
-	transform_to_index(count_op->stack_a, size);
-	max = find_max_complex(count_op->stack_a);
+	transform_to_index(stacks->stack_a, size);
+	max = find_max_complex(stacks->stack_a);
 	while (i < max)
-		sort(count_op, i++, size);
+		sort(stacks, i++, size);
 }
