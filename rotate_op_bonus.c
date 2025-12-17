@@ -1,54 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_op.c                                       :+:      :+:    :+:   */
+/*   rotate_op_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/10 08:28:59 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/17 09:53:54 by bfitte           ###   ########lyon.fr   */
+/*   Created: 2025/12/09 10:21:51 by bfitte/gmac       #+#    #+#             */
+/*   Updated: 2025/12/17 12:27:48 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	reverse_op(t_stack **stack)
+void	rotate_op(t_stack **stack)
 {
 	t_stack	*last;
-	t_stack	*prev_last;
 
 	if (!stack || !*stack || !(*stack)->next)
 		return ;
-	prev_last = *stack;
 	last = ft_lstlast(*stack);
-	while (prev_last->next != last)
-		prev_last = prev_last->next;
-	prev_last->next = NULL;
 	last->next = *stack;
-	*stack = last;
+	*stack = (*stack)->next;
+	last->next->next = NULL;
 }
 
-void	rra(t_stacks *stacks)
+void	ra(t_stacks *stacks)
 {
-	reverse_op(&stacks->stack_a);
-	stacks->rra++;
-	stacks->total++;
-	ft_printf("rra\n", 1);
+	rotate_op(&stacks->stack_a);
 }
 
-void	rrb(t_stacks *stacks)
+void	rb(t_stacks *stacks)
 {
-	reverse_op(&stacks->stack_b);
-	stacks->rrb++;
-	stacks->total++;
-	ft_printf("rrb\n", 1);
+	rotate_op(&stacks->stack_b);
 }
 
-void	rrr(t_stacks *stacks)
+void	rr(t_stacks *stacks)
 {
-	reverse_op(&stacks->stack_a);
-	reverse_op(&stacks->stack_b);
-	stacks->rrr++;
-	stacks->total++;
-	ft_printf("rrr\n", 1);
+	rotate_op(&stacks->stack_a);
+	rotate_op(&stacks->stack_b);
 }

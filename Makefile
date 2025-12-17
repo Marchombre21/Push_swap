@@ -33,7 +33,11 @@ SRC_FILES := ft_push_swap.c\
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 DEPS := $(patsubst %.o, %.d, $(OBJ))
 
-SRC_FILES_BONUS := checker.c\
+SRC_FILES_BONUS := ft_push_swap_bonus.c\
+	swap_op_bonus.c\
+	rotate_op_bonus.c\
+	reverse_op_bonus.c\
+	push_op_bonus.c
 
 OBJ_BONUS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES_BONUS))
 DEPS_BONUS := $(patsubst %.o, %.d, $(OBJ_BONUS))
@@ -54,8 +58,8 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir -p $@
 
-bonus: all
-	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT) $(PRINTF) -o $(BONUS)
+bonus: all $(OBJ_BONUS)
+	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT) -o $(BONUS)
 
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
@@ -71,3 +75,4 @@ re: fclean all
 .PHONY: all clean fclean re FORCE bonus
 
 -include $(DEPS)
+-include $(DEPS_BONUS)

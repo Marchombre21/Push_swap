@@ -1,40 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_push_swap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 15:49:56 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 16:24:47 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap.h"
-
-void	check_flags(char *s, t_flags *flags, t_count *count_op)
-{
-	if (ft_strncmp("--simple", s, 8) == 0)
-	{
-		flags->simple = 1;
-		flags->adaptive = 0;
-		count_op->strategy = "Simple / O(𝑛²)";
-	}
-	else if (ft_strncmp("--medium", s, 8) == 0)
-	{
-		flags->medium = 1;
-		flags->adaptive = 0;
-		count_op->strategy = "Medium / O(𝑛√𝑛)";
-	}
-	else if (ft_strncmp("--complex", s, 9) == 0)
-	{
-		flags->complex = 1;
-		flags->adaptive = 0;
-		count_op->strategy = "Complex / O(𝑛log𝑛)";
-	}
-	else if (ft_strncmp("--bench", s, 7) == 0)
-		flags->bench_mode = 1;
-}
+#include "ft_push_swap_bonus.h"
 
 void	delete_value(int value)
 {
@@ -65,49 +41,108 @@ t_stack	*parse_input(int nb_input, char **numbers)
 	return (stack_a);
 }
 
-void	dispatch(t_flags *flags, t_count *count_op)
+void	perform_operations(char *ope, t_stacks *stacks)
 {
-	flags->disorder = check_disorder(count_op->stack_a);
-	if (flags->simple)
-		simple_sort(count_op, ft_lstsize(count_op->stack_a));
-	else if (flags->medium)
-		medium_sort(count_op);
-	else if (flags->complex)
-		complex_sort(count_op);
-	else if (flags->adaptive)
-		adaptive_sort(count_op);
-	if (flags->bench_mode)
+	int	size_ope;
+
+	size_ope = ft_strlen((const char *)ope);
+	if(ft_strncmp(ope, "pa", size_ope) == 0)
+		pa(stacks);
+	else if(ft_strncmp(ope, "pb", size_ope) == 0)
+		pb(stacks);
+	else if(ft_strncmp(ope, "sa", size_ope) == 0)
+		sa(stacks);
+	else if(ft_strncmp(ope, "sb", size_ope) == 0)
+		sb(stacks);
+	else if(ft_strncmp(ope, "ss", size_ope) == 0)
+		ss(stacks);
+	else if(ft_strncmp(ope, "ra", size_ope) == 0)
+		ra(stacks);
+	else if(ft_strncmp(ope, "rb", size_ope) == 0)
+		rb(stacks);
+	else if(ft_strncmp(ope, "rr", size_ope) == 0)
+		rr(stacks);
+	else if(ft_strncmp(ope, "rra", size_ope) == 0)
+		rra(stacks);
+	else if(ft_strncmp(ope, "rrb", size_ope) == 0)
+		rrb(stacks);
+	else if(ft_strncmp(ope, "rrr", size_ope) == 0)
+		rrr(stacks);
+}
+
+void	reading_list(char *list, t_stacks *stacks)
+{
+	int	i;
+	char	*ope;
+	char	*lst_temp;
+	int		index_n;
+
+	i = 0;
+	lst_temp = list;
+	index_n = ft_strchr((const char *)lst_temp, '\n');
+	while (lst_temp && index_n != -1)
 	{
-		ft_printf("disorder:	%f%%\n", 2, flags->disorder);
-		ft_printf("strategy:	%s\n", 2, count_op->strategy);
-		ft_printf("total_ops:	%d\n", 2, count_op->total);
-		ft_printf("sa: %d sb: %d ss: %d pa: %d pb: %d\n", 2,
-			count_op->sa, count_op->sb, count_op->ss, count_op->pa,
-			count_op->pb);
-		ft_printf("ra: %d rb: %d rr: %d rra: %d rrb: %d rrr: %d\n", 2,
-			count_op->ra, count_op->rb, count_op->rr, count_op->rra,
-			count_op->rrb, count_op->rrr);
+		ope = ft_substr((const char *)lst_temp, 0, (size_t)index_n);
+		perform_operations(ope, stacks);
+		lst_temp = lst_temp + (index_n + 1);
+		index_n = ft_strchr((const char *)lst_temp, '\n');
 	}
+	if (lst_temp && index_n  != -1)
+		perform_operations(lst_temp + 1, stacks);
+	free((void *)list);
+}
+
+char	*reading_ope(void)
+{
+	int		read_bytes;
+	char	*list_ope;
+	char	buffer[50];
+	
+	list_ope = NULL;
+	read_bytes = 1;
+	while (read_bytes > 0)
+	{
+		read_bytes = read(0, buffer, 50);
+		if (read_bytes == -1)
+		{
+			free(list_ope);
+			return (NULL);
+		}
+		buffer[read_bytes] = '\0';
+		list_ope = ft_strjoin((const char *)list_ope, (const char*)buffer);
+	}
+	return(list_ope);
+}
+
+int	check_sort(t_stack *stack_a)
+{
+	while (stack_a && stack_a->next)
+	{
+		if (stack_a->value > stack_a->next->value)
+			return (1);
+		stack_a = stack_a->next;
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	int		i;
-	t_flags	flags;
-	t_count	count_op;
-
-	ft_bzero(&flags, sizeof(t_flags));
-	ft_bzero(&count_op, sizeof(t_count));
-	flags.adaptive = 1;
-	i = 1;
+	char	*list_ope;
+	t_stacks	stacks;
+	
+	list_ope = reading_ope();
+	ft_bzero(&stacks, sizeof(t_stacks));
 	if (argc < 2)
 		return (0);
-	while (argv[i][0] == '-' && argv[i][1] == '-')
-		check_flags(argv[i++], &flags, &count_op);
-	count_op.stack_a = parse_input(argc - i, &argv[i]);
-	if (!count_op.stack_a)
+	stacks.stack_a = parse_input(argc - 1, &argv[1]);
+	if (!stacks.stack_a)
 		return (1);
-	dispatch(&flags, &count_op);
-	ft_lstclear(&count_op.stack_a, delete_value);
+	reading_list(list_ope, &stacks);
+	list_ope = NULL;
+	if (check_sort(stacks.stack_a) == 0 && !stacks.stack_b)
+		ft_putstr_fd("OK\n", 1);
+	else
+		ft_putstr_fd("KO\n", 1);
+	ft_lstclear(&stacks.stack_a, delete_value);
 	return (0);
 }

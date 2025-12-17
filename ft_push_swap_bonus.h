@@ -6,85 +6,54 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/16 16:53:05 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 10:53:40 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PUSH_SWAP_H
-# define FT_PUSH_SWAP_H
+#ifndef FT_PUSH_SWAP_BONUS_H
+# define FT_PUSH_SWAP_BONUS_H
 
 # include <stdlib.h>
 # include <unistd.h>
 # include <libft.h>
 
-/*Count_operations structure*/
-typedef struct s_count
+/*stackserations structure*/
+typedef struct s_stacks
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	int		sa;
-	int		sb;
-	int		ss;
-	int		pa;
-	int		pb;
-	int		ra;
-	int		rb;
-	int		rr;
-	int		rra;
-	int		rrb;
-	int		rrr;
-}	t_count;
+}	t_stacks;
 
 /* Stack_operations structure */
-typedef struct s_ops
-{
-	char	letter;
-	t_stack	*ptr;
-	void	(*rotate)(t_count *);
-	void	(*rrotate)(t_count *);
-	void	(*swap)(t_count *);
-}	t_ops;
+// typedef struct s_ops
+// {
+// 	char	letter;
+// 	t_stack	*ptr;
+// 	void	(*rotate)(t_stacks *);
+// 	void	(*rrotate)(t_stacks *);
+// 	void	(*swap)(t_stacks *);
+// }	t_ops;
 
-/* Bucket structure */
-typedef struct s_bucket
-{
-	int	min;
-	int	max;
-	int	count;
-	int	number;
-}	t_bucket;
+// /* Bucket structure */
+// typedef struct s_bucket
+// {
+// 	int	min;
+// 	int	max;
+// 	int	count;
+// 	int	number;
+// }	t_bucket;
 
 /* Push_swap operations */
-void	sa(t_count *count_op);
-void	sb(t_count *count_op);
-void	ss(t_count *count_op);
-void	pa(t_count *count_op);
-void	pb(t_count *count_op);
-void	ra(t_count *count_op);
-void	rb(t_count *count_op);
-void	rr(t_count *count_op);
-void	rra(t_count *count_op);
-void	rrb(t_count *count_op);
-void	rrr(t_count *count_op);
-
-/* Utils functions */
-int		next_sqrt(int nb);
-int		find_min(t_stack *stack, int size);
-int		find_max(t_stack *stack, int size);
-void	print_stack(t_stack *stack, char *name);
-int		count_nodes_until_value(t_stack *stack, int value);
-t_ops	get_ops(t_count *count_op, char which);
-int		count_nodes_to_spot(t_ops stack, int value, int to_sort);
-int		rot_top(t_ops stack, int value, t_count *count_op);
-int		rot_bottom(t_ops stack, int value, t_count *count_op);
-int		rot_spot(t_ops stack, int value, t_count *count_op);
-
-/* Sort functions */
-int		simple_sort(t_count *count_op, int size);
-void	rev_simple_sort(t_count *count_op, int to_sort);
-int		medium_sort(t_count *count_op);
-void	complex_sort(t_count *count_op);
-void	adaptive_sort(t_count *count_op);
-float	check_disorder(t_stack *stack_a);
+void	sa(t_stacks *stacks);
+void	sb(t_stacks *stacks);
+void	ss(t_stacks *stacks);
+void	pa(t_stacks *stacks);
+void	pb(t_stacks *stacks);
+void	ra(t_stacks *stacks);
+void	rb(t_stacks *stacks);
+void	rr(t_stacks *stacks);
+void	rra(t_stacks *stacks);
+void	rrb(t_stacks *stacks);
+void	rrr(t_stacks *stacks);
 
 #endif

@@ -29,24 +29,24 @@ float	check_disorder(t_stack *stack_a)
 	return (mistakes / total_pairs);
 }
 
-void	adaptive_sort(t_count *count_op)
+void	adaptive_sort(t_stacks *stacks)
 {
 	float	disorder;
 
-	disorder = check_disorder(count_op->stack_a);
+	disorder = check_disorder(stacks->stack_a);
 	if (disorder < 0.2)
 	{
-		count_op->strategy = "Adaptive /  O(𝑛²)";
-		simple_sort(count_op, ft_lstsize(count_op->stack_a));
+		stacks->strategy = "Adaptive /  O(𝑛²)";
+		simple_sort(stacks, ft_lstsize(stacks->stack_a));
 	}
 	else if (0.2 <= disorder && disorder < 0.5)
 	{
-		count_op->strategy = "Adaptive / O(𝑛√𝑛)";
-		medium_sort(count_op);
+		stacks->strategy = "Adaptive / O(𝑛√𝑛)";
+		medium_sort(stacks);
 	}
 	else if (disorder >= 0.5)
 	{
-		count_op->strategy = "Adaptive / O(𝑛log𝑛)";
-		complex_sort(count_op);
+		stacks->strategy = "Adaptive / O(𝑛log𝑛)";
+		complex_sort(stacks);
 	}
 }
