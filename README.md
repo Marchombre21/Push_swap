@@ -20,6 +20,26 @@ The insertion sort has 3 different triage :
 
 
 #### Complex sort
+Initially I tried to do this algorithm with a merge sort. But the method I found 
+needed a first fake node to work which distorted the results. So I switched on 
+Radix sort. It consists of sorting numbers firstly by the units, then by the tens,
+then by the hundreds, etc...
+
+To do that I started by create an array with all values inside my chain, sort this array with a bubble sort and replace all values in my chained list by their index in 
+the sorted array. It permit to handle negative numbers because, now, we don't have
+to handle sign anymore.
+After that, normally, we compare by the units and we push 1 in stack_1, 2 in stack_2, etc...
+Except that here we have just two stacks.
+So I have to compare on binary's base.
+For that I use this syntaxe
+```c
+(stacks->stack_a)->value >> shift_byte & 1
+```
+If value == 5 the computer sees 00000101. '>> n' say to the computer 'Shift 
+of n bytes to the right'. If n == 1 then 00000101 -> 0000010. And '&1' says 'Look
+at just the last one byte'.
+So, for 2 (00000010) and 1 (00000001), first, 2 will be pushed in stack_b 
+and 1 will stay in stack_a (0 / 1). Then we empty stack_b in stack_a so we have 2 -> 1. Then we compare the tens (1 for two and 0 for one) so 2 will stay in stack_a en 1 will be pushed in stack_b before came back in stack_a. So we finish with 1 -> 2.
 
 ### Usage examples
 
@@ -28,5 +48,25 @@ The insertion sort has 3 different triage :
 ### Technical choices
 
 ## Instructions
+To have the main program you have to be in the folder which contains the Makefile and tap command 
+```bash
+make
+```
+Then you can execute him without forget to add arguments after the executable file
+```bash
+./push_swap 5 3 2 4 1
+```
+If you want to add some flags (bench, simple, medium or complex) you have to add them BEFORE your list
+```bash
+./push_swap --simple 5 3 2 4 1
+```
+If you want to have the checker you must tap command
+```bash
+make bonus
+```
+Then you can execute the main program as usual and add | before execute checker programm with the same numbers as arguments.
+```bash
+./push_swap 5 3 2 4 1 | ./checker 5 3 2 4 1
+```
 
 ## Resources

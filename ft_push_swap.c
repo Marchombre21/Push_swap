@@ -6,27 +6,35 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/18 14:17:27 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 17:46:08 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
+int	check_algo(t_flags *flags)
+{
+	if (flags->complex || flags->medium || flags->simple)
+		return (1);
+	return (0);
+}
+
 int	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 {
-	if (ft_strncmp("--simple", s, 8) == 0)
+
+	if (ft_strncmp("--simple", s, 8) == 0 && !check_algo(flags))
 	{
 		flags->simple = 1;
 		flags->adaptive = 0;
 		stacks->strategy = "Simple / O(𝑛²)";
 	}
-	else if (ft_strncmp("--medium", s, 8) == 0)
+	else if (ft_strncmp("--medium", s, 8) == 0 && !check_algo(flags))
 	{
 		flags->medium = 1;
 		flags->adaptive = 0;
 		stacks->strategy = "Medium / O(𝑛√𝑛)";
 	}
-	else if (ft_strncmp("--complex", s, 9) == 0)
+	else if (ft_strncmp("--complex", s, 9) == 0 && !check_algo(flags))
 	{
 		flags->complex = 1;
 		flags->adaptive = 0;
