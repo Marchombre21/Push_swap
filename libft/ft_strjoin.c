@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 10:11:46 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/14 16:42:27 by bfitte           ###   ########.fr       */
+/*   Updated: 2025/12/17 11:39:19 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[j])
 		new_str[i++] = s2[j++];
 	new_str[i] = '\0';
+	free((void *)s1);
 	return (new_str);
 }

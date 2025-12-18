@@ -3,109 +3,109 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/16 14:29:23 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 09:53:54 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-// int	b_push_limited(t_count *count_op, int limit)
+// int	b_push_limited(t_stacks *stacks, int limit)
 // {
 // 	int	j;
 // 	int	sorted;
 
 // 	sorted = 0;
 // 	j = limit - 1;
-// 	pb(count_op);
+// 	pb(stacks);
 // 	while (j > 0)
 // 	{
 // 		if ((*stack_a)->value < (*stack_b)->value)
 // 		{
-// 			pb(count_op);
+// 			pb(stacks);
 // 			sb(stack_b);
 // 			sorted++;
 // 		}
 // 		else
-// 			pb(count_op);
+// 			pb(stacks);
 // 		j--;
 // 	}
 // 	return (sorted);
 // }
 
-// int a_push_limited(t_count *count_op, int limit)
+// int a_push_limited(t_stacks *stacks, int limit)
 // {
 // 	int	j;
 // 	int	sorted;
 
 // 	sorted = 0;
 // 	j = limit - 1;
-// 	pa(count_op);
+// 	pa(stacks);
 // 	while (j > 0)
 // 	{
 // 		if ((*stack_a)->value < (*stack_b)->value)
 // 		{
-// 			pa(count_op);
+// 			pa(stacks);
 // 			sa(stack_a);
 // 			sorted++;
 // 		}
 // 		else
-// 			pa(count_op);
+// 			pa(stacks);
 // 		j--;
 // 	}
 // 	return (sorted);
 // }
 
-// void	rev_bubble_sort_bucket(t_count *count_op, int limit)
+// void	rev_bubble_sort_bucket(t_stacks *stacks, int limit)
 // {
 // 	if (limit == 0)
 // 		return ;
 // 	if (limit == 1)
-// 		return (pa(count_op));
-// 	while (a_push_limited(count_op, limit) != 0)
-// 		b_push_limited(count_op, limit);
+// 		return (pa(stacks));
+// 	while (a_push_limited(stacks, limit) != 0)
+// 		b_push_limited(stacks, limit);
 // }
 
-int	fill_bucket(t_count *count_op, t_bucket bucket, int to_sort)
+int	fill_bucket(t_stacks *stacks, t_bucket bucket, int to_sort)
 {
 	int		i;
 	t_stack	**s_a;
 	t_stack	**s_b;
 
-	s_a = &count_op->stack_a;
-	s_b = &count_op->stack_b;
+	s_a = &stacks->stack_a;
+	s_b = &stacks->stack_b;
 	i = 0;
 	while (i++ < to_sort)
 	{
 		if ((*s_a)->value >= bucket.min && (*s_a)->value <= bucket.max)
 		{
-			pb(count_op);
+			pb(stacks);
 			if (s_b && (*s_b)->next && (*s_b)->value < (*s_b)->next->value)
-				sb(count_op);
+				sb(stacks);
 			bucket.count++;
 		}
 		else
-			ra(count_op);
+			ra(stacks);
 	}
 	return (bucket.count);
 }
 
-void	reset_stack_a(t_count *count_op, int to_sort, int count, int size_a)
+void	reset_stack_a(t_stacks *stacks, int to_sort, int count, int size_a)
 {
 	int	i;
 
 	i = 0;
 	if (size_a - to_sort < to_sort - count)
 		while (i++ < size_a - to_sort)
-			ra(count_op);
+			ra(stacks);
 	else
 		while (i++ < to_sort - count)
-			rra(count_op);
+			rra(stacks);
 }
 
-void	bucket_sort(t_count *stacks, t_bucket *buckets, int nb)
+void	bucket_sort(t_stacks *stacks, t_bucket *buckets, int nb)
 {
 	int			i;
 	int			to_sort;
@@ -159,7 +159,7 @@ t_bucket	*init_buckets(int nb_buckets, int min, int max)
 /* Bucket sort --> get number of buckets then call sort	*/
 /* ****************************************************	*/
 
-int	medium_sort(t_count *stacks)
+int	medium_sort(t_stacks *stacks)
 {
 	int			nb_buckets;
 	int			min;

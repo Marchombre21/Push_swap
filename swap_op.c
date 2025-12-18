@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:17:16 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/16 13:19:21 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 09:53:54 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,27 +26,27 @@ void	swap_op(t_stack **stack)
 	*stack = second;
 }
 
-void	sa(t_count *count_op)
+void	sa(t_stacks *stacks)
 {
-	swap_op(&count_op->stack_a);
-	count_op->sa++;
-	count_op->total++;
+	swap_op(&stacks->stack_a);
+	stacks->sa++;
+	stacks->total++;
 	ft_printf("sa\n", 1);
 }
 
-void	sb(t_count *count_op)
+void	sb(t_stacks *stacks)
 {
-	swap_op(&count_op->stack_b);
-	count_op->sb++;
-	count_op->total++;
+	swap_op(&stacks->stack_b);
+	stacks->sb++;
+	stacks->total++;
 	ft_printf("sb\n", 1);
 }
 
-void	ss(t_count *count_op)
+void	ss(t_stacks *stacks)
 {
-	swap_op(&count_op->stack_a);
-	swap_op(&count_op->stack_b);
-	count_op->ss++;
-	count_op->total++;
+	swap_op(&stacks->stack_a);
+	swap_op(&stacks->stack_b);
+	stacks->ss++;
+	stacks->total++;
 	ft_printf("ss\n", 1);
 }

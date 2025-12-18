@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 06:55:11 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/16 13:14:53 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 10:04:35 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ typedef struct s_stack
 	struct s_stack	*next;
 }	t_stack;
 
+// typedef struct s_ope
+// {
+// 	char	*operation;
+// 	t_ope	next;
+// }	t_ope;
+
 /* Mem functions */
 void			*ft_memchr(const void *s, int c, size_t n);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -41,7 +47,7 @@ char			*ft_strrchr(const char *s, size_t c);
 unsigned long	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
-char			*ft_strchr(const char *s, int c);
+int				ft_strchr(const char *s, int c);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strdup(const char *s);
 char			*ft_strtrim(char const *s1, char const *set);
@@ -73,12 +79,13 @@ void			ft_putnbr_fd(int n, int fd);
 
 /* Linked list functions */
 t_stack			*ft_lstnew(int value);
+// t_ope			*ft_lstnew_ope(char *value);
 void			ft_lstadd_front(t_stack **lst, t_stack *new);
 int				ft_lstsize(t_stack *lst);
 t_stack			*ft_lstlast(t_stack *lst);
 void			ft_lstadd_back(t_stack **lst, t_stack *new);
 void			ft_lstdelone(t_stack *lst, void (*del)(int));
-void			ft_lstclear(t_stack **lst, void (*del)(int));
+void			ft_lstclear(t_stack **lst);
 void			ft_lstiter(t_stack *lst, void (*f)(int));
 t_stack			*ft_lstmap(t_stack *lst, int (*f)(int), void (*del)(int));
 

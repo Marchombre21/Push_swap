@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_op.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 18:29:57 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/16 14:47:45 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/17 09:53:54 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,22 @@ void	push_op(t_stack **dest, t_stack **src)
 	*dest = temp;
 }
 
-void	pa(t_count *count_op)
+void	pa(t_stacks *stacks)
 {
-	if (!count_op->stack_b)
+	if (!stacks->stack_b)
 		return ;
-	push_op(&count_op->stack_a, &count_op->stack_b);
-	count_op->pa++;
-	count_op->total++;
+	push_op(&stacks->stack_a, &stacks->stack_b);
+	stacks->pa++;
+	stacks->total++;
 	ft_printf("pa\n", 1);
 }
 
-void	pb(t_count *count_op)
+void	pb(t_stacks *stacks)
 {
-	if (!count_op->stack_a)
+	if (!stacks->stack_a)
 		return ;
-	push_op(&count_op->stack_b, &count_op->stack_a);
-	count_op->pb++;
-	count_op->total++;
+	push_op(&stacks->stack_b, &stacks->stack_a);
+	stacks->pb++;
+	stacks->total++;
 	ft_printf("pb\n", 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 09:21:22 by bfitte            #+#    #+#             */
-/*   Updated: 2025/11/13 18:40:51 by bfitte           ###   ########.fr       */
+/*   Updated: 2025/12/17 12:08:12 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // 	return (0);
 // }
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s, int c)
 {
 	int	i;
 	int	s_len;
@@ -33,8 +33,8 @@ char	*ft_strchr(const char *s, int c)
 	while (i < (s_len + 1))
 	{
 		if (s[i] == (char)c)
-			return ((char *)s + i);
+			return (i);
 		i++;
 	}
-	return (NULL);
+	return (-1);
 }

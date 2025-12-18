@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 07:12:00 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/15 09:25:10 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 10:05:45 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_stack	*ft_lstmap(t_stack *lst, int (*f)(int), void (*del)(int))
 		if (!new_node)
 		{
 			del(new_content);
-			ft_lstclear(&new_list, del);
+			ft_lstclear(&new_list);
 		}
 		ft_lstadd_back(&new_list, new_node);
 		lst = lst->next;

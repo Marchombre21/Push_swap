@@ -1,6 +1,8 @@
 
 NAME := push_swap
 
+BONUS := checker
+
 LIBFT_DIR := libft
 
 BUILD_DIR := .build
@@ -15,7 +17,7 @@ DEPFLAGS := -MMD -MP
 
 LIBFT := $(LIBFT_DIR)/libft.a
 
-SRC_FILES := main.c\
+SRC_FILES := ft_push_swap.c\
 	complex_sort.c\
 	medium_sort.c\
 	push_op.c\
@@ -27,10 +29,20 @@ SRC_FILES := main.c\
 	adaptive_sort.c\
 	push_swap_utils.c\
 	push_swap_utils2.c\
+	push_swap_utils3.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
-
 DEPS := $(patsubst %.o, %.d, $(OBJ))
+
+SRC_FILES_BONUS := ft_push_swap_bonus.c\
+	push_swap_utils3.c\
+	push_op.c\
+	reverse_op.c\
+	rotate_op.c\
+	swap_op.c\
+
+OBJ_BONUS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES_BONUS))
+DEPS_BONUS := $(patsubst %.o, %.d, $(OBJ_BONUS))
 
 all: $(NAME)
 
@@ -48,17 +60,20 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir -p $@
 
+bonus: all $(OBJ_BONUS)
+	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT) -o $(BONUS)
+
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
-	$(RM) $(OBJ) $(DEPS)
+	$(RM) $(OBJ) $(DEPS) $(OBJ_BONUS) $(DEPS_BONUS)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 	rmdir -p $(BUILD_DIR)
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(BONUS)
 
 re: fclean all
 
-.PHONY: all clean fclean re FORCE
+.PHONY: all clean fclean re FORCE bonus
 
--include $(DEPS)
+-include $(DEPS) $(DEPS_BONUS)
