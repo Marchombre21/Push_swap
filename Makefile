@@ -37,7 +37,9 @@ SRC_FILES_BONUS := ft_push_swap_bonus.c\
 	swap_op_bonus.c\
 	rotate_op_bonus.c\
 	reverse_op_bonus.c\
-	push_op_bonus.c
+	push_op_bonus.c\
+	push_swap_utils_bonus.c\
+	push_swap_utils2_bonus.c
 
 OBJ_BONUS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES_BONUS))
 DEPS_BONUS := $(patsubst %.o, %.d, $(OBJ_BONUS))

@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/17 10:53:40 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 09:37:09 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,13 @@ void	rr(t_stacks *stacks);
 void	rra(t_stacks *stacks);
 void	rrb(t_stacks *stacks);
 void	rrr(t_stacks *stacks);
+
+/* Utils functions */
+void	delete_value(int value);
+void	add_node(int value, t_stack **stack_a);
+int		check_input(char *nptr);
+int		check_duplicate(int value, t_stack *stack_a);
+t_stack	*handle_error(t_stack *stack_a);
+int		check_sort(t_stack *stack_a);
 
 #endif
