@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:06:59 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/18 16:12:39 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 17:52:34 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,3 +134,24 @@ int	rot_spot(t_ops s, int value, t_stacks *stacks)
 	}
 	return (spot_pos);
 }
+
+// int	rev_rot_spot(t_ops s, int value, t_stacks *stacks)
+// {
+// 	int	i;
+// 	int	spot_pos;
+// 	int	size;
+
+// 	i = 0;
+// 	size = ft_lstsize(s.ptr);
+// 	spot_pos = count_nodes_to_spot(s, value, size);
+// 	if (spot_pos <= size / 2)
+// 		while (i++ < spot_pos)
+// 			s.rotate(stacks);
+// 	else
+// 	{
+// 		spot_pos = size - spot_pos;
+// 		while (i++ < spot_pos)
+// 			s.rrotate(stacks);
+// 	}
+// 	return (spot_pos);
+// }
