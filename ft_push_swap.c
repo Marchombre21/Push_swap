@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/17 09:53:54 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 12:08:30 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,29 @@ void	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 		flags->bench_mode = 1;
 }
 
-void	delete_value(int value)
-{
-	(void)value;
-}
+// t_stack	*parse_input(int nb_input, char **numbers)
+// {
+// 	int		i;
+// 	t_stack	*stack_a;
+// 	t_stack	*new_node;
+// 	int		value;
 
-t_stack	*parse_input(int nb_input, char **numbers)
-{
-	int		i;
-	t_stack	*stack_a;
-	t_stack	*new_node;
-	int		value;
-
-	stack_a = NULL;
-	i = 0;
-	while (i < nb_input)
-	{
-		value = ft_atoi(numbers[i]);
-		new_node = ft_lstnew(value);
-		if (!new_node)
-		{
-			ft_lstclear(&stack_a, delete_value);
-			return (NULL);
-		}
-		ft_lstadd_back(&stack_a, new_node);
-		i++;
-	}
-	return (stack_a);
-}
+// 	stack_a = NULL;
+// 	i = 0;
+// 	while (i < nb_input)
+// 	{
+// 		value = ft_atoi(numbers[i]);
+// 		new_node = ft_lstnew(value);
+// 		if (!new_node)
+// 		{
+// 			ft_lstclear(&stack_a);
+// 			return (NULL);
+// 		}
+// 		ft_lstadd_back(&stack_a, new_node);
+// 		i++;
+// 	}
+// 	return (stack_a);
+// }
 
 void	dispatch(t_flags *flags, t_stacks *stacks)
 {
@@ -78,7 +73,7 @@ void	dispatch(t_flags *flags, t_stacks *stacks)
 		adaptive_sort(stacks);
 	if (flags->bench_mode)
 	{
-		ft_printf("disorder:	%f%%\n", 2, flags->disorder);
+		ft_printf("disorder:	%f%%\n", 2, (flags->disorder * 100));
 		ft_printf("strategy:	%s\n", 2, stacks->strategy);
 		ft_printf("total_ops:	%d\n", 2, stacks->total);
 		ft_printf("sa: %d sb: %d ss: %d pa: %d pb: %d\n", 2,
@@ -92,8 +87,8 @@ void	dispatch(t_flags *flags, t_stacks *stacks)
 
 int	main(int argc, char **argv)
 {
-	int		i;
-	t_flags	flags;
+	int			i;
+	t_flags		flags;
 	t_stacks	stacks;
 
 	ft_bzero(&flags, sizeof(t_flags));
@@ -108,6 +103,6 @@ int	main(int argc, char **argv)
 	if (!stacks.stack_a)
 		return (1);
 	dispatch(&flags, &stacks);
-	ft_lstclear(&stacks.stack_a, delete_value);
+	ft_lstclear(&stacks.stack_a);
 	return (0);
 }

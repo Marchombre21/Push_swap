@@ -29,15 +29,17 @@ SRC_FILES := ft_push_swap.c\
 	adaptive_sort.c\
 	push_swap_utils.c\
 	push_swap_utils2.c\
+	push_swap_utils3.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 DEPS := $(patsubst %.o, %.d, $(OBJ))
 
 SRC_FILES_BONUS := ft_push_swap_bonus.c\
-	swap_op_bonus.c\
-	rotate_op_bonus.c\
-	reverse_op_bonus.c\
-	push_op_bonus.c
+	push_swap_utils3.c\
+	push_op.c\
+	reverse_op.c\
+	rotate_op.c\
+	swap_op.c\
 
 OBJ_BONUS := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES_BONUS))
 DEPS_BONUS := $(patsubst %.o, %.d, $(OBJ_BONUS))
@@ -74,5 +76,4 @@ re: fclean all
 
 .PHONY: all clean fclean re FORCE bonus
 
--include $(DEPS)
--include $(DEPS_BONUS)
+-include $(DEPS) $(DEPS_BONUS)

@@ -6,73 +6,67 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/17 16:24:47 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 11:58:00 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap_bonus.h"
+#include "ft_push_swap.h"
 
-void	delete_value(int value)
+int	check_sort(t_stack *stack_a)
 {
-	(void)value;
-}
-
-t_stack	*parse_input(int nb_input, char **numbers)
-{
-	int		i;
-	t_stack	*stack_a;
-	t_stack	*new_node;
-	int		value;
-
-	stack_a = NULL;
-	i = 0;
-	while (i < nb_input)
+	while (stack_a && stack_a->next)
 	{
-		value = ft_atoi(numbers[i]);
-		new_node = ft_lstnew(value);
-		if (!new_node)
-		{
-			ft_lstclear(&stack_a, delete_value);
-			return (NULL);
-		}
-		ft_lstadd_back(&stack_a, new_node);
-		i++;
+		if (stack_a->value > stack_a->next->value)
+			return (1);
+		stack_a = stack_a->next;
 	}
-	return (stack_a);
+	return (0);
 }
 
+/**
+ * @brief Applie the operation found in the list to the list of numbers.
+ * @param ope The operation.
+ * @param stacks Contain list of numbers to be sorted.
+ */
 void	perform_operations(char *ope, t_stacks *stacks)
 {
 	int	size_ope;
 
 	size_ope = ft_strlen((const char *)ope);
-	if(ft_strncmp(ope, "pa", size_ope) == 0)
+	if (ft_strncmp(ope, "pa", size_ope) == 0)
 		pa(stacks);
-	else if(ft_strncmp(ope, "pb", size_ope) == 0)
+	else if (ft_strncmp(ope, "pb", size_ope) == 0)
 		pb(stacks);
-	else if(ft_strncmp(ope, "sa", size_ope) == 0)
+	else if (ft_strncmp(ope, "sa", size_ope) == 0)
 		sa(stacks);
-	else if(ft_strncmp(ope, "sb", size_ope) == 0)
+	else if (ft_strncmp(ope, "sb", size_ope) == 0)
 		sb(stacks);
-	else if(ft_strncmp(ope, "ss", size_ope) == 0)
+	else if (ft_strncmp(ope, "ss", size_ope) == 0)
 		ss(stacks);
-	else if(ft_strncmp(ope, "ra", size_ope) == 0)
+	else if (ft_strncmp(ope, "ra", size_ope) == 0)
 		ra(stacks);
-	else if(ft_strncmp(ope, "rb", size_ope) == 0)
+	else if (ft_strncmp(ope, "rb", size_ope) == 0)
 		rb(stacks);
-	else if(ft_strncmp(ope, "rr", size_ope) == 0)
+	else if (ft_strncmp(ope, "rr", size_ope) == 0)
 		rr(stacks);
-	else if(ft_strncmp(ope, "rra", size_ope) == 0)
+	else if (ft_strncmp(ope, "rra", size_ope) == 0)
 		rra(stacks);
-	else if(ft_strncmp(ope, "rrb", size_ope) == 0)
+	else if (ft_strncmp(ope, "rrb", size_ope) == 0)
 		rrb(stacks);
-	else if(ft_strncmp(ope, "rrr", size_ope) == 0)
+	else if (ft_strncmp(ope, "rrr", size_ope) == 0)
 		rrr(stacks);
 }
 
+/**
+ * @brief Find the first newline in list, get the previous word,
+ * send him to the dispatch function, then update list by
+ * remove the previous word until the list is empty.
+ * @param list String which contain all instructions followed by newline
+ * @param stacks Contain list of numbers to be sorted.
+ */
 void	reading_list(char *list, t_stacks *stacks)
 {
-	int	i;
+	int		i;
 	char	*ope;
 	char	*lst_temp;
 	int		index_n;
@@ -87,17 +81,21 @@ void	reading_list(char *list, t_stacks *stacks)
 		lst_temp = lst_temp + (index_n + 1);
 		index_n = ft_strchr((const char *)lst_temp, '\n');
 	}
-	if (lst_temp && index_n  != -1)
+	if (lst_temp && index_n != -1)
 		perform_operations(lst_temp + 1, stacks);
 	free((void *)list);
 }
 
+/**
+ * @brief Read all instructions displayed on the stdout and 
+ * record them in list_ope.
+ */
 char	*reading_ope(void)
 {
 	int		read_bytes;
 	char	*list_ope;
 	char	buffer[50];
-	
+
 	list_ope = NULL;
 	read_bytes = 1;
 	while (read_bytes > 0)
@@ -109,27 +107,16 @@ char	*reading_ope(void)
 			return (NULL);
 		}
 		buffer[read_bytes] = '\0';
-		list_ope = ft_strjoin((const char *)list_ope, (const char*)buffer);
+		list_ope = ft_strjoin((const char *)list_ope, (const char *)buffer);
 	}
-	return(list_ope);
-}
-
-int	check_sort(t_stack *stack_a)
-{
-	while (stack_a && stack_a->next)
-	{
-		if (stack_a->value > stack_a->next->value)
-			return (1);
-		stack_a = stack_a->next;
-	}
-	return (0);
+	return (list_ope);
 }
 
 int	main(int argc, char **argv)
 {
-	char	*list_ope;
+	char		*list_ope;
 	t_stacks	stacks;
-	
+
 	list_ope = reading_ope();
 	ft_bzero(&stacks, sizeof(t_stacks));
 	if (argc < 2)
@@ -143,6 +130,6 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("OK\n", 1);
 	else
 		ft_putstr_fd("KO\n", 1);
-	ft_lstclear(&stacks.stack_a, delete_value);
+	ft_lstclear(&stacks.stack_a);
 	return (0);
 }

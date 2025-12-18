@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/17 09:53:54 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 11:26:38 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,11 @@ int		count_nodes_to_spot(t_ops stack, int value, int to_sort);
 int		rot_top(t_ops stack, int value, t_stacks *stacks);
 int		rot_bottom(t_ops stack, int value, t_stacks *stacks);
 int		rot_spot(t_ops stack, int value, t_stacks *stacks);
+void	add_node(int value, t_stack **stack_a);
+int		check_input(char *nptr);
+int		check_duplicate(int value, t_stack *stack_a);
+t_stack	*handle_error(t_stack *stack_a);
+t_stack	*parse_input(int nb_input, char **numbers);
 
 /* Sort functions */
 int		simple_sort(t_stacks *stacks, int size);

@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/17 10:53:40 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 11:44:19 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,30 +18,24 @@
 # include <libft.h>
 
 /*stackserations structure*/
-typedef struct s_stacks
+typedef struct s_count
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	char	*strategy;
+	int		total;
+	int		sa;
+	int		sb;
+	int		ss;
+	int		pa;
+	int		pb;
+	int		ra;
+	int		rb;
+	int		rr;
+	int		rra;
+	int		rrb;
+	int		rrr;
 }	t_stacks;
-
-/* Stack_operations structure */
-// typedef struct s_ops
-// {
-// 	char	letter;
-// 	t_stack	*ptr;
-// 	void	(*rotate)(t_stacks *);
-// 	void	(*rrotate)(t_stacks *);
-// 	void	(*swap)(t_stacks *);
-// }	t_ops;
-
-// /* Bucket structure */
-// typedef struct s_bucket
-// {
-// 	int	min;
-// 	int	max;
-// 	int	count;
-// 	int	number;
-// }	t_bucket;
 
 /* Push_swap operations */
 void	sa(t_stacks *stacks);
@@ -55,5 +49,12 @@ void	rr(t_stacks *stacks);
 void	rra(t_stacks *stacks);
 void	rrb(t_stacks *stacks);
 void	rrr(t_stacks *stacks);
+
+/* Utils functions */
+void	add_node(int value, t_stack **stack_a);
+int		check_input(char *nptr);
+int		check_duplicate(int value, t_stack *stack_a);
+t_stack	*handle_error(t_stack *stack_a);
+t_stack	*parse_input(int nb_input, char **numbers);
 
 #endif
