@@ -6,13 +6,13 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/18 12:08:30 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 13:06:50 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	check_flags(char *s, t_flags *flags, t_stacks *stacks)
+int	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 {
 	if (ft_strncmp("--simple", s, 8) == 0)
 	{
@@ -34,31 +34,10 @@ void	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 	}
 	else if (ft_strncmp("--bench", s, 7) == 0)
 		flags->bench_mode = 1;
+	else
+		return (1);
+	return (0);
 }
-
-// t_stack	*parse_input(int nb_input, char **numbers)
-// {
-// 	int		i;
-// 	t_stack	*stack_a;
-// 	t_stack	*new_node;
-// 	int		value;
-
-// 	stack_a = NULL;
-// 	i = 0;
-// 	while (i < nb_input)
-// 	{
-// 		value = ft_atoi(numbers[i]);
-// 		new_node = ft_lstnew(value);
-// 		if (!new_node)
-// 		{
-// 			ft_lstclear(&stack_a);
-// 			return (NULL);
-// 		}
-// 		ft_lstadd_back(&stack_a, new_node);
-// 		i++;
-// 	}
-// 	return (stack_a);
-// }
 
 void	dispatch(t_flags *flags, t_stacks *stacks)
 {
@@ -96,9 +75,13 @@ int	main(int argc, char **argv)
 	flags.adaptive = 1;
 	i = 1;
 	if (argc < 2)
-		return (0);
+		return (1);
 	while (argv[i][0] == '-' && argv[i][1] == '-')
-		check_flags(argv[i++], &flags, &stacks);
+		if (check_flags(argv[i++], &flags, &stacks) == 1)
+		{
+			ft_printf("Error\n", 2);
+			return(1);
+		}
 	stacks.stack_a = parse_input(argc - i, &argv[i]);
 	if (!stacks.stack_a)
 		return (1);
