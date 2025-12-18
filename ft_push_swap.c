@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/17 09:53:54 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 10:11:15 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,6 @@ void	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 		flags->bench_mode = 1;
 }
 
-void	delete_value(int value)
-{
-	(void)value;
-}
-
 t_stack	*parse_input(int nb_input, char **numbers)
 {
 	int		i;
@@ -56,7 +51,7 @@ t_stack	*parse_input(int nb_input, char **numbers)
 		new_node = ft_lstnew(value);
 		if (!new_node)
 		{
-			ft_lstclear(&stack_a, delete_value);
+			ft_lstclear(&stack_a);
 			return (NULL);
 		}
 		ft_lstadd_back(&stack_a, new_node);
@@ -92,8 +87,8 @@ void	dispatch(t_flags *flags, t_stacks *stacks)
 
 int	main(int argc, char **argv)
 {
-	int		i;
-	t_flags	flags;
+	int			i;
+	t_flags		flags;
 	t_stacks	stacks;
 
 	ft_bzero(&flags, sizeof(t_flags));
@@ -108,6 +103,6 @@ int	main(int argc, char **argv)
 	if (!stacks.stack_a)
 		return (1);
 	dispatch(&flags, &stacks);
-	ft_lstclear(&stacks.stack_a, delete_value);
+	ft_lstclear(&stacks.stack_a);
 	return (0);
 }

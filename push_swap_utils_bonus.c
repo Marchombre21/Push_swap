@@ -6,30 +6,29 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 10:58:46 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/18 09:33:18 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 10:44:16 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap_bonus.h"
 
-void	delete_value(int value)
-{
-	(void)value;
-}
-
 void	add_node(int value, t_stack **stack_a)
 {
 	t_stack	*new_node;
-	
+
 	new_node = ft_lstnew(value);
 	if (!new_node)
 	{
-		ft_lstclear(stack_a, delete_value);
+		ft_lstclear(stack_a);
 		return ;
 	}
 	ft_lstadd_back(stack_a, new_node);
 }
 
+/**
+ * @brief Check if the argument contain just digits and is within the limits of
+ * int type.
+ */
 int	check_input(char *nptr)
 {
 	int			i;
@@ -58,6 +57,7 @@ int	check_input(char *nptr)
 	}
 	return (0);
 }
+
 int	check_duplicate(int value, t_stack *stack_a)
 {
 	while (stack_a)
@@ -71,7 +71,18 @@ int	check_duplicate(int value, t_stack *stack_a)
 
 t_stack	*handle_error(t_stack *stack_a)
 {
-	ft_lstclear(&stack_a, delete_value);
+	ft_lstclear(&stack_a);
 	ft_printf("Error\n", 2);
 	return (stack_a);
+}
+
+int	check_sort(t_stack *stack_a)
+{
+	while (stack_a && stack_a->next)
+	{
+		if (stack_a->value > stack_a->next->value)
+			return (1);
+		stack_a = stack_a->next;
+	}
+	return (0);
 }

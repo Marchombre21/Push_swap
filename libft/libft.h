@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 06:55:11 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/17 12:08:07 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 10:04:35 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int				ft_lstsize(t_stack *lst);
 t_stack			*ft_lstlast(t_stack *lst);
 void			ft_lstadd_back(t_stack **lst, t_stack *new);
 void			ft_lstdelone(t_stack *lst, void (*del)(int));
-void			ft_lstclear(t_stack **lst, void (*del)(int));
+void			ft_lstclear(t_stack **lst);
 void			ft_lstiter(t_stack *lst, void (*f)(int));
 t_stack			*ft_lstmap(t_stack *lst, int (*f)(int), void (*del)(int));
 
