@@ -62,7 +62,7 @@ $(BUILD_DIR):
 
 bonus: $(OBJ_BONUS)
 
-$(BONUS): $(OBJ_BONUS) $(LIBFT)
+$(BONUS): $(OBJ_BONUS) $(LIBFT) $(NAME)
 	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT) -o $(BONUS)
 
 clean:
