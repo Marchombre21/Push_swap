@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_utils_bonus.c                            :+:      :+:    :+:   */
+/*   push_swap_utils3.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/11 10:58:46 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/18 10:44:16 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 10:52:59 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap_bonus.h"
+#include "ft_push_swap.h"
+// #include "ft_push_swap_bonus.h"
 
 void	add_node(int value, t_stack **stack_a)
 {
@@ -76,13 +77,34 @@ t_stack	*handle_error(t_stack *stack_a)
 	return (stack_a);
 }
 
-int	check_sort(t_stack *stack_a)
+/**
+ * @brief Add new node to the chained list if the argument passed all tests.
+ * @param nb_input Argc
+ * @param numbers Argv
+ */
+t_stack	*parse_input(int nb_input, char **numbers)
 {
-	while (stack_a && stack_a->next)
+	int		i;
+	t_stack	*stack_a;
+	int		value;
+
+	stack_a = NULL;
+	i = 0;
+	while (i < nb_input)
 	{
-		if (stack_a->value > stack_a->next->value)
-			return (1);
-		stack_a = stack_a->next;
+		if (check_input(numbers[i]) == 1)
+			i = -1;
+		else
+		{
+			value = ft_atoi(numbers[i]);
+			if (check_duplicate(value, stack_a) == 1)
+				i = -1;
+			else
+				add_node(value, &stack_a);
+		}
+		if (i == -1)
+			return (handle_error(stack_a));
+		i++;
 	}
-	return (0);
+	return (stack_a);
 }

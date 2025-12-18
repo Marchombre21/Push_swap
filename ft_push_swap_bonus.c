@@ -6,42 +6,21 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/18 10:46:16 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 11:58:00 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_push_swap_bonus.h"
+#include "ft_push_swap.h"
 
-/**
- * @brief Add new node to the chained list if the argument passed all tests.
- * @param nb_input Argc
- * @param numbers Argv
- */
-t_stack	*parse_input(int nb_input, char **numbers)
+int	check_sort(t_stack *stack_a)
 {
-	int		i;
-	t_stack	*stack_a;
-	int		value;
-
-	stack_a = NULL;
-	i = 0;
-	while (i < nb_input)
+	while (stack_a && stack_a->next)
 	{
-		if (check_input(numbers[i]) == 1)
-			i = -1;
-		else
-		{
-			value = ft_atoi(numbers[i]);
-			if (check_duplicate(value, stack_a) == 1)
-				i = -1;
-			else
-				add_node(value, &stack_a);
-		}
-		if (i == -1)
-			return (handle_error(stack_a));
-		i++;
+		if (stack_a->value > stack_a->next->value)
+			return (1);
+		stack_a = stack_a->next;
 	}
-	return (stack_a);
+	return (0);
 }
 
 /**

@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/18 10:11:15 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 12:08:30 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,29 +36,29 @@ void	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 		flags->bench_mode = 1;
 }
 
-t_stack	*parse_input(int nb_input, char **numbers)
-{
-	int		i;
-	t_stack	*stack_a;
-	t_stack	*new_node;
-	int		value;
+// t_stack	*parse_input(int nb_input, char **numbers)
+// {
+// 	int		i;
+// 	t_stack	*stack_a;
+// 	t_stack	*new_node;
+// 	int		value;
 
-	stack_a = NULL;
-	i = 0;
-	while (i < nb_input)
-	{
-		value = ft_atoi(numbers[i]);
-		new_node = ft_lstnew(value);
-		if (!new_node)
-		{
-			ft_lstclear(&stack_a);
-			return (NULL);
-		}
-		ft_lstadd_back(&stack_a, new_node);
-		i++;
-	}
-	return (stack_a);
-}
+// 	stack_a = NULL;
+// 	i = 0;
+// 	while (i < nb_input)
+// 	{
+// 		value = ft_atoi(numbers[i]);
+// 		new_node = ft_lstnew(value);
+// 		if (!new_node)
+// 		{
+// 			ft_lstclear(&stack_a);
+// 			return (NULL);
+// 		}
+// 		ft_lstadd_back(&stack_a, new_node);
+// 		i++;
+// 	}
+// 	return (stack_a);
+// }
 
 void	dispatch(t_flags *flags, t_stacks *stacks)
 {
@@ -73,7 +73,7 @@ void	dispatch(t_flags *flags, t_stacks *stacks)
 		adaptive_sort(stacks);
 	if (flags->bench_mode)
 	{
-		ft_printf("disorder:	%f%%\n", 2, flags->disorder);
+		ft_printf("disorder:	%f%%\n", 2, (flags->disorder * 100));
 		ft_printf("strategy:	%s\n", 2, stacks->strategy);
 		ft_printf("total_ops:	%d\n", 2, stacks->total);
 		ft_printf("sa: %d sb: %d ss: %d pa: %d pb: %d\n", 2,
