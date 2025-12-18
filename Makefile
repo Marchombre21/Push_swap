@@ -60,7 +60,9 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir -p $@
 
-bonus: all $(OBJ_BONUS)
+bonus: $(OBJ_BONUS)
+
+$(BONUS): $(OBJ_BONUS) $(LIBFT)
 	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT) -o $(BONUS)
 
 clean:
