@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/17 09:53:54 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 16:11:15 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,27 +212,39 @@ static void	exec(t_stacks *stacks, int *min_b, int *max_b)
 			*max_b = (stacks->stack_a)->value;
 		}
 		else
+		{
 			rot_spot(b_ops, (stacks->stack_a)->value, stacks);
+			ft_printf("Placed %d in spot\n", 2, (stacks->stack_a)->value);
+		}
 		pb(stacks);
+		print_stack(stacks->stack_a, "A");
+		print_stack(stacks->stack_b, "B");
 	}
 }
 
-int	simple_sort(t_stacks *stacks, int to_sort)
+
+
+int	simple_sort(t_stacks *stacks)
 {
 	int		min_b;
 	int		max_b;
+	int		size_a;
 	t_stack	**stack_a;
 	t_stack	**stack_b;
 
 	stack_a = &stacks->stack_a;
 	stack_b = &stacks->stack_b;
-	if (to_sort <= 1 || !*stack_a || ft_lstsize(*stack_a) < to_sort)
+	size_a = ft_lstsize(stacks->stack_a);
+	if (size_a <= 1 || !*stack_a)
 		return (-1);
 	min_b = 0;
 	max_b = 0;
+	print_stack(stacks->stack_a, "A");
 	init(stacks, &min_b, &max_b);
+	ft_printf("min_b: %d | max_b: %d\n", 2, min_b, max_b);
 	exec(stacks, &min_b, &max_b);
 	rot_top(get_ops(stacks, 'b'), max_b, stacks);
 	refill_a(stacks);
+	print_stack(stacks->stack_a, "A");
 	return (0);
 }
