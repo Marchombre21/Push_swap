@@ -6,20 +6,20 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/18 17:25:04 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/18 17:35:15 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-int	check_algo(t_flags *flags)
+static int	check_algo(t_flags *flags)
 {
 	if (flags->complex || flags->medium || flags->simple)
 		return (1);
 	return (0);
 }
 
-int	check_flags(char *s, t_flags *flags, t_stacks *stacks)
+static int	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 {
 	
 	if (ft_strncmp("--simple", s, 8) == 0 && !check_algo(flags))
@@ -47,7 +47,7 @@ int	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 	return (0);
 }
 
-void	dispatch(t_flags *flags, t_stacks *stacks)
+static void	dispatch(t_flags *flags, t_stacks *stacks)
 {
 	flags->disorder = check_disorder(stacks->stack_a);
 	if (flags->simple)
