@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bfitte/gmach <bfitte@student.42lyon.fr/    +#+  +:+       +#+         #
+#    By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/11/06 06:57:02 by bfitte            #+#    #+#              #
-#    Updated: 2025/12/16 10:53:47 by bfitte/gmac      ###   ########lyon.fr    #
+#    Updated: 2025/12/18 17:39:20 by gmach            ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rmdir -p $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 
 re: fclean all
 

@@ -60,7 +60,7 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir -p $@
 
-bonus: $(OBJ_BONUS)
+bonus: $(BONUS)
 
 $(BONUS): $(OBJ_BONUS) $(LIBFT) $(NAME)
 	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT) -o $(BONUS)
@@ -71,7 +71,7 @@ clean:
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
-	rmdir -p $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 	$(RM) $(NAME) $(BONUS)
 
 re: fclean all
