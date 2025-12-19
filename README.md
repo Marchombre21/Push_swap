@@ -8,22 +8,32 @@ The allowed operations are :
 
 * sa (swap a): Swap the first two elements at the top of stack a.
 Do nothing if there is only one or no elements.
+
 * sb (swap b): Swap the first two elements at the top of stack b.
 Do nothing if there is only one or no elements.
+
 * ss : sa and sb at the same time.
+
 * pa (push a): Take the first element at the top of b and put it at the top of a.
 Do nothing if b is empty.
+
 * pb (push b): Take the first element at the top of a and put it at the top of b.
 Do nothing if a is empty.
+
 * ra (rotate a): Shift up all elements of stack a by one.
 The first element becomes the last one.
+
 * rb (rotate b): Shift up all elements of stack b by one.
 The first element becomes the last one.
+
 * rr : ra and rb at the same time.
+
 * rra (reverse rotate a): Shift down all elements of stack a by one.
 The last element becomes the first one.
+
 * rrb (reverse rotate b): Shift down all elements of stack b by one.
 The last element becomes the first one.
+
 * rrr : rra and rrb at the same time.
 
 ### Algo choices
@@ -93,3 +103,5 @@ Then you can execute the main program as usual and add "|" before executing the 
 ```
 
 ## Resources
+The site [GeeksForGeeks](https://www.geeksforgeeks.org/) especially his [Radix part](https://www.geeksforgeeks.org/dsa/radix-sort/).
+[Wikipedia](https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal) of course, to have a brief overview of all proposed algorithms.
