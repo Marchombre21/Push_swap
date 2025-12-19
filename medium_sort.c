@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/19 17:05:06 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 17:06:30 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,29 +94,29 @@ int	fill_bucket(t_stacks *stacks, t_bucket bucket, int to_sort)
 
 void    bucket_sort(t_stacks *stacks, t_bucket *buckets, int nb)
 {
-    int            i;
-    int            to_sort;
-    int            max_b;
-    int            size_a;
-    t_bucket    bucket;
+	int			i;
+	int			to_sort;
+	int			max_b;
+	int			size_a;
+	t_bucket	bucket;
 
-    size_a = ft_lstsize(stacks->stack_a);
-    to_sort = size_a;
-    i = 0;
-    while (i < nb && to_sort > 0)
-    {
-        bucket = buckets[i];
-        to_sort -= fill_bucket(stacks, bucket, to_sort);
-        i++;
-    }
-    while (stacks->stack_b)
-    {
-        size_a = ft_lstsize(stacks->stack_a);
-        max_b = find_max(stacks->stack_b, ft_lstsize(stacks->stack_b));
-        rot_top(get_ops(stacks, 'b'), max_b, stacks);
-        pa(stacks);
-    }
-    rot_top(get_ops(stacks, 'a'), buckets[0].min, stacks);
+	size_a = ft_lstsize(stacks->stack_a);
+	to_sort = size_a;
+	i = 0;
+	while (i < nb && to_sort > 0)
+	{
+		bucket = buckets[i];
+		to_sort -= fill_bucket(stacks, bucket, to_sort);
+		i++;
+	}
+	while (stacks->stack_b)
+	{
+		size_a = ft_lstsize(stacks->stack_a);
+		max_b = find_max(stacks->stack_b, ft_lstsize(stacks->stack_b));
+		rot_top(get_ops(stacks, 'b'), max_b, stacks);
+		pa(stacks);
+	}
+	rot_top(get_ops(stacks, 'a'), buckets[0].min, stacks);
 }
 
 t_bucket	*init_buckets(int nb_buckets, int min, int max)
