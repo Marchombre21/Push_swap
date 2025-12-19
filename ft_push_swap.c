@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/19 15:22:41 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 17:26:57 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static int	check_algo(t_flags *flags)
 
 static int	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 {
-
 	if (ft_strncmp("--simple", s, 8) == 0 && !check_algo(flags))
 	{
 		flags->simple = 1;
@@ -85,11 +84,13 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (1);
 	while (argv[i][0] == '-' && argv[i][1] == '-')
+	{
 		if (check_flags(argv[i++], &flags, &stacks) == 1)
 		{
 			ft_printf("Error\n", 2);
-			return(1);
+			return (1);
 		}
+	}
 	stacks.stack_a = parse_input(argc - i, &argv[i]);
 	if (!stacks.stack_a)
 		return (1);

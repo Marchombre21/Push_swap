@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/19 17:05:04 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 17:24:38 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,8 +267,6 @@ static void	exec(t_stacks *stacks, int to_sort)
 		pb(stacks);
 	}
 }
-
-
 
 int	simple_sort(t_stacks *stacks)
 {

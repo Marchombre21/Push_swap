@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/19 09:57:51 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 17:26:03 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	sort_array(int *tab, int size)
 }
 
 /**
- * @brief Put all values of chained list in array, sort the array and replace 
+ * @brief Put all values of chained list in array, sort the array and replace
  * values of chained list by their index in sorted array.
  * @param a chained list
  * @param size Size of list to malloc the array

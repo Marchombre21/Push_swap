@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/19 17:06:30 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 17:34:54 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ int	fill_bucket(t_stacks *stacks, t_bucket bucket, int to_sort)
 		if ((*s_a)->value >= bucket.min && (*s_a)->value <= bucket.max)
 		{
 			pb(stacks);
-			// if (s_b && (*s_b)->next && (*s_b)->value < (*s_b)->next->value)
-			// 	sb(stacks);
 			bucket.count++;
 		}
 		else
@@ -92,7 +90,7 @@ int	fill_bucket(t_stacks *stacks, t_bucket bucket, int to_sort)
 	return (bucket.count);
 }
 
-void    bucket_sort(t_stacks *stacks, t_bucket *buckets, int nb)
+void	bucket_sort(t_stacks *stacks, t_bucket *buckets, int nb)
 {
 	int			i;
 	int			to_sort;
@@ -143,10 +141,6 @@ t_bucket	*init_buckets(int nb_buckets, int min, int max)
 	return (buckets);
 }
 
-/* ****************************************************	*/
-/* Bucket sort --> get number of buckets then call sort	*/
-/* ****************************************************	*/
-
 int	medium_sort(t_stacks *stacks)
 {
 	int			nb_buckets;
@@ -165,7 +159,11 @@ int	medium_sort(t_stacks *stacks)
 		return (-1);
 	buckets = init_buckets(nb_buckets, min, max);
 	if (!buckets)
-		return (-1);
+	{
+		ft_printf("Error\n", 2);
+		exit(EXIT_FAILURE);
+	}
 	bucket_sort(stacks, buckets, nb_buckets);
+	free(buckets);
 	return (0);
 }
