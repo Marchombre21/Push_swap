@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/17 09:53:54 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 16:55:04 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int	fill_bucket(t_stacks *stacks, t_bucket bucket, int to_sort)
 		if ((*s_a)->value >= bucket.min && (*s_a)->value <= bucket.max)
 		{
 			pb(stacks);
-			if (s_b && (*s_b)->next && (*s_b)->value < (*s_b)->next->value)
-				sb(stacks);
+			// if (s_b && (*s_b)->next && (*s_b)->value < (*s_b)->next->value)
+			// 	sb(stacks);
 			bucket.count++;
 		}
 		else
@@ -105,39 +105,40 @@ void	reset_stack_a(t_stacks *stacks, int to_sort, int count, int size_a)
 			rra(stacks);
 }
 
-void	bucket_sort(t_stacks *stacks, t_bucket *buckets, int nb)
+void    bucket_sort(t_stacks *stacks, t_bucket *buckets, int nb)
 {
-	int			i;
-	int			to_sort;
-	int			size_a;
-	int			marker;
-	t_bucket	bucket;
+    int            i;
+    int            to_sort;
+    int            max_b;
+    int            size_a;
+    t_bucket    bucket;
 
-	size_a = ft_lstsize(stacks->stack_a);
-	to_sort = size_a;
-	i = 0;
-	while (i < nb && to_sort > 0)
-	{
-		bucket = buckets[i];
-		bucket.count = fill_bucket(stacks, bucket, to_sort);
-		marker = find_max(stacks->stack_b, bucket.count);
-		if (i != 0)
-			reset_stack_a(stacks, to_sort, bucket.count, size_a);
-		rev_simple_sort(stacks, bucket.count);
-		rot_bottom(get_ops(stacks, 'a'), marker, stacks);
-		to_sort -= bucket.count;
-		i++;
-	}
-	rot_top(get_ops(stacks, 'a'), buckets[0].min, stacks);
+    size_a = ft_lstsize(stacks->stack_a);
+    to_sort = size_a;
+    i = 0;
+    while (i < nb && to_sort > 0)
+    {
+        bucket = buckets[i];
+        to_sort -= fill_bucket(stacks, bucket, to_sort);
+        i++;
+    }
+    while (stacks->stack_b)
+    {
+        size_a = ft_lstsize(stacks->stack_a);
+        max_b = find_max(stacks->stack_b, ft_lstsize(stacks->stack_b));
+        rot_top(get_ops(stacks, 'b'), max_b, stacks);
+        pa(stacks);
+    }
+    rot_top(get_ops(stacks, 'a'), buckets[0].min, stacks);
 }
 
 t_bucket	*init_buckets(int nb_buckets, int min, int max)
 {
 	t_bucket	*buckets;
 	int			i;
-	int			bucket_size;
+	float		bucket_size;
 
-	bucket_size = (max - min + 1) / nb_buckets;
+	bucket_size = (max - min) / (float)nb_buckets;
 	if (bucket_size == 0)
 		bucket_size = 1;
 	buckets = malloc(sizeof(t_bucket) * nb_buckets);
@@ -147,7 +148,7 @@ t_bucket	*init_buckets(int nb_buckets, int min, int max)
 	while (i < nb_buckets)
 	{
 		buckets[i].min = min + i * bucket_size;
-		buckets[i].max = min + (i + 1) * bucket_size - 1;
+		buckets[i].max = min + (i + 1) * bucket_size;
 		buckets[i].count = 0;
 		buckets[i].number = i;
 		i++;

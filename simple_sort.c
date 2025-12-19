@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/19 11:13:47 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 11:44:48 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,27 +244,27 @@ static void	exec(t_stacks *stacks, int to_sort)
 {
 	int		min_b;
 	int		max_b;
-	//t_ops	b_ops;
+	t_ops	b_ops;
 
 	min_b = 0;
 	max_b = 0;
 	to_sort -= init(stacks, &min_b, &max_b);
-	//b_ops = get_ops(stacks, 'b');
 	while (to_sort-- > 0)
 	{
+		b_ops = get_ops(stacks, 'b');
 		if ((stacks->stack_a)->value < min_b)
 		{
-			rot_bottom(get_ops(stacks, 'b'), min_b, stacks);
+			rot_bottom(b_ops, min_b, stacks);
 			min_b = (stacks->stack_a)->value;
 		}
 		else if ((stacks->stack_a)->value > max_b)
 		{
-			rot_top(get_ops(stacks, 'b'), max_b, stacks);
+			rot_top(b_ops, max_b, stacks);
 			max_b = (stacks->stack_a)->value;
 		}
 		else
 		{
-			rot_spot(get_ops(stacks, 'b'), (stacks->stack_a)->value, stacks);
+			rot_spot(b_ops, (stacks->stack_a)->value, stacks);
 		}
 		pb(stacks);
 		//print_stack(stacks->stack_a, "A");

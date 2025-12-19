@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 12:06:59 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/18 17:52:34 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 13:08:22 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	rot_bottom(t_ops s, int value, t_stacks *stacks)
 		return (0);
 	if (count <= size / 2)
 	{
-		while (i++ < count)
+		while (i++ < (count - 1))
 			s.rrotate(stacks);
 	}
 	else

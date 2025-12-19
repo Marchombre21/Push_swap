@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/18 14:17:44 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 15:05:53 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ typedef struct s_ops
 /* Bucket structure */
 typedef struct s_bucket
 {
-	int	min;
-	int	max;
-	int	count;
-	int	number;
+	float	min;
+	float	max;
+	int		count;
+	int		number;
 }	t_bucket;
 
 /* Push_swap operations */

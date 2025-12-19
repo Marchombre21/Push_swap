@@ -24,7 +24,6 @@ SRC_FILES := ft_push_swap.c\
 	reverse_op.c\
 	rotate_op.c\
 	simple_sort.c\
-	rev_simple_sort.c\
 	swap_op.c\
 	adaptive_sort.c\
 	push_swap_utils.c\
