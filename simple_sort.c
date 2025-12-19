@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/19 11:44:48 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 17:05:04 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,12 +263,8 @@ static void	exec(t_stacks *stacks, int to_sort)
 			max_b = (stacks->stack_a)->value;
 		}
 		else
-		{
 			rot_spot(b_ops, (stacks->stack_a)->value, stacks);
-		}
 		pb(stacks);
-		//print_stack(stacks->stack_a, "A");
-		//print_stack(stacks->stack_b, "B");
 	}
 }
 

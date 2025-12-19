@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/19 16:55:04 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 17:05:06 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,6 @@ int	fill_bucket(t_stacks *stacks, t_bucket bucket, int to_sort)
 			ra(stacks);
 	}
 	return (bucket.count);
-}
-
-void	reset_stack_a(t_stacks *stacks, int to_sort, int count, int size_a)
-{
-	int	i;
-
-	i = 0;
-	if (size_a - to_sort < to_sort - count)
-		while (i++ < size_a - to_sort)
-			ra(stacks);
-	else
-		while (i++ < to_sort - count)
-			rra(stacks);
 }
 
 void    bucket_sort(t_stacks *stacks, t_bucket *buckets, int nb)
