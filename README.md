@@ -123,7 +123,9 @@ Then you can execute the main program as usual and add "|" before executing the 
 
 ## Resources
 The site [GeeksForGeeks](https://www.geeksforgeeks.org/) especially his [Radix part](https://www.geeksforgeeks.org/dsa/radix-sort/), [Insertion sort](https://www.geeksforgeeks.org/dsa/insertion-sort-for-singly-linked-list/) and [Bucket sorting](https://www.geeksforgeeks.org/dsa/bucket-sort-2/).
+
 The example of a bubble sort for 2 stacks was also quite helpfull: [Bubble sort using two Stacks](https://www.geeksforgeeks.org/dsa/bubble-sort-using-two-stacks/)
+
 [Wikipedia](https://en.wikipedia.org/wiki/Sorting_algorithm) of course, to have a brief overview of all proposed algorithms.
 
 Finally an article on the complexity of algorithms which although not necessary to developp this project, is mandatory to comprehend how thoses differents algorithms works [Comprendre la complexité algorihmique](https://code-garage.com/blog/comprendre-la-complexite-algorithmique)
