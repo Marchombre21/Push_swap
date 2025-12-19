@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/18 16:11:15 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 11:13:47 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,56 @@ static void	refill_a(t_stacks *stacks)
 		pa(stacks);
 }
 
+// int	rot_spot_b(t_ops s, int value, t_stacks *stacks)
+// {
+// 	int	i;
+// 	int	spot_pos;
+// 	int	size;
+
+// 	i = 0;
+// 	size = ft_lstsize(s.ptr);
+// 	spot_pos = count_nodes_to_spot(s, value, size);
+// 	if (spot_pos <= size / 2)
+// 		while (i++ < spot_pos)
+// 			s.rotate(stacks);
+// 	else
+// 	{
+// 		spot_pos = size - spot_pos;
+// 		while (i++ < spot_pos)
+// 			s.rrotate(stacks);
+// 	}
+// 	return (spot_pos);
+// }
+
+// int	count_nodes_to_spot(t_ops s, int value, int to_sort)
+// {
+// 	int		spot_pos;
+// 	int		min;
+// 	int		max;
+// 	t_stack	*current;
+
+// 	min = find_min(s.ptr, to_sort);
+// 	max = find_max(s.ptr, to_sort);
+// 	spot_pos = 1;
+// 	current = s.ptr;
+// 	while (current && current->next)
+// 	{
+// 		if (s.letter == 'b')
+// 		{
+// 			if (value < current->value && value > current->next->value
+// 				&& !(current->value == min && current->next->value == max))
+// 				return (spot_pos);
+// 		}
+// 		else if (s.letter == 'a')
+// 			if (value > current->value && value < current->next->value
+// 				&& !(current->value == max && current->next->value == min))
+// 				return (spot_pos);
+// 		spot_pos++;
+// 		current = current->next;
+// 	}
+// 	return (spot_pos);
+// }
+
 static int	init(t_stacks *stacks, int *min, int *max)
 {
 	pb(stacks);
@@ -190,35 +240,35 @@ static int	init(t_stacks *stacks, int *min, int *max)
 	return (2);
 }
 
-static void	exec(t_stacks *stacks, int *min_b, int *max_b)
+static void	exec(t_stacks *stacks, int to_sort)
 {
-	int		i;
-	int		to_sort;
-	t_ops	b_ops;
+	int		min_b;
+	int		max_b;
+	//t_ops	b_ops;
 
-	i = 0;
-	to_sort = ft_lstsize(stacks->stack_a);
-	b_ops = get_ops(stacks, 'b');
-	while (i++ < to_sort)
+	min_b = 0;
+	max_b = 0;
+	to_sort -= init(stacks, &min_b, &max_b);
+	//b_ops = get_ops(stacks, 'b');
+	while (to_sort-- > 0)
 	{
-		if ((stacks->stack_a)->value < *min_b)
+		if ((stacks->stack_a)->value < min_b)
 		{
-			rot_top(b_ops, *max_b, stacks);
-			*min_b = (stacks->stack_a)->value;
+			rot_bottom(get_ops(stacks, 'b'), min_b, stacks);
+			min_b = (stacks->stack_a)->value;
 		}
-		else if ((stacks->stack_a)->value > *max_b)
+		else if ((stacks->stack_a)->value > max_b)
 		{
-			rot_top(b_ops, *max_b, stacks);
-			*max_b = (stacks->stack_a)->value;
+			rot_top(get_ops(stacks, 'b'), max_b, stacks);
+			max_b = (stacks->stack_a)->value;
 		}
 		else
 		{
-			rot_spot(b_ops, (stacks->stack_a)->value, stacks);
-			ft_printf("Placed %d in spot\n", 2, (stacks->stack_a)->value);
+			rot_spot(get_ops(stacks, 'b'), (stacks->stack_a)->value, stacks);
 		}
 		pb(stacks);
-		print_stack(stacks->stack_a, "A");
-		print_stack(stacks->stack_b, "B");
+		//print_stack(stacks->stack_a, "A");
+		//print_stack(stacks->stack_b, "B");
 	}
 }
 
@@ -226,25 +276,17 @@ static void	exec(t_stacks *stacks, int *min_b, int *max_b)
 
 int	simple_sort(t_stacks *stacks)
 {
-	int		min_b;
-	int		max_b;
+	int		max;
 	int		size_a;
-	t_stack	**stack_a;
-	t_stack	**stack_b;
 
-	stack_a = &stacks->stack_a;
-	stack_b = &stacks->stack_b;
 	size_a = ft_lstsize(stacks->stack_a);
-	if (size_a <= 1 || !*stack_a)
+	if (size_a <= 1 || !stacks->stack_a)
 		return (-1);
-	min_b = 0;
-	max_b = 0;
-	print_stack(stacks->stack_a, "A");
-	init(stacks, &min_b, &max_b);
-	ft_printf("min_b: %d | max_b: %d\n", 2, min_b, max_b);
-	exec(stacks, &min_b, &max_b);
-	rot_top(get_ops(stacks, 'b'), max_b, stacks);
+	max = find_max(stacks->stack_a, size_a);
+	exec(stacks, size_a);
+	rot_top(get_ops(stacks, 'b'), max, stacks);
 	refill_a(stacks);
 	print_stack(stacks->stack_a, "A");
+	print_stack(stacks->stack_b, "B");
 	return (0);
 }
