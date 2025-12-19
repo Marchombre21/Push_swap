@@ -6,80 +6,29 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/19 17:34:54 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 19:22:04 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-// int	b_push_limited(t_stacks *stacks, int limit)
-// {
-// 	int	j;
-// 	int	sorted;
-
-// 	sorted = 0;
-// 	j = limit - 1;
-// 	pb(stacks);
-// 	while (j > 0)
-// 	{
-// 		if ((*stack_a)->value < (*stack_b)->value)
-// 		{
-// 			pb(stacks);
-// 			sb(stack_b);
-// 			sorted++;
-// 		}
-// 		else
-// 			pb(stacks);
-// 		j--;
-// 	}
-// 	return (sorted);
-// }
-
-// int a_push_limited(t_stacks *stacks, int limit)
-// {
-// 	int	j;
-// 	int	sorted;
-
-// 	sorted = 0;
-// 	j = limit - 1;
-// 	pa(stacks);
-// 	while (j > 0)
-// 	{
-// 		if ((*stack_a)->value < (*stack_b)->value)
-// 		{
-// 			pa(stacks);
-// 			sa(stack_a);
-// 			sorted++;
-// 		}
-// 		else
-// 			pa(stacks);
-// 		j--;
-// 	}
-// 	return (sorted);
-// }
-
-// void	rev_bubble_sort_bucket(t_stacks *stacks, int limit)
-// {
-// 	if (limit == 0)
-// 		return ;
-// 	if (limit == 1)
-// 		return (pa(stacks));
-// 	while (a_push_limited(stacks, limit) != 0)
-// 		b_push_limited(stacks, limit);
-// }
+void	exit_error(t_stacks *stacks)
+{
+	ft_lstclear(&stacks->stack_a);
+	ft_lstclear(&stacks->stack_b);
+	ft_printf("Error\n", 2);
+	exit(EXIT_FAILURE);
+}
 
 int	fill_bucket(t_stacks *stacks, t_bucket bucket, int to_sort)
 {
 	int		i;
-	t_stack	**s_a;
-	t_stack	**s_b;
 
-	s_a = &stacks->stack_a;
-	s_b = &stacks->stack_b;
 	i = 0;
 	while (i++ < to_sort)
 	{
-		if ((*s_a)->value >= bucket.min && (*s_a)->value <= bucket.max)
+		if ((stacks->stack_a)->value >= bucket.min
+			&& (stacks->stack_a)->value <= bucket.max)
 		{
 			pb(stacks);
 			bucket.count++;
@@ -94,25 +43,20 @@ void	bucket_sort(t_stacks *stacks, t_bucket *buckets, int nb)
 {
 	int			i;
 	int			to_sort;
+	int			size_b;
 	int			max_b;
-	int			size_a;
-	t_bucket	bucket;
 
-	size_a = ft_lstsize(stacks->stack_a);
-	to_sort = size_a;
 	i = 0;
-	while (i < nb && to_sort > 0)
-	{
-		bucket = buckets[i];
-		to_sort -= fill_bucket(stacks, bucket, to_sort);
-		i++;
-	}
+	to_sort = ft_lstsize(stacks->stack_a);
+	while (i < nb)
+		to_sort -= fill_bucket(stacks, buckets[i++], to_sort);
+	size_b = ft_lstsize(stacks->stack_b);
 	while (stacks->stack_b)
 	{
-		size_a = ft_lstsize(stacks->stack_a);
-		max_b = find_max(stacks->stack_b, ft_lstsize(stacks->stack_b));
+		max_b = find_max(stacks->stack_b, size_b);
 		rot_top(get_ops(stacks, 'b'), max_b, stacks);
 		pa(stacks);
+		size_b--;
 	}
 	rot_top(get_ops(stacks, 'a'), buckets[0].min, stacks);
 }
@@ -125,7 +69,7 @@ t_bucket	*init_buckets(int nb_buckets, int min, int max)
 
 	bucket_size = (max - min) / (float)nb_buckets;
 	if (bucket_size == 0)
-		bucket_size = 1;
+		return (NULL);
 	buckets = malloc(sizeof(t_bucket) * nb_buckets);
 	if (!buckets)
 		return (NULL);
@@ -141,6 +85,9 @@ t_bucket	*init_buckets(int nb_buckets, int min, int max)
 	return (buckets);
 }
 
+/**
+ * @brief Sorts a stack using the bucket sort algorithm.
+ */
 int	medium_sort(t_stacks *stacks)
 {
 	int			nb_buckets;
@@ -149,20 +96,15 @@ int	medium_sort(t_stacks *stacks)
 	int			size_a;
 	t_bucket	*buckets;
 
-	if (!stacks->stack_a || ft_lstsize(stacks->stack_a) <= 1)
-		return (-1);
 	size_a = ft_lstsize(stacks->stack_a);
 	min = find_min(stacks->stack_a, size_a);
 	max = find_max(stacks->stack_a, size_a);
 	nb_buckets = next_sqrt(size_a);
 	if (nb_buckets <= 0)
-		return (-1);
+		exit_error(stacks);
 	buckets = init_buckets(nb_buckets, min, max);
 	if (!buckets)
-	{
-		ft_printf("Error\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		exit_error(stacks);
 	bucket_sort(stacks, buckets, nb_buckets);
 	free(buckets);
 	return (0);

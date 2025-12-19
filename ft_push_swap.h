@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/19 15:05:53 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/19 19:19:15 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,14 @@ typedef struct s_count
 	int		rrr;
 }	t_stacks;
 
-/* Stack_operations structure */
+/**
+ * @brief Operations structure for stack manipulations.
+ * @param letter Identifier for the stack ('a' or 'b').
+ * @param ptr Pointer to the stack.
+ * @param rotate Function pointer to the rotate operation.
+ * @param rrotate Function pointer to the reverse rotate operation.
+ * @param swap Function pointer to the swap operation.
+ */
 typedef struct s_ops
 {
 	char	letter;
@@ -59,7 +66,13 @@ typedef struct s_ops
 	void	(*swap)(t_stacks *);
 }	t_ops;
 
-/* Bucket structure */
+/**
+ * @brief Bucket structure for bucket sort algorithm.
+ * @param min Minimum value in the bucket.
+ * @param max Maximum value in the bucket.
+ * @param count Number of elements in the bucket.
+ * @param number Bucket identifier.
+ */
 typedef struct s_bucket
 {
 	float	min;
@@ -100,7 +113,6 @@ t_stack	*parse_input(int nb_input, char **numbers);
 
 /* Sort functions */
 int		simple_sort(t_stacks *stacks);
-void	rev_simple_sort(t_stacks *stacks, int to_sort);
 int		medium_sort(t_stacks *stacks);
 void	complex_sort(t_stacks *stacks);
 void	adaptive_sort(t_stacks *stacks);

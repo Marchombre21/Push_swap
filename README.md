@@ -1,4 +1,7 @@
+*This project has been created as part of the 42 curriculum by bfitte and gmach.*
+
 # Push_swap
+*Two stacks and a dream.*
 
 ## Description
 We have a list of integers in disorder, two stacks and a set of allowed operations to manipulate both stacks.
@@ -36,24 +39,32 @@ The last element becomes the first one.
 
 * rrr : rra and rrb at the same time.
 
+The parsing is also managed and multiple flags can be added to chose a specific algorithm or have detailed informations on the number and which operations had been used as well as the complexity class of the algorithm.
+
 ### Algo choices
+For this project we had to propose 3 different algorithms with different complexity class : O(𝑛²), O(𝑛√𝑛) and O(𝑛log𝑛).
+Depending on the disorder of the list that we have to calculate, the programm shall choose the best algorithm for it.
 
-#### Simple sort
-Initially a bubble sort was chosen to make this project but after implementing it testing it out, we figured pretty fast that bubble sorting our stacks was highly inefficient and a better sorting algorithm ought to be chosen. Especially since our sorting or at least the logic of it is also used in our medium algorithm.
+#### Simple sort : Insertion
+Initially a bubble sort was chosen to make this project but after implementing it testing it out, we figured out pretty fast that bubble sorting our stacks was highly inefficient and a better sorting algorithm ought to be chosen.
 
-After reading some docs on the differents O(n²) algorithms proposed, the insertion sort algorithm appeared to be the better choice.
+After reading some docs on the differents O(n²) algorithms proposed by the subject, the insertion sort algorithm appeared to be the better choice.
 Here's an illustration of a basic operation in an insertion sort :
-![alt text](image-1.png)
+![alt text](insertion_sort.png)
 
 The insertion sort has 3 different triage :
 - if top of stack_a is a new_min of stack_b, we place the old min_b at the bottom of stack_b and pb the new_min.
 - if top of stack_a is a new_max of stack_b, we place the old max_b at the top of stack_b and pb the new_min.
 - if top of stack_a is neither max or min of stack_b, we need to find the good spot for it.
 
-#### Medium sort
+#### Medium sort : Buckets
 
+For the medium sort, a bucket sort has been used. Really similar to the chunk sort method, bucket sort consist of separating the list to sort in multiple "bucket" (here √𝑛 buckets). This effectively do a pre-triage of our list and we can then sort back easily our final list through replacing the the buckets in order. The difference between chunk and buckets sort is that the buckets are not even weighted compared to the chunks. Indeed while the chunks tend to have the same numbers of element in each chunk, buckets are even sized instead. Meaning you c
 
-#### Complex sort
+![alt text](bucket_sort.png)
+![alt text](rot_max_pa.png)
+
+#### Complex sort : Radix
 Initially I tried to do this algorithm with a merge sort. But the method I found
 needed a first fake node to work which distorted the results. So I switched to
 Radix sort. It consists of sorting numbers firstly by the units, then by the tens,
