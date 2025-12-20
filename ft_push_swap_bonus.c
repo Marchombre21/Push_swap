@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/19 15:22:38 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/20 09:38:34 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,13 @@ void	reading_list(char *list, t_stacks *stacks)
 	while (lst_temp && index_n != -1)
 	{
 		ope = ft_substr((const char *)lst_temp, 0, (size_t)index_n);
+		if (!ope)
+		{
+			free(lst_temp);
+			exit_error(stacks);
+		}
 		perform_operations(ope, stacks);
+		free(ope);
 		lst_temp = lst_temp + (index_n + 1);
 		index_n = ft_strchr((const char *)lst_temp, '\n');
 	}
@@ -94,7 +100,7 @@ char	*reading_ope(void)
 {
 	int		read_bytes;
 	char	*list_ope;
-	char	buffer[50];
+	char	buffer[51];
 
 	list_ope = NULL;
 	read_bytes = 1;

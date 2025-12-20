@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/19 19:22:04 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/20 09:35:02 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-
-void	exit_error(t_stacks *stacks)
-{
-	ft_lstclear(&stacks->stack_a);
-	ft_lstclear(&stacks->stack_b);
-	ft_printf("Error\n", 2);
-	exit(EXIT_FAILURE);
-}
 
 int	fill_bucket(t_stacks *stacks, t_bucket bucket, int to_sort)
 {

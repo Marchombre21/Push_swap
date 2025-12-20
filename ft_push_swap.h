@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/19 19:19:15 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/20 09:32:49 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int		check_input(char *nptr);
 int		check_duplicate(int value, t_stack *stack_a);
 t_stack	*handle_error(t_stack *stack_a);
 t_stack	*parse_input(int nb_input, char **numbers);
+void	exit_error(t_stacks *stacks);
 
 /* Sort functions */
 int		simple_sort(t_stacks *stacks);
