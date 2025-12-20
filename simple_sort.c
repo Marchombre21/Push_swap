@@ -6,11 +6,25 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/19 18:23:25 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/20 12:22:19 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
+
+static int	is_presorted(int value, char *pre_sorted)
+{
+	int	i;
+
+	i = 0;
+	while (pre_sorted[i])
+	{
+		if (value == pre_sorted[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 static void	refill_a(t_stacks *stacks)
 {
