@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/20 09:32:49 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/20 14:56:27 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,13 @@ typedef struct s_bucket
 	int		count;
 	int		number;
 }	t_bucket;
+
+typedef struct s_order
+{
+	int	value;
+	int	size_list;
+	t_order	next;
+}	t_order;
 
 /* Push_swap operations */
 void	sa(t_stacks *stacks);

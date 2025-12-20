@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   complex_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/19 17:26:03 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/20 15:05:17 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	sort(t_stacks *stacks, int shift_byte, int size)
+static void	sort(t_stacks *stacks, int shift_byte, int size)
 {
 	while (size > 0)
 	{
@@ -33,7 +33,7 @@ void	sort(t_stacks *stacks, int shift_byte, int size)
  * in his bit version.
  * @param a The chained list.
  */
-int	find_max_complex(t_stack *a)
+static int	find_max_complex(t_stack *a)
 {
 	int	max;
 	int	shift_byte;
@@ -51,34 +51,7 @@ int	find_max_complex(t_stack *a)
 	return (shift_byte);
 }
 
-/**
- * @brief Sort the array so that we can retrieve the indexes later.
- * @param tab The array
- * @param size Size of the array
- */
-void	sort_array(int *tab, int size)
-{
-	int	i;
-	int	j;
-	int	tmp;
 
-	i = 0;
-	while (i < size)
-	{
-		j = 0;
-		while (j < size - 1)
-		{
-			if (tab[j] > tab[j + 1])
-			{
-				tmp = tab[j];
-				tab[j] = tab[j + 1];
-				tab[j + 1] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
-}
 
 /**
  * @brief Put all values of chained list in array, sort the array and replace
@@ -86,7 +59,7 @@ void	sort_array(int *tab, int size)
  * @param a chained list
  * @param size Size of list to malloc the array
  */
-void	transform_to_index(t_stack *a, int size)
+static void	transform_to_index(t_stack *a, int size)
 {
 	int		*array;
 	int		i;
@@ -106,7 +79,7 @@ void	transform_to_index(t_stack *a, int size)
 	while (b)
 	{
 		i = -1;
-		while (array[++i])
+		while (++i < size)
 			if (array[i] == b->value)
 				b->value = i;
 		b = b->next;

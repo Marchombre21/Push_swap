@@ -20,7 +20,7 @@ void	add_node(int value, t_stack **stack_a)
 	if (!new_node)
 	{
 		ft_lstclear(stack_a);
-		return ;
+		exit(EXIT_FAILURE);
 	}
 	ft_lstadd_back(stack_a, new_node);
 }

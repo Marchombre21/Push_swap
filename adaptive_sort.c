@@ -34,12 +34,13 @@ void	adaptive_sort(t_stacks *stacks)
 	float	disorder;
 
 	disorder = check_disorder(stacks->stack_a);
-	if (disorder < 0.2)
+	if (disorder < 0.2 || ft_lstsize(stacks->stack_a) <= 20)
 	{
 		stacks->strategy = "Adaptive /  O(𝑛²)";
 		simple_sort(stacks);
 	}
-	else if (0.2 <= disorder && disorder < 0.5)
+	else if ((0.2 <= disorder && disorder < 0.5)
+		|| ft_lstsize(stacks->stack_a) <= 225)
 	{
 		stacks->strategy = "Adaptive / O(𝑛√𝑛)";
 		medium_sort(stacks);
