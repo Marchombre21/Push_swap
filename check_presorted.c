@@ -6,7 +6,7 @@
 /*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 10:58:32 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/20 17:11:00 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/20 17:39:20 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ static t_stack	*find_best_list(t_stack **lists, int list_count)
 	}
 	return (lists[best_index]);
 }
-
+#include <stdio.h>
 t_stack	*pre_sorted_list(t_stacks *stacks, int min)
 {
 	t_stack	*cur;
@@ -131,9 +131,12 @@ t_stack	*pre_sorted_list(t_stacks *stacks, int min)
 	if (!lists)
 		exit_error(stacks);
 	cur = stacks->stack_a;
-	while (cur->value != min && cur)
+	if (ft_lstlast(cur)->value != min)
+	{
+		while (cur->value != min && cur)
+			cur = cur->next;
 		cur = cur->next;
-	cur = cur->next;
+	}
 	list_count = 0;
 	while (cur->value != min)
 	{
@@ -144,20 +147,22 @@ t_stack	*pre_sorted_list(t_stacks *stacks, int min)
 			list_count++;
 		}
 		else
-			if (!(add_to_lists(cur->value, i_lists, lists)))
-			{
-				ft_lstclear(&i_lists);
-				free_all_lists(lists, list_count);
-				exit_error(stacks);
-			}
-			ft_lstclear(&i_lists);
+		{
+			add_to_lists(cur->value, i_lists, lists);
+			// {
+			// 	ft_lstclear(&i_lists);
+			// 	free_all_lists(lists, list_count);
+			// 	exit_error(stacks);
+			// }
+			//ft_lstclear(&i_lists);
+		}
 		if (cur->next)
 			cur = cur->next;
 		else
 			cur = stacks->stack_a;
 	}
 	res = find_best_list(lists, list_count);
-	free_all_lists(lists, list_count);
+	//free_all_lists(lists, list_count);
 	return (res);
 }
 
