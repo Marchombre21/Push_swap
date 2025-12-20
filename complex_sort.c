@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/19 17:26:03 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/20 16:32:06 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	transform_to_index(t_stack *a, int size)
 	while (b)
 	{
 		i = -1;
-		while (array[++i])
+		while (i++ < size)
 			if (array[i] == b->value)
 				b->value = i;
 		b = b->next;
