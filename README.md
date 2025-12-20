@@ -59,7 +59,7 @@ Initially a **bubble sort** was chosen to make this project but after implementi
 After reading some docs on the differents O(n²) algorithms proposed by the subject, the **insertion sort** algorithm appeared to be the better choice.
 Here's an illustration of a basic operation in an insertion sort :
 
-![alt text](insertion_sort.png)
+![alt text](https://github.com/user-attachments/assets/6f451e3b-656b-4f13-9438-932b6d890342)
 
 The insertion sort has 3 different triage :
 - if top of `stack_a` is a `new_min` of `stack_b`, we place the old `min_b` at the **bottom of stack_b** and `pb` the `new_min`.
@@ -72,11 +72,11 @@ For the medium sort, a **bucket sort** has been used. Very similar to the chunk 
 
 First we create `√n buckets` of `size = (max - min)/√n`. Then we fill each bucket successively one by one without sorting them but **in order**. In our case, we will just **fill** `stack_b` with the numbers in each bucket successively: we **go through** `stack_a` and if we find a **value belonging to the bucket** we're filling we **send it to b**. Once the stack_a has been run through entirely, we fill the **next bucket into b**.
 
-![alt text](bucket_sort.png)
+![alt text](https://github.com/user-attachments/assets/2f9a727c-de30-4bd3-bd7e-f5e20c638895)
 
 Then we send the **max of stack_b** in stack_a till **stack_b is completely empty**. Since stack_b is already partly sorted by bucket, the triage will be way faster than the simple method if the list to sort is large enough.
 
-![alt text](rot_max_pa.png)
+![alt text](https://github.com/user-attachments/assets/e64b60c9-6737-431d-8118-5952e852c084)
 
 ### Complex sort : Radix
 Initially I tried to do this algorithm with a merge sort. But the method I found
