@@ -93,9 +93,9 @@ For that I use this syntaxe
 ```c
 (stacks->stack_a)->value >> shift_byte & 1
 ```
-If value == 5 the computer sees 00000101. '>> n' say to the computer 'Shift
-of n bytes to the right'. If n == 1 then 00000101 -> 0000010. And '&1' says 'Look
-at just the last one byte'.
+If value == 5 the computer sees 00000101. `>> n` say to the computer `Shift
+of n bytes to the right`. If n == 1 then 00000101 -> 0000010. And `&1` says `Look
+at just the last one byte`.
 So, for 2 (00000010) and 1 (00000001), first, 2 will be pushed in stack_b
 and 1 will stay in stack_a (0 / 1). Then we empty stack_b in stack_a so we have 2 -> 1. Then we compare the tens (1 for two and 0 for one) so 2 will stay in stack_a en 1 will be pushed in stack_b before came back in stack_a. So we finish with 1 -> 2.
 
