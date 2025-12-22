@@ -64,7 +64,7 @@ $(BUILD_DIR):
 
 bonus: $(BONUS)
 
-$(BONUS): $(OBJ_BONUS) $(LIBFT) $(NAME)
+$(BONUS): $(OBJ_BONUS) $(LIBFT)
 	$(CC) $(FLAGS) $(OBJ_BONUS) $(LIBFT) -o $(BONUS)
 
 clean:
@@ -78,6 +78,8 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re FORCE bonus
+bonus_re: fclean bonus
+
+.PHONY: all clean fclean re FORCE bonus bonus_re
 
 -include $(DEPS) $(DEPS_BONUS)
