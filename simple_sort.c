@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 10:17:01 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 10:24:05 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,12 @@ int	simple_sort(t_stacks *stacks)
 	min = find_min(stacks->stack_a, size_a);
 	max = find_max(stacks->stack_a, size_a);
 	to_sort_lst = pre_sorted_list(stacks, find_min(stacks->stack_a, size_a));
-	if (ft_lstsize(to_sort_lst) == 0)
+	to_sort = ft_lstsize(to_sort_lst);
+	if (to_sort == 0)
 	{
 		rot_top(get_ops(stacks, 'a'), min, stacks);
 		return (0);
 	}
-	to_sort = size_a - ft_lstsize(to_sort_lst);
 	exec(stacks, to_sort_lst, to_sort);
 	refill_a(stacks, min, max);
 	return (0);

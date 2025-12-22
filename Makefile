@@ -37,7 +37,7 @@ DEPS := $(patsubst %.o, %.d, $(OBJ))
 
 SRC_FILES_BONUS := ft_push_swap_bonus.c\
 	push_swap_utils3.c\
-	push_swap_utils4.c\
+	push_swap_utils5.c\
 	push_op_bonus.c\
 	reverse_op_bonus.c\
 	rotate_op_bonus.c\

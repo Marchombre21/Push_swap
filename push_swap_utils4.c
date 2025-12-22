@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:35:06 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/22 10:10:44 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 10:34:30 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,17 @@ t_stack	*create_new_list(int value, int min, t_lists *sorted)
 	return (new);
 }
 
+int	is_in_list(t_stack *best_list, int value)
+{
+	while (best_list)
+	{
+		if (best_list->value == value)
+			return (0);
+		best_list = best_list->next;
+	}
+	return (1);
+}
+
 t_stack	*list_to_sort(t_lists *sorted, t_stack *best_list)
 {
 	t_stack	*stack_a;
@@ -82,7 +93,7 @@ t_stack	*list_to_sort(t_lists *sorted, t_stack *best_list)
 	stack_a = sorted->stacks->stack_a;
 	while (stack_a)
 	{
-		if (stack_a->value != best_list->value)
+		if (is_in_list(best_list, stack_a->value) == 1)
 		{
 			new_node = ft_lstnew(stack_a->value);
 			if (!new_node)
