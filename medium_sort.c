@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/20 09:35:02 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 22:39:42 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_bucket	*init_buckets(int nb_buckets, int min, int max)
 /**
  * @brief Sorts a stack using the bucket sort algorithm.
  */
-int	medium_sort(t_stacks *stacks)
+void	medium_sort(t_stacks *stacks)
 {
 	int			nb_buckets;
 	int			min;
@@ -99,5 +99,4 @@ int	medium_sort(t_stacks *stacks)
 		exit_error(stacks);
 	bucket_sort(stacks, buckets, nb_buckets);
 	free(buckets);
-	return (0);
 }

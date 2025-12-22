@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 22:01:35 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 22:33:03 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	simple_sort(t_stacks *stacks)
 	{
 		rot_top(get_ops(stacks, 'a'), min, stacks);
 		ft_lstclear(&pre_sorted);
+		return ;
 	}
 	to_sort = size_a - ft_lstsize(pre_sorted);
 	exec(stacks, pre_sorted, to_sort);
