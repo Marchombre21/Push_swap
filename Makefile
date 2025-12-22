@@ -11,7 +11,7 @@ RM := rm -f
 
 CC := cc
 
-FLAGS := -Wall -Werror -Wextra -I $(LIBFT_DIR) -g -g3
+FLAGS := -Wall -Werror -Wextra -I $(LIBFT_DIR)
 
 DEPFLAGS := -MMD -MP
 

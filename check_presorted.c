@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 10:58:32 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 09:40:33 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 11:55:01 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,27 @@ static t_stack	*find_best_list(t_stack **lists, int list_count)
 		}
 		i++;
 	}
+	i = -1;
+	while (lists[++i])
+		if (i != best_index)
+			ft_lstclear(&lists[i]);
 	return (lists[best_index]);
 }
 
 static t_stack	*handlst(int min, t_stack *cur, t_lists *sorted)
 {
-	int	count;
+	int		*count;
+	t_stack	*best_list;
 
-	count = sorted->list_count;
-	sorted->list_count = 0;
+	count = &sorted->list_count;
+	*count = 0;
 	while (cur->value != min)
 	{
 		sorted->i_lists = find_valid_lists(cur->value, sorted);
 		if (!sorted->i_lists)
 		{
-			sorted->lists[count] = create_new_list(cur->value, min, sorted);
-			sorted->list_count++;
+			sorted->lists[*count] = create_new_list(cur->value, min, sorted);
+			(*count)++;
 		}
 		else
 			add_to_lists(cur->value, sorted);
@@ -105,7 +110,9 @@ static t_stack	*handlst(int min, t_stack *cur, t_lists *sorted)
 		else
 			cur = sorted->stacks->stack_a;
 	}
-	return (find_best_list(sorted->lists, sorted->list_count));
+	best_list = find_best_list(sorted->lists, *count);
+	free(sorted->lists);
+	return (best_list);
 }
 
 t_stack	*pre_sorted_list(t_stacks *stacks, int min)

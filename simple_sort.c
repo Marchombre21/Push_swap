@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 09:30:21 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 11:57:10 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static void	exec(t_stacks *stacks, t_stack *pre_sorted, int to_sort)
 		pb(stacks);
 		to_sort--;
 	}
+	ft_lstclear(&pre_sorted);
 }
 
 /**
@@ -110,6 +111,7 @@ int	simple_sort(t_stacks *stacks)
 	if (ft_lstsize(pre_sorted) == size_a)
 	{
 		rot_top(get_ops(stacks, 'a'), min, stacks);
+		ft_lstclear(&pre_sorted);
 		return (0);
 	}
 	to_sort = size_a - ft_lstsize(pre_sorted);
