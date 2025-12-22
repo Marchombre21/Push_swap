@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 16:42:59 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 17:15:46 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,29 +26,6 @@ static void	sort(t_stacks *stacks, int shift_byte, int size)
 	size = ft_lstsize(stacks->stack_b);
 	while (size-- > 0)
 		pa(stacks);
-}
-
-/**
- * @brief Find the highest number of the list then find the place of the last 1
- * in his bit version.
- * @param a The chained list.
- */
-static int	find_max_complex(t_stack *a)
-{
-	int	max;
-	int	shift_byte;
-
-	shift_byte = 0;
-	max = a->value;
-	while (a)
-	{
-		if (a->value > max)
-			max = a->value;
-		a = a->next;
-	}
-	while (max >> shift_byte != 0)
-		shift_byte++;
-	return (shift_byte);
 }
 
 /**
@@ -98,7 +75,7 @@ static void	transform_to_index(t_stack *a, int size, int *array)
 			if (array[i] == a->value)
 			{
 				a->value = i;
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -116,7 +93,7 @@ static void	create_array(t_stacks *stacks, int size)
 {
 	int		*array;
 	int		i;
-	t_stack *b;
+	t_stack	*b;
 
 	b = stacks->stack_a;
 	array = ft_calloc(size + 1, sizeof(int));
@@ -132,14 +109,13 @@ static void	create_array(t_stacks *stacks, int size)
 	transform_to_index(stacks->stack_a, size, array);
 }
 
-
 void	complex_sort(t_stacks *stacks)
 {
 	int	size;
 	int	max;
 	int	i;
 	int	is_sorted;
-	
+
 	is_sorted = 0;
 	size = ft_lstsize(stacks->stack_a);
 	i = 0;

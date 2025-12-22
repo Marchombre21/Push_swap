@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 16:27:43 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 17:17:43 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ t_stack	*pre_sorted_list(t_stacks *stacks, int min);
 int		is_presorted(int value, t_stack *pre_sorted);
 void	free_all_lists(t_lists *sorted);
 t_stack	*create_new_list(int value, int min, t_lists *sorted);
+int		find_max_complex(t_stack *a);
 
 /* Sort functions */
 void	simple_sort(t_stacks *stacks);
