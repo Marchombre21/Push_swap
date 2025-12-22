@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 21:46:54 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 23:02:20 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ t_stack	*create_new_list(int value, int min, t_lists *sorted);
 /* Sort functions */
 void	micro_sort(t_stacks *stacks);
 void	simple_sort(t_stacks *stacks);
-int		medium_sort(t_stacks *stacks);
+void	medium_sort(t_stacks *stacks);
 void	complex_sort(t_stacks *stacks);
 void	adaptive_sort(t_stacks *stacks);
 float	check_disorder(t_stack *stack_a);
