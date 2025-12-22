@@ -31,6 +31,7 @@ SRC_FILES := ft_push_swap.c\
 	push_swap_utils3.c\
 	push_swap_utils4.c\
 	check_presorted.c\
+	micro_sort.c\
 
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(SRC_FILES))
 DEPS := $(patsubst %.o, %.d, $(OBJ))

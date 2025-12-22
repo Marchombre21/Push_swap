@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/20 09:38:34 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 21:47:40 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,10 @@ void	perform_operations(char *ope, t_stacks *stacks)
  */
 void	reading_list(char *list, t_stacks *stacks)
 {
-	int		i;
 	char	*ope;
 	char	*lst_temp;
 	int		index_n;
 
-	i = 0;
 	lst_temp = list;
 	index_n = ft_strchr((const char *)lst_temp, '\n');
 	while (lst_temp && index_n != -1)
@@ -93,7 +91,7 @@ void	reading_list(char *list, t_stacks *stacks)
 }
 
 /**
- * @brief Read all instructions displayed on the stdout and 
+ * @brief Read all instructions displayed on the stdout and
  * record them in list_ope.
  */
 char	*reading_ope(void)

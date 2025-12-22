@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 17:17:43 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 21:46:54 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_stacks
 	int		rrr;
 }	t_stacks;
 
+/* Lists structure for pre_sorted */
 typedef struct s_lists
 {
 	t_stack		**lists;
@@ -106,9 +107,10 @@ void	rrr(t_stacks *stacks);
 int		next_sqrt(int nb);
 int		find_min(t_stack *stack, int size);
 int		find_max(t_stack *stack, int size);
+int		find_max_complex(t_stack *a);
 void	print_stack(t_stack *stack, char *name);
-int		count_nodes_until_value(t_stack *stack, int value);
 t_ops	get_ops(t_stacks *stacks, char which);
+int		count_nodes_until_value(t_stack *stack, int value);
 int		count_nodes_to_spot(t_ops stack, int value, int to_sort);
 int		rot_top(t_ops stack, int value, t_stacks *stacks);
 int		rot_bottom(t_ops stack, int value, t_stacks *stacks);
@@ -116,16 +118,16 @@ int		rot_spot(t_ops stack, int value, t_stacks *stacks);
 void	add_node(int value, t_stack **stack_a);
 int		check_input(char *nptr);
 int		check_duplicate(int value, t_stack *stack_a);
-t_stack	*handle_error(t_stack *stack_a);
 t_stack	*parse_input(int nb_input, char **numbers);
+t_stack	*handle_error(t_stack *stack_a);
 void	exit_error(t_stacks *stacks);
+void	free_all_lists(t_lists *sorted);
 t_stack	*pre_sorted_list(t_stacks *stacks, int min);
 int		is_presorted(int value, t_stack *pre_sorted);
-void	free_all_lists(t_lists *sorted);
 t_stack	*create_new_list(int value, int min, t_lists *sorted);
-int		find_max_complex(t_stack *a);
 
 /* Sort functions */
+void	micro_sort(t_stacks *stacks);
 void	simple_sort(t_stacks *stacks);
 int		medium_sort(t_stacks *stacks);
 void	complex_sort(t_stacks *stacks);
