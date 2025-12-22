@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 09:40:20 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 12:15:40 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_flags
 }	t_flags;
 
 /*stackserations structure*/
-typedef struct s_count
+typedef struct s_stacks
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
