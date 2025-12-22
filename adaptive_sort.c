@@ -44,22 +44,26 @@ float	check_disorder(t_stack *stack_a)
 void	adaptive_sort(t_stacks *stacks)
 {
 	float	disorder;
-	int		lst_size;
+	int		size;
 
-	lst_size = ft_lstsize(stacks->stack_a);
+	size = ft_lstsize(stacks->stack_a);
 	disorder = check_disorder(stacks->stack_a);
-	if (disorder < 0.2 || lst_size <= 40)
+	if (size <= 3)
+	{
+		stacks->strategy = "Adaptive / O(𝑛)";
+		micro_sort(stacks);
+	}
+	else if (disorder < 0.2 || size <= 40)
 	{
 		stacks->strategy = "Adaptive /  O(𝑛²)";
 		simple_sort(stacks);
 	}
-	else if ((0.2 <= disorder && disorder < 0.5 && lst_size <= 225)
-		|| lst_size <= 225)
+	else if ((0.2 <= disorder && disorder < 0.5 && size <= 225) || size <= 225)
 	{
 		stacks->strategy = "Adaptive / O(𝑛√𝑛)";
 		medium_sort(stacks);
 	}
-	else if (disorder >= 0.5 || lst_size > 225)
+	else if (disorder >= 0.5 || size > 225)
 	{
 		stacks->strategy = "Adaptive / O(𝑛log𝑛)";
 		complex_sort(stacks);

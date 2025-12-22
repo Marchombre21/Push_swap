@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 21:42:38 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 22:00:35 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ static void	dispatch(t_flags *flags, t_stacks *stacks)
 	flags->disorder = check_disorder(stacks->stack_a);
 	if (flags->disorder == 0.0f)
 		return ;
-	if (ft_lstsize(stacks->stack_a) <= 3)
-		micro_sort(stacks);
 	else if (flags->simple)
 		simple_sort(stacks);
 	else if (flags->medium)
