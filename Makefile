@@ -78,6 +78,8 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re FORCE bonus
+bonus_re: fclean bonus
+
+.PHONY: all clean fclean re FORCE bonus bonus_re
 
 -include $(DEPS) $(DEPS_BONUS)
