@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 09:30:21 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 10:17:01 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,18 @@ static void	refill_a(t_stacks *stacks, int min, int max)
 	rot_top(get_ops(stacks, 'a'), min, stacks);
 }
 
-static int	init(t_stacks *stacks, int *min, int *max, t_stack *pre_sorted)
+static t_stack	*init(t_stacks *stacks, int *min, int *max, t_stack *to_sort_lst)
 {
 	int	size;
 	int	i;
 
 	i = 0;
 	size = ft_lstsize(stacks->stack_a);
-	while (i++ < size && is_presorted((stacks->stack_a)->value, pre_sorted))
-		ra(stacks);
+	to_sort_lst = lf_next(stacks, to_sort_lst);
 	pb(stacks);
 	*min = (stacks->stack_b)->value;
 	*max = (stacks->stack_b)->value;
-	return (1);
+	return (to_sort_lst);
 }
 
 static void	dispatch_rot(t_stacks *stacks, int *min_b, int *max_b)
@@ -70,22 +69,17 @@ static void	dispatch_rot(t_stacks *stacks, int *min_b, int *max_b)
 		rot_spot(b_ops, (stacks->stack_a)->value, stacks);
 }
 
-static void	exec(t_stacks *stacks, t_stack *pre_sorted, int to_sort)
+static void	exec(t_stacks *stacks, t_stack *to_sort_lst, int to_sort)
 {
 	int		min_b;
 	int		max_b;
 
 	min_b = 0;
 	max_b = 0;
-	if (init(stacks, &min_b, &max_b, pre_sorted) == 0)
-		return ;
+	to_sort_lst = init(stacks, &min_b, &max_b, to_sort_lst);
 	while (to_sort - 1 > 0)
 	{
-		if (is_presorted((stacks->stack_a)->value, pre_sorted))
-		{
-			ra(stacks);
-			continue ;
-		}
+		to_sort_lst = lf_next(stacks, to_sort_lst);
 		dispatch_rot(stacks, &min_b, &max_b);
 		pb(stacks);
 		to_sort--;
@@ -100,20 +94,20 @@ int	simple_sort(t_stacks *stacks)
 	int		min;
 	int		max;
 	int		size_a;
-	t_stack	*pre_sorted;
+	t_stack	*to_sort_lst;
 	int		to_sort;
 
 	size_a = ft_lstsize(stacks->stack_a);
 	min = find_min(stacks->stack_a, size_a);
 	max = find_max(stacks->stack_a, size_a);
-	pre_sorted = pre_sorted_list(stacks, find_min(stacks->stack_a, size_a));
-	if (ft_lstsize(pre_sorted) == size_a)
+	to_sort_lst = pre_sorted_list(stacks, find_min(stacks->stack_a, size_a));
+	if (ft_lstsize(to_sort_lst) == 0)
 	{
 		rot_top(get_ops(stacks, 'a'), min, stacks);
 		return (0);
 	}
-	to_sort = size_a - ft_lstsize(pre_sorted);
-	exec(stacks, pre_sorted, to_sort);
+	to_sort = size_a - ft_lstsize(to_sort_lst);
+	exec(stacks, to_sort_lst, to_sort);
 	refill_a(stacks, min, max);
 	return (0);
 }

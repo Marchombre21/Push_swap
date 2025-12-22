@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_presorted.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 10:58:32 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 09:40:33 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 09:48:40 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static t_stack	*find_best_list(t_stack **lists, int list_count)
 static t_stack	*handlst(int min, t_stack *cur, t_lists *sorted)
 {
 	int	count;
+	t_stack	*best_list;
+	t_stack *to_sort_list;
 
 	count = sorted->list_count;
 	sorted->list_count = 0;
@@ -105,7 +107,10 @@ static t_stack	*handlst(int min, t_stack *cur, t_lists *sorted)
 		else
 			cur = sorted->stacks->stack_a;
 	}
-	return (find_best_list(sorted->lists, sorted->list_count));
+	best_list = find_best_list(sorted->lists, sorted->list_count);
+	to_sort_list = list_to_sort(sorted, best_list);
+	free_all_lists(sorted);
+	return (to_sort_list);
 }
 
 t_stack	*pre_sorted_list(t_stacks *stacks, int min)

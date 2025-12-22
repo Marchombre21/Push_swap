@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 09:40:20 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 10:11:21 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ t_stack	*pre_sorted_list(t_stacks *stacks, int min);
 int		is_presorted(int value, t_stack *pre_sorted);
 void	free_all_lists(t_lists *sorted);
 t_stack	*create_new_list(int value, int min, t_lists *sorted);
+t_stack *list_to_sort(t_lists *sorted, t_stack *best_list);
+t_stack	*lf_next(t_stacks *stacks, t_stack *to_sort_lst);
 
 /* Sort functions */
 int		simple_sort(t_stacks *stacks);
