@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 09:08:46 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 09:40:20 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,9 @@ t_stack	*handle_error(t_stack *stack_a);
 t_stack	*parse_input(int nb_input, char **numbers);
 void	exit_error(t_stacks *stacks);
 t_stack	*pre_sorted_list(t_stacks *stacks, int min);
+int		is_presorted(int value, t_stack *pre_sorted);
+void	free_all_lists(t_lists *sorted);
+t_stack	*create_new_list(int value, int min, t_lists *sorted);
 
 /* Sort functions */
 int		simple_sort(t_stacks *stacks);

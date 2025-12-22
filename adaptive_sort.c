@@ -41,8 +41,8 @@ void	adaptive_sort(t_stacks *stacks)
 		stacks->strategy = "Adaptive /  O(𝑛²)";
 		simple_sort(stacks);
 	}
-	else if ((0.2 <= disorder && disorder < 0.5 && lst_size <=225)
-			|| lst_size <=225)
+	else if ((0.2 <= disorder && disorder < 0.5 && lst_size <= 225)
+		|| lst_size <= 225)
 	{
 		stacks->strategy = "Adaptive / O(𝑛√𝑛)";
 		medium_sort(stacks);
