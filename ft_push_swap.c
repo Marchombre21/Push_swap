@@ -6,7 +6,7 @@
 /*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 22:00:35 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 22:59:11 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,29 @@ static int	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 	return (0);
 }
 
+static int	check_sort(t_stacks *stacks)
+{
+	t_stack	*pre_sorted;
+	int		size;
+	int		min;
+
+	size = ft_lstsize(stacks->stack_a);
+	min = find_min(stacks->stack_a, size);
+	pre_sorted = pre_sorted_list(stacks, min);
+	if (ft_lstsize(pre_sorted) == size)
+	{
+		rot_top(get_ops(stacks, 'a'), min, stacks);
+		ft_lstclear(&pre_sorted);
+		return (0);
+	}
+	ft_lstclear(&pre_sorted);
+	return (1);
+}
+
 static void	dispatch(t_flags *flags, t_stacks *stacks)
 {
 	flags->disorder = check_disorder(stacks->stack_a);
-	if (flags->disorder == 0.0f)
+	if (flags->disorder == 0.0f || check_sort(stacks) == 0)
 		return ;
 	else if (flags->simple)
 		simple_sort(stacks);
