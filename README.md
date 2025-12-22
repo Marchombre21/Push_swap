@@ -64,7 +64,7 @@ Here's an illustration of a basic operation in an insertion sort :
 The insertion sort has 3 different triage :
 - if top of `stack_a` is a `new_min` of `stack_b`, we place the old `min_b` at the **bottom of stack_b** and `pb` the `new_min`.
 - if top of `stack_a` is a `new_max` of `stack_b`, we place the old `max_b` at the **top of stack_b** and `pb` the `new_min`.
-- if top of `stack_a` is neither `max` or m`in` of `stack_b`, we need to find the **good spot** for it.
+- if top of `stack_a` is neither `max` or `min` of `stack_b`, we need to find the **good spot** for it.
 
 ### Medium sort : Buckets
 
@@ -94,7 +94,7 @@ For that I use this syntaxe
 (stacks->stack_a)->value >> shift_byte & 1
 ```
 If value == 5 the computer sees 00000101. `>> n` say to the computer `Shift
-of n bytes to the right`. If n == 1 then 00000101 -> 0000010. And `&1` says `Look
+of n bytes to the right. If n == 1 then 00000101 -> 0000010. And `&1` says `Look
 at just the last one byte`.
 So, for 2 (00000010) and 1 (00000001), first, 2 will be pushed in stack_b
 and 1 will stay in stack_a (0 / 1). Then we empty stack_b in stack_a so we have 2 -> 1. Then we compare the tens (1 for two and 0 for one) so 2 will stay in stack_a en 1 will be pushed in stack_b before came back in stack_a. So we finish with 1 -> 2.

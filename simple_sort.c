@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/20 18:29:47 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 07:54:49 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,30 @@ static int	init(t_stacks *stacks, int *min, int *max, t_stack *pre_sorted)
 // 		ra(stacks);
 // }
 
+static void	dispatch_rot(t_stacks *stacks, int *min_b, int *max_b)
+{
+	t_ops	b_ops;
+
+	b_ops = get_ops(stacks, 'b');
+		if ((stacks->stack_a)->value < (*min_b))
+		{
+			rot_bottom(b_ops, *min_b, stacks);
+			(*min_b) = (stacks->stack_a)->value;
+		}
+		else if ((stacks->stack_a)->value > (*max_b))
+		{
+			rot_top(b_ops, *max_b, stacks);
+			(*max_b) = (stacks->stack_a)->value;
+		}
+		else
+			rot_spot(b_ops, (stacks->stack_a)->value, stacks);
+}
+
 static void	exec(t_stacks *stacks, t_stack *pre_sorted, int to_sort)
 {
 	int		min_b;
 	int		max_b;
-	t_ops	b_ops;
+	
 
 	min_b = 0;
 	max_b = 0;
@@ -99,19 +118,7 @@ static void	exec(t_stacks *stacks, t_stack *pre_sorted, int to_sort)
 			ra(stacks);
 			continue ;
 		}
-		b_ops = get_ops(stacks, 'b');
-		if ((stacks->stack_a)->value < min_b)
-		{
-			rot_bottom(b_ops, min_b, stacks);
-			min_b = (stacks->stack_a)->value;
-		}
-		else if ((stacks->stack_a)->value > max_b)
-		{
-			rot_top(b_ops, max_b, stacks);
-			max_b = (stacks->stack_a)->value;
-		}
-		else
-			rot_spot(b_ops, (stacks->stack_a)->value, stacks);
+		dispatch_rot(stacks, &min_b, &max_b);
 		pb(stacks);
 		to_sort--;
 	}
@@ -131,18 +138,18 @@ int	simple_sort(t_stacks *stacks)
 	size_a = ft_lstsize(stacks->stack_a);
 	min = find_min(stacks->stack_a, size_a);
 	max = find_max(stacks->stack_a, size_a);
-	print_stack(stacks->stack_a, "Initial stack A");
+	// print_stack(stacks->stack_a, "Initial stack A");
 	pre_sorted = pre_sorted_list(stacks, find_min(stacks->stack_a, size_a));
 	if (ft_lstsize(pre_sorted) == size_a)
 	{
 		rot_top(get_ops(stacks, 'a'), min, stacks);
-		print_stack(pre_sorted, "Pre-sorted list");
+		// print_stack(pre_sorted, "Pre-sorted list");
 		return (0);
 	}
 	to_sort = size_a - ft_lstsize(pre_sorted);
-	print_stack(pre_sorted, "Pre-sorted list");
+	// print_stack(pre_sorted, "Pre-sorted list");
 	exec(stacks, pre_sorted, to_sort);
 	refill_a(stacks, min, max);
-	print_stack(stacks->stack_a, "Sorted stack A");
+	// print_stack(stacks->stack_a, "Sorted stack A");
 	return (0);
 }
