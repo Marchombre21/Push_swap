@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 09:41:14 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 15:45:23 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ static int	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 static void	dispatch(t_flags *flags, t_stacks *stacks)
 {
 	flags->disorder = check_disorder(stacks->stack_a);
+	if (ft_lstsize(stacks->stack_a) <= 1)
+		return ;
 	if (flags->simple)
 		simple_sort(stacks);
 	else if (flags->medium)
