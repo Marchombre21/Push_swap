@@ -16,15 +16,27 @@ float	check_disorder(t_stack *stack_a)
 {
 	float	mistakes;
 	float	total_pairs;
+	int		size_a;
+	t_stack	*cur;
+	t_stack	*next;
 
 	mistakes = 0;
 	total_pairs = 0;
-	while (stack_a->next)
+	size_a = ft_lstsize(stack_a);
+	if (size_a <= 1)
+		return (0);
+	cur = stack_a;
+	while (cur->next)
 	{
-		total_pairs++;
-		if (stack_a->value > stack_a->next->value)
-			mistakes++;
-		stack_a = stack_a->next;
+		next = cur->next;
+		while (next)
+		{
+			total_pairs++;
+			if (cur->value > next->value)
+				mistakes++;
+			next = next->next;
+		}
+		cur = cur->next;
 	}
 	return (mistakes / total_pairs);
 }
