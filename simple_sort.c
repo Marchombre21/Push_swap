@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 11:57:10 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 16:27:30 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	exec(t_stacks *stacks, t_stack *pre_sorted, int to_sort)
 /**
  * @brief Sorts a stack with an insertion sorting algorithm.
  */
-int	simple_sort(t_stacks *stacks)
+void	simple_sort(t_stacks *stacks)
 {
 	int		min;
 	int		max;
@@ -112,10 +112,8 @@ int	simple_sort(t_stacks *stacks)
 	{
 		rot_top(get_ops(stacks, 'a'), min, stacks);
 		ft_lstclear(&pre_sorted);
-		return (0);
 	}
 	to_sort = size_a - ft_lstsize(pre_sorted);
 	exec(stacks, pre_sorted, to_sort);
 	refill_a(stacks, min, max);
-	return (0);
 }
