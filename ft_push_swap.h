@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/20 15:20:28 by gmach            ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 09:08:46 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ typedef struct s_count
 	int		rrb;
 	int		rrr;
 }	t_stacks;
+
+typedef struct s_lists
+{
+	t_stack		**lists;
+	t_stack		*i_lists;
+	t_stacks	*stacks;
+	int			list_count;
+}	t_lists;
 
 /**
  * @brief Operations structure for stack manipulations.

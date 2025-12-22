@@ -6,40 +6,39 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 10:58:32 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 08:48:54 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 09:23:45 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-static void	free_all_lists(t_stack **lists, int list_count)
+static void	free_all_lists(t_lists *sorted)
 {
 	int	i;
 
-	if (!lists)
+	if (!sorted->lists)
 		return ;
 	i = 0;
-	while (i < list_count)
+	while (i < sorted->list_count)
 	{
-		if(lists[i])
-			ft_lstclear(&lists[i]);
+		if(sorted->lists[i])
+			ft_lstclear(&sorted->lists[i]);
 		i++;
 	}
-	free(lists);
+	free(sorted->lists);
 }
 
-static t_stack	*find_valid_lists(int value, t_stack **lists, int list_count)
+static t_stack	*find_valid_lists(int value, t_lists *sorted)
 {
 	int		i;
 	t_stack	*cur;
-	t_stack	*i_lists;
 	t_stack	*new_node;
 
 	i = 0;
-	i_lists = NULL;
-	while (i < list_count && lists[i])
+	sorted->i_lists = NULL;
+	while (i < sorted->list_count && sorted->lists[i])
 	{
-		cur = lists[i];
+		cur = sorted->lists[i];
 		while (cur && cur->next)
 			cur = cur->next;
 		if (cur && cur->value < value)
@@ -47,17 +46,17 @@ static t_stack	*find_valid_lists(int value, t_stack **lists, int list_count)
 			new_node = ft_lstnew(i);
 			if (!new_node)
 			{
-				ft_lstclear(&i_lists);
+				ft_lstclear(&sorted->i_lists);
 				return (NULL);
 			}
-			ft_lstadd_back(&i_lists, new_node);
+			ft_lstadd_back(&sorted->i_lists, new_node);
 		}
 		i++;
 	}
-	return (i_lists);
+	return (sorted->i_lists);
 }
 
-static t_stack	*create_new_list(int value, int min, t_stacks *stacks, t_stack **lists, int list_count)
+static t_stack	*create_new_list(int value, int min, t_lists *sorted)
 {
 	t_stack	*new;
 	t_stack	*second;
@@ -65,40 +64,39 @@ static t_stack	*create_new_list(int value, int min, t_stacks *stacks, t_stack **
 	new = ft_lstnew(min);
 	if (!new)
 	{
-		free_all_lists(lists, list_count);
-		exit_error(stacks);
+		free_all_lists(sorted);
+		exit_error(sorted->stacks);
 	}
 	second = ft_lstnew(value);
 	if (!second)
 	{
 		free(new);
-		free_all_lists(lists, list_count);
-		exit_error(stacks);
+		free_all_lists(sorted);
+		exit_error(sorted->stacks);
 	}
 	new->next = second;
 	return (new);
 }
 
-static int	add_to_lists(int value, t_stack *i_lists, t_stack **lists)
+static void	add_to_lists(int value, t_lists *sorted)
 {
 	t_stack	*cur;
 	t_stack *new_node;
 
-	cur = i_lists;
+	cur = sorted->i_lists;
 	while (cur)
 	{
 		new_node = ft_lstnew(value);
 		if (!new_node)
 		{
-			ft_lstclear(&i_lists);
-			free_all_lists(lists, list_count);
-			exit_error(stacks);
-			return (0);
+			ft_lstclear(&sorted->i_lists);
+			free_all_lists(sorted);
+			exit_error(sorted->stacks);
 		}
-		ft_lstadd_back(&lists[cur->value], new_node);
+		ft_lstadd_back(&sorted->lists[cur->value], new_node);
 		cur = cur->next;
 	}
-	return (1);
+	ft_lstclear(&sorted->i_lists);
 }
 
 static t_stack	*find_best_list(t_stack **lists, int list_count)
@@ -124,43 +122,38 @@ static t_stack	*find_best_list(t_stack **lists, int list_count)
 	return (lists[best_index]);
 }
 
-static t_stack *handlst(t_stacks *stacks, int min, t_stack *cur, t_stacks **lists)
+static t_stack *handlst(int min, t_stack *cur, t_lists *sorted)
 {
-	t_stack	*i_lists;
-	t_stack *res;
-	int		list_count;
-
-	list_count = 0;
+	sorted->list_count = 0;
 	while (cur->value != min)
 	{
-		i_lists = find_valid_lists(cur->value, lists, list_count);
-		if (!i_lists)
+		sorted->i_lists = find_valid_lists(cur->value, sorted);
+		if (!sorted->i_lists)
 		{
-			lists[list_count] = create_new_list(cur->value, min, stacks,
-				 lists, list_count);
-			list_count++;
+			sorted->lists[sorted->list_count] = create_new_list(cur->value, min,
+				 sorted);
+			sorted->list_count++;
 		}
 		else
-		{
-			if (!add_to_lists(cur->value, i_lists, lists))
-			
-		}
+			add_to_lists(cur->value, sorted);
 		if (cur->next)
 			cur = cur->next;
 		else
-			cur = stacks->stack_a;
+			cur = sorted->stacks->stack_a;
 		}
-		return(find_best_list(lists, list_count));
+		return(find_best_list(sorted->lists, sorted->list_count));
 }
 
 #include <stdio.h>
 t_stack	*pre_sorted_list(t_stacks *stacks, int min)
 {
 	t_stack	*cur;
-	t_stack	**lists;
+	t_lists	sorted;
 
-	lists = ft_calloc(sizeof(t_stack *), (ft_lstsize(stacks->stack_a) + 1));
-	if (!lists)
+	sorted.stacks = stacks;
+	sorted.lists = ft_calloc(sizeof(t_stack *),
+		 (ft_lstsize(stacks->stack_a) + 1));
+	if (!sorted.lists)
 		exit_error(stacks);
 	cur = stacks->stack_a;
 	if (ft_lstlast(cur)->value != min)
@@ -170,7 +163,7 @@ t_stack	*pre_sorted_list(t_stacks *stacks, int min)
 		cur = cur->next;
 	}
 	//free_all_lists(lists, list_count);
-	return (handlst(stacks, min, cur, lists));
+	return (handlst(min, cur, &sorted));
 }
 
 // int main(int argc, char **argv)
