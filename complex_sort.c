@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   complex_sort.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 17:15:46 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 21:37:12 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,7 @@ void	complex_sort(t_stacks *stacks)
 	int	size;
 	int	max;
 	int	i;
-	int	is_sorted;
-
-	is_sorted = 0;
+	
 	size = ft_lstsize(stacks->stack_a);
 	i = 0;
 	create_array(stacks, size);
