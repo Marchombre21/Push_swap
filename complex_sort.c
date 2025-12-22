@@ -6,13 +6,13 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/20 16:32:06 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 16:42:59 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	sort(t_stacks *stacks, int shift_byte, int size)
+static void	sort(t_stacks *stacks, int shift_byte, int size)
 {
 	while (size > 0)
 	{
@@ -33,7 +33,7 @@ void	sort(t_stacks *stacks, int shift_byte, int size)
  * in his bit version.
  * @param a The chained list.
  */
-int	find_max_complex(t_stack *a)
+static int	find_max_complex(t_stack *a)
 {
 	int	max;
 	int	shift_byte;
@@ -56,7 +56,7 @@ int	find_max_complex(t_stack *a)
  * @param tab The array
  * @param size Size of the array
  */
-void	sort_array(int *tab, int size)
+static void	sort_array(int *tab, int size)
 {
 	int	i;
 	int	j;
@@ -81,38 +81,57 @@ void	sort_array(int *tab, int size)
 }
 
 /**
- * @brief Put all values of chained list in array, sort the array and replace
- * values of chained list by their index in sorted array.
+ * @brief Replace values of chained list by their index in sorted array.
  * @param a chained list
  * @param size Size of list to malloc the array
+ * @param array Sorted array
  */
-void	transform_to_index(t_stack *a, int size)
+static void	transform_to_index(t_stack *a, int size, int *array)
 {
-	int		*array;
-	int		i;
-	t_stack	*b;
+	int	i;
 
-	array = ft_calloc(size + 1, sizeof(int));
-	if (!array)
-		return ;
-	b = a;
-	i = 0;
 	while (a)
 	{
-		array[i++] = a->value;
+		i = 0;
+		while (i < size)
+		{
+			if (array[i] == a->value)
+			{
+				a->value = i;
+				break;
+			}
+			i++;
+		}
 		a = a->next;
-	}
-	sort_array(array, size);
-	while (b)
-	{
-		i = -1;
-		while (i++ < size)
-			if (array[i] == b->value)
-				b->value = i;
-		b = b->next;
 	}
 	free(array);
 }
+
+/**
+ * @brief Put all values of chained list in array and sort the array.
+ * @param a chained list
+ * @param size Size of list to malloc the array
+ */
+static void	create_array(t_stacks *stacks, int size)
+{
+	int		*array;
+	int		i;
+	t_stack *b;
+
+	b = stacks->stack_a;
+	array = ft_calloc(size + 1, sizeof(int));
+	if (!array)
+		exit_error(stacks);
+	i = 0;
+	while (b)
+	{
+		array[i++] = b->value;
+		b = b->next;
+	}
+	sort_array(array, size);
+	transform_to_index(stacks->stack_a, size, array);
+}
+
 
 void	complex_sort(t_stacks *stacks)
 {
@@ -120,11 +139,11 @@ void	complex_sort(t_stacks *stacks)
 	int	max;
 	int	i;
 	int	is_sorted;
-
+	
 	is_sorted = 0;
 	size = ft_lstsize(stacks->stack_a);
 	i = 0;
-	transform_to_index(stacks->stack_a, size);
+	create_array(stacks, size);
 	max = find_max_complex(stacks->stack_a);
 	while (i < max)
 		sort(stacks, i++, size);

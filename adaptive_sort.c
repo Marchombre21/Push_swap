@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
-
 float	check_disorder(t_stack *stack_a)
 {
 	float	mistakes;
@@ -26,6 +25,7 @@ float	check_disorder(t_stack *stack_a)
 			mistakes++;
 		stack_a = stack_a->next;
 	}
+	total_pairs++;
 	return (mistakes / total_pairs);
 }
 

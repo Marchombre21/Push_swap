@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 09:41:14 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/22 15:25:34 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ static int	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 		flags->adaptive = 0;
 		stacks->strategy = "Complex / O(𝑛log𝑛)";
 	}
+	else if (ft_strncmp("--adaptive", s, 10) == 0 && !check_algo(flags))
+		flags->adaptive = 1;
 	else if (ft_strncmp("--bench", s, 7) == 0)
 		flags->bench_mode = 1;
 	else
