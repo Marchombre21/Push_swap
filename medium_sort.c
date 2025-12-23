@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   medium_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 22:39:42 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 15:23:25 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ void	medium_sort(t_stacks *stacks)
 	max = find_max(stacks->stack_a, size_a);
 	nb_buckets = next_sqrt(size_a);
 	if (nb_buckets <= 0)
-		exit_error(stacks);
+		exit_malloc(stacks);
 	buckets = init_buckets(nb_buckets, min, max);
 	if (!buckets)
-		exit_error(stacks);
+		exit_malloc(stacks);
 	bucket_sort(stacks, buckets, nb_buckets);
 	free(buckets);
 }

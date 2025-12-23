@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 23:02:20 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 15:22:43 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,13 +118,15 @@ int		rot_spot(t_ops stack, int value, t_stacks *stacks);
 void	add_node(int value, t_stack **stack_a);
 int		check_input(char *nptr);
 int		check_duplicate(int value, t_stack *stack_a);
-t_stack	*parse_input(int nb_input, char **numbers);
-t_stack	*handle_error(t_stack *stack_a);
-void	exit_error(t_stacks *stacks);
-void	free_all_lists(t_lists *sorted);
+void	parse_input(char **numbers, t_stacks *stacks);
+void	exit_malloc(t_stacks *stacks);
 t_stack	*pre_sorted_list(t_stacks *stacks, int min);
 int		is_presorted(int value, t_stack *pre_sorted);
 t_stack	*create_new_list(int value, int min, t_lists *sorted);
+int		find_max_complex(t_stack *a);
+void	exit_error(t_stacks *stacks, char *lst, char *ope);
+void	free_split(char **str);
+// void	handle_inputs(t_stacks *stacks, char **numbers);
 
 /* Sort functions */
 void	micro_sort(t_stacks *stacks);

@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:19:47 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/17 10:46:46 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 13:42:02 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	nb_words = 0;
-	index_words = malloc(sizeof(int) * ft_strlen(s));
+	index_words = malloc(sizeof(int) * (ft_strlen(s) * 2) + 1);
 	if (!index_words)
 		return (NULL);
 	ft_count_words(s, c, index_words, &nb_words);

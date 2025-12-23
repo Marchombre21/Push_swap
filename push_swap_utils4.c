@@ -6,13 +6,13 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 09:35:06 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/22 17:16:15 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 09:28:37 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	exit_error(t_stacks *stacks)
+void	exit_malloc(t_stacks *stacks)
 {
 	ft_lstclear(&stacks->stack_a);
 	ft_lstclear(&stacks->stack_b);
@@ -59,14 +59,14 @@ t_stack	*create_new_list(int value, int min, t_lists *sorted)
 	if (!new)
 	{
 		free_all_lists(sorted);
-		exit_error(sorted->stacks);
+		exit_malloc(sorted->stacks);
 	}
 	second = ft_lstnew(value);
 	if (!second)
 	{
 		free(new);
 		free_all_lists(sorted);
-		exit_error(sorted->stacks);
+		exit_malloc(sorted->stacks);
 	}
 	new->next = second;
 	return (new);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 21:47:40 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 15:22:45 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ int	check_sort(t_stack *stack_a)
  * @param ope The operation.
  * @param stacks Contain list of numbers to be sorted.
  */
-void	perform_operations(char *ope, t_stacks *stacks)
+void	perform_operations(char *ope, t_stacks *stacks, int size_ope, char *lst)
 {
-	int	size_ope;
-
-	size_ope = ft_strlen((const char *)ope);
 	if (ft_strncmp(ope, "pa", size_ope) == 0)
 		pa(stacks);
 	else if (ft_strncmp(ope, "pb", size_ope) == 0)
@@ -55,7 +52,22 @@ void	perform_operations(char *ope, t_stacks *stacks)
 		rrb(stacks);
 	else if (ft_strncmp(ope, "rrr", size_ope) == 0)
 		rrr(stacks);
+	else
+		exit_error(stacks, lst, ope);
 }
+
+// char	*check_ope(char *lst_temp, int index_n, t_stacks *stacks)
+// {
+// 	char	*ope;
+
+// 	ope = ft_substr((const char *)lst_temp, 0, (size_t)index_n);
+// 	if (!ope)
+// 	{
+// 		free(lst_temp);
+// 		exit_malloc(stacks);
+// 	}
+// 	return (ope);
+// }
 
 /**
  * @brief Find the first newline in list, get the previous word,
@@ -77,17 +89,18 @@ void	reading_list(char *list, t_stacks *stacks)
 		ope = ft_substr((const char *)lst_temp, 0, (size_t)index_n);
 		if (!ope)
 		{
-			free(lst_temp);
-			exit_error(stacks);
+			free(list);
+			exit_malloc(stacks);
 		}
-		perform_operations(ope, stacks);
+		perform_operations(ope, stacks, ft_strlen((const char *)ope), list);
 		free(ope);
 		lst_temp = lst_temp + (index_n + 1);
 		index_n = ft_strchr((const char *)lst_temp, '\n');
 	}
-	if (lst_temp && index_n != -1)
-		perform_operations(lst_temp + 1, stacks);
-	free((void *)list);
+	// if (lst_temp && index_n != -1)
+	// 	perform_operations(lst_temp + 1, stacks,
+	// 		ft_strlen((const char *)(lst_temp + 1)), list);
+	// free(list);
 }
 
 /**
@@ -120,20 +133,22 @@ int	main(int argc, char **argv)
 {
 	char		*list_ope;
 	t_stacks	stacks;
+	int			i;
+	(void)argc;
 
+	i = 1;
 	list_ope = reading_ope();
 	ft_bzero(&stacks, sizeof(t_stacks));
-	if (argc < 2)
-		return (0);
-	stacks.stack_a = parse_input(argc - 1, &argv[1]);
-	if (!stacks.stack_a)
-		return (1);
+	while (argv[i])
+		parse_input(ft_split((const char *)argv[i++], ' '), &stacks);
 	reading_list(list_ope, &stacks);
+	free(list_ope);
 	list_ope = NULL;
 	if (check_sort(stacks.stack_a) == 0 && !stacks.stack_b)
 		ft_putstr_fd("OK\n", 1);
 	else
 		ft_putstr_fd("KO\n", 1);
 	ft_lstclear(&stacks.stack_a);
+	ft_lstclear(&stacks.stack_b);
 	return (0);
 }
