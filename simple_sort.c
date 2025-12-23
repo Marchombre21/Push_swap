@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 22:33:03 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 15:44:25 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,5 @@ void	simple_sort(t_stacks *stacks)
 	to_sort = size_a - ft_lstsize(pre_sorted);
 	exec(stacks, pre_sorted, to_sort);
 	refill_a(stacks, min, max);
+	print_stack(stacks->stack_a, "Stack a");
 }
