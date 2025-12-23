@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   simple_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 19:07:25 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/23 15:44:25 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 21:46:36 by gildas           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-static void	refill_a(t_stacks *stacks, int min, int max)
+static void	refill_a(t_stacks *stacks, int min)
 {
-	int	min_a;
 	int	max_a;
 	int	size_a;
 
@@ -23,12 +22,12 @@ static void	refill_a(t_stacks *stacks, int min, int max)
 	while (stacks->stack_b)
 	{
 		size_a = ft_lstsize(stacks->stack_a);
-		min_a = find_min(stacks->stack_a, size_a);
 		max_a = find_max(stacks->stack_a, size_a);
-		if ((stacks->stack_b)->value == min)
-			rot_top(get_ops(stacks, 'a'), min_a, stacks);
-		else if ((stacks->stack_b)->value == max)
-			rot_bottom(get_ops(stacks, 'a'), max_a, stacks);
+		if (stacks->stack_b->value > max_a)
+		{
+			rot_top(get_ops(stacks, 'a'), min, stacks);
+			max_a = stacks->stack_b->value;
+		}
 		else
 			rot_spot(get_ops(stacks, 'a'), (stacks->stack_b)->value, stacks);
 		pa(stacks);
@@ -99,14 +98,12 @@ static void	exec(t_stacks *stacks, t_stack *pre_sorted, int to_sort)
 void	simple_sort(t_stacks *stacks)
 {
 	int		min;
-	int		max;
 	int		size_a;
 	t_stack	*pre_sorted;
 	int		to_sort;
 
 	size_a = ft_lstsize(stacks->stack_a);
 	min = find_min(stacks->stack_a, size_a);
-	max = find_max(stacks->stack_a, size_a);
 	pre_sorted = pre_sorted_list(stacks, find_min(stacks->stack_a, size_a));
 	if (ft_lstsize(pre_sorted) == size_a)
 	{
@@ -116,6 +113,5 @@ void	simple_sort(t_stacks *stacks)
 	}
 	to_sort = size_a - ft_lstsize(pre_sorted);
 	exec(stacks, pre_sorted, to_sort);
-	refill_a(stacks, min, max);
-	print_stack(stacks->stack_a, "Stack a");
+	refill_a(stacks, min);
 }
