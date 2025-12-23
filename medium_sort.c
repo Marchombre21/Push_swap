@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 11:12:09 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/20 09:35:02 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 09:28:37 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,10 @@ int	medium_sort(t_stacks *stacks)
 	max = find_max(stacks->stack_a, size_a);
 	nb_buckets = next_sqrt(size_a);
 	if (nb_buckets <= 0)
-		exit_error(stacks);
+		exit_malloc(stacks);
 	buckets = init_buckets(nb_buckets, min, max);
 	if (!buckets)
-		exit_error(stacks);
+		exit_malloc(stacks);
 	bucket_sort(stacks, buckets, nb_buckets);
 	free(buckets);
 	return (0);

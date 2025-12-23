@@ -6,14 +6,17 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 13:31:38 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 17:15:46 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 09:28:37 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-static void	sort(t_stacks *stacks, int shift_byte, int size)
+static void	sort(t_stacks *stacks, int shift_byte, int max)
 {
+	int	size;
+
+	size = ft_lstsize(stacks->stack_a);
 	while (size > 0)
 	{
 		if (((stacks->stack_a)->value >> shift_byte & 1))
@@ -25,7 +28,15 @@ static void	sort(t_stacks *stacks, int shift_byte, int size)
 	}
 	size = ft_lstsize(stacks->stack_b);
 	while (size-- > 0)
-		pa(stacks);
+	{
+		if (shift_byte < (max - 1)
+			&& ((stacks->stack_b)->value >> (shift_byte + 1) & 1))
+			pa(stacks);
+		else if (shift_byte == (max - 1))
+			pa(stacks);
+		else
+			rb(stacks);
+	}
 }
 
 /**
@@ -98,7 +109,7 @@ static void	create_array(t_stacks *stacks, int size)
 	b = stacks->stack_a;
 	array = ft_calloc(size + 1, sizeof(int));
 	if (!array)
-		exit_error(stacks);
+		exit_malloc(stacks);
 	i = 0;
 	while (b)
 	{
@@ -122,5 +133,5 @@ void	complex_sort(t_stacks *stacks)
 	create_array(stacks, size);
 	max = find_max_complex(stacks->stack_a);
 	while (i < max)
-		sort(stacks, i++, size);
+		sort(stacks, i++, max);
 }

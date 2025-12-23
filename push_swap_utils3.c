@@ -69,41 +69,36 @@ int	check_duplicate(int value, t_stack *stack_a)
 	return (0);
 }
 
-t_stack	*handle_error(t_stack *stack_a)
-{
-	ft_lstclear(&stack_a);
-	ft_printf("Error\n", 2);
-	return (stack_a);
-}
-
 /**
  * @brief Add new node to the chained list if the argument passed all tests.
  * @param nb_input Argc
  * @param numbers Argv
  */
-t_stack	*parse_input(int nb_input, char **numbers)
+void	parse_input(char **numbers, t_stacks *stacks)
 {
 	int		i;
-	t_stack	*stack_a;
 	int		value;
 
-	stack_a = NULL;
-	i = 0;
-	while (i < nb_input)
+	i = -1;
+	while (numbers[++i])
 	{
 		if (check_input(numbers[i]) == 1)
 			i = -1;
 		else
 		{
 			value = ft_atoi(numbers[i]);
-			if (check_duplicate(value, stack_a) == 1)
+			if (check_duplicate(value, stacks->stack_a) == 1)
 				i = -1;
 			else
-				add_node(value, &stack_a);
+				add_node(value, &stacks->stack_a);
 		}
 		if (i == -1)
-			return (handle_error(stack_a));
-		i++;
+		{
+			ft_lstclear(&stacks->stack_a);
+			free_split(numbers);
+			ft_printf("Error\n", 2);
+			exit(EXIT_FAILURE);
+		}
 	}
-	return (stack_a);
+	free_split(numbers);
 }

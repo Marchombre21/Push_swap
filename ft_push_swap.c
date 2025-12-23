@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 17:03:03 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 13:29:36 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,8 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 	}
-	stacks.stack_a = parse_input(argc - i, &argv[i]);
-	if (!stacks.stack_a)
-		return (1);
+	while (argv[i])
+		parse_input(ft_split((const char *)argv[i++], ' '), &stacks);
 	dispatch(&flags, &stacks);
 	ft_lstclear(&stacks.stack_a);
 	return (0);

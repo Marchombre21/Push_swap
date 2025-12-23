@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 10:58:32 by gmach             #+#    #+#             */
-/*   Updated: 2025/12/22 11:55:01 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2025/12/23 09:28:37 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	add_to_lists(int value, t_lists *sorted)
 		{
 			ft_lstclear(&sorted->i_lists);
 			free_all_lists(sorted);
-			exit_error(sorted->stacks);
+			exit_malloc(sorted->stacks);
 		}
 		ft_lstadd_back(&sorted->lists[cur->value], new_node);
 		cur = cur->next;
@@ -124,7 +124,7 @@ t_stack	*pre_sorted_list(t_stacks *stacks, int min)
 	sorted.lists = ft_calloc(sizeof(t_stack *),
 			(ft_lstsize(stacks->stack_a) + 1));
 	if (!sorted.lists)
-		exit_error(stacks);
+		exit_malloc(stacks);
 	cur = stacks->stack_a;
 	if (ft_lstlast(cur)->value != min)
 	{
