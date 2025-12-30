@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gildas <gildas@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/22 22:59:11 by gildas           ###   ########lyon.fr   */
+/*   Updated: 2025/12/30 11:34:27 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static int	check_sort(t_stacks *stacks)
 	size = ft_lstsize(stacks->stack_a);
 	min = find_min(stacks->stack_a, size);
 	pre_sorted = pre_sorted_list(stacks, min);
+	if (!(pre_sorted))
+		exit_error(stacks);
 	if (ft_lstsize(pre_sorted) == size)
 	{
 		rot_top(get_ops(stacks, 'a'), min, stacks);
@@ -70,16 +72,17 @@ static int	check_sort(t_stacks *stacks)
 static void	dispatch(t_flags *flags, t_stacks *stacks)
 {
 	flags->disorder = check_disorder(stacks->stack_a);
-	if (flags->disorder == 0.0f || check_sort(stacks) == 0)
-		return ;
-	else if (flags->simple)
-		simple_sort(stacks);
-	else if (flags->medium)
-		medium_sort(stacks);
-	else if (flags->complex)
-		complex_sort(stacks);
-	else if (flags->adaptive)
-		adaptive_sort(stacks);
+	if (!(flags->disorder == 0.0f || check_sort(stacks) == 0))
+	{
+		if (flags->simple)
+			simple_sort(stacks);
+		else if (flags->medium)
+			medium_sort(stacks);
+		else if (flags->complex)
+			complex_sort(stacks);
+		else if (flags->adaptive)
+			adaptive_sort(stacks);
+	}
 	if (flags->bench_mode)
 	{
 		ft_printf("disorder:	%f%%\n", 2, (flags->disorder * 100));
