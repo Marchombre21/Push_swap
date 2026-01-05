@@ -73,10 +73,10 @@ $(BONUS): $(OBJ_BONUS) $(LIBFT) $(NAME)
 clean:
 	$(MAKE) -C $(LIBFT_DIR) clean
 	$(RM) $(OBJ) $(DEPS) $(OBJ_BONUS) $(DEPS_BONUS)
+	rm -rf $(BUILD_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
-	rm -rf $(BUILD_DIR)
 	$(RM) $(NAME) $(BONUS)
 
 re: fclean all
