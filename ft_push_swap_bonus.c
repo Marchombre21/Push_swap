@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2026/01/05 10:38:53 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 11:27:23 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ int	main(int argc, char **argv)
 	char		*list_ope;
 	t_stacks	stacks;
 	int			i;
+
 	if (argc < 2)
 		return (1);
-
 	i = 1;
 	ft_bzero(&stacks, sizeof(t_stacks));
 	while (argv[i])
