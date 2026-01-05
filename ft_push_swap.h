@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_swap.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: gmach <gmach@student.42lyon.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2026/01/05 09:50:28 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 11:28:50 by gmach            ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ int		find_max_complex(t_stack *a);
 void	exit_bonus(t_stacks *stacks, char *lst, char *ope);
 void	free_split(char **str);
 void	free_all_lists(t_lists *sorted);
-// void	handle_inputs(t_stacks *stacks, char **numbers);
 
 /* Sort functions */
 void	micro_sort(t_stacks *stacks);
