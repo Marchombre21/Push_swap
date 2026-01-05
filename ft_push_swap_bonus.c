@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2026/01/05 09:50:28 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 10:38:53 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,6 @@ void	perform_operations(char *ope, t_stacks *stacks, int size_ope, char *lst)
 		exit_bonus(stacks, lst, ope);
 }
 
-// char	*check_ope(char *lst_temp, int index_n, t_stacks *stacks)
-// {
-// 	char	*ope;
-
-// 	ope = ft_substr((const char *)lst_temp, 0, (size_t)index_n);
-// 	if (!ope)
-// 	{
-// 		free(lst_temp);
-// 		exit_malloc(stacks);
-// 	}
-// 	return (ope);
-// }
-
 /**
  * @brief Find the first newline in list, get the previous word,
  * send him to the dispatch function, then update list by
@@ -97,10 +84,6 @@ void	reading_list(char *list, t_stacks *stacks)
 		lst_temp = lst_temp + (index_n + 1);
 		index_n = ft_strchr((const char *)lst_temp, '\n');
 	}
-	// if (lst_temp && index_n != -1)
-	// 	perform_operations(lst_temp + 1, stacks,
-	// 		ft_strlen((const char *)(lst_temp + 1)), list);
-	// free(list);
 }
 
 /**
@@ -134,13 +117,14 @@ int	main(int argc, char **argv)
 	char		*list_ope;
 	t_stacks	stacks;
 	int			i;
-	(void)argc;
+	if (argc < 2)
+		return (1);
 
 	i = 1;
-	list_ope = reading_ope();
 	ft_bzero(&stacks, sizeof(t_stacks));
 	while (argv[i])
 		parse_input(ft_split((const char *)argv[i++], ' '), &stacks);
+	list_ope = reading_ope();
 	reading_list(list_ope, &stacks);
 	free(list_ope);
 	list_ope = NULL;
