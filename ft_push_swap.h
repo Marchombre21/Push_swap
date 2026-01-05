@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:14:40 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/23 15:26:40 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 09:50:28 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ t_stack	*pre_sorted_list(t_stacks *stacks, int min);
 int		is_presorted(int value, t_stack *pre_sorted);
 t_stack	*create_new_list(int value, int min, t_lists *sorted);
 int		find_max_complex(t_stack *a);
-void	exit_error(t_stacks *stacks, char *lst, char *ope);
+void	exit_bonus(t_stacks *stacks, char *lst, char *ope);
 void	free_split(char **str);
 void	free_all_lists(t_lists *sorted);
 // void	handle_inputs(t_stacks *stacks, char **numbers);

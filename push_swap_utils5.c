@@ -6,13 +6,13 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/23 09:32:08 by bfitte            #+#    #+#             */
-/*   Updated: 2025/12/23 13:26:26 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 09:50:28 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_push_swap.h"
 
-void	exit_error(t_stacks *stacks, char *lst, char *ope)
+void	exit_bonus(t_stacks *stacks, char *lst, char *ope)
 {
 	ft_lstclear(&stacks->stack_a);
 	ft_lstclear(&stacks->stack_b);

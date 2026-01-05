@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2025/12/23 15:22:45 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/01/05 09:50:28 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	perform_operations(char *ope, t_stacks *stacks, int size_ope, char *lst)
 	else if (ft_strncmp(ope, "rrr", size_ope) == 0)
 		rrr(stacks);
 	else
-		exit_error(stacks, lst, ope);
+		exit_bonus(stacks, lst, ope);
 }
 
 // char	*check_ope(char *lst_temp, int index_n, t_stacks *stacks)
