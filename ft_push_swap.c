@@ -6,7 +6,7 @@
 /*   By: bfitte <bfitte@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 07:11:39 by bfitte/gmac       #+#    #+#             */
-/*   Updated: 2026/01/05 09:55:30 by bfitte           ###   ########lyon.fr   */
+/*   Updated: 2026/01/09 06:52:49 by bfitte           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,27 @@ static int	check_algo(t_flags *flags)
 
 static int	check_flags(char *s, t_flags *flags, t_stacks *stacks)
 {
-	if (ft_strncmp("--simple", s, 8) == 0 && !check_algo(flags))
+	if (ft_strncmp("--simple", s, 9) == 0 && !check_algo(flags))
 	{
 		flags->simple = 1;
 		flags->adaptive = 0;
 		stacks->strategy = "Simple / O(𝑛²)";
 	}
-	else if (ft_strncmp("--medium", s, 8) == 0 && !check_algo(flags))
+	else if (ft_strncmp("--medium", s, 9) == 0 && !check_algo(flags))
 	{
 		flags->medium = 1;
 		flags->adaptive = 0;
 		stacks->strategy = "Medium / O(𝑛√𝑛)";
 	}
-	else if (ft_strncmp("--complex", s, 9) == 0 && !check_algo(flags))
+	else if (ft_strncmp("--complex", s, 10) == 0 && !check_algo(flags))
 	{
 		flags->complex = 1;
 		flags->adaptive = 0;
 		stacks->strategy = "Complex / O(𝑛log𝑛)";
 	}
-	else if (ft_strncmp("--adaptive", s, 10) == 0 && !check_algo(flags))
+	else if (ft_strncmp("--adaptive", s, 11) == 0 && !check_algo(flags))
 		flags->adaptive = 1;
-	else if (ft_strncmp("--bench", s, 7) == 0)
+	else if (ft_strncmp("--bench", s, 8) == 0)
 		flags->bench_mode = 1;
 	else
 		return (1);
